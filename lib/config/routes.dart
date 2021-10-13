@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/src/pages/commodities/boats_page.dart';
-import 'package:my_app/src/pages/commodities/household_goods_page.dart';
-import 'package:my_app/src/pages/commodities/vehicles_page.dart';
 import 'package:my_app/src/pages/home_page.dart';
+import 'package:my_app/src/pages/options/boats_page.dart';
+import 'package:my_app/src/pages/options/household_goods_page.dart';
+import 'package:my_app/src/pages/options/vehicles_page.dart';
 import 'package:my_app/src/pages/register_page.dart';
 import 'package:my_app/src/pages/welcome_page.dart';
 

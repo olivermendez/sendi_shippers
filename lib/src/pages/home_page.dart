@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          
           elevation: 0,
           title: const Text(
             'Que quieres enviar?',
@@ -33,7 +32,6 @@ class _HomePageState extends State<HomePage> {
           ),
           backgroundColor: const Color.fromRGBO(37, 59, 128, 5),
         ),
-        backgroundColor: const Color.fromRGBO(255, 255, 236, 20),
         body: _listaItem(),
       ),
     );
@@ -58,7 +56,8 @@ class _HomePageState extends State<HomePage> {
         leading: getIcon(opt['icon'].toString()),
         trailing: const Icon(Icons.keyboard_arrow_right),
         onTap: () {
-          Navigator.pushNamed(context, opt['route'].toString());
+          Navigator.pushNamed(context, opt['route'],
+              arguments: {"name": opt['label']});
         },
       );
 
