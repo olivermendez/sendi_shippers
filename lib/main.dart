@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/config/routes.dart';
+import 'package:my_app/src/pages/page_seleted_index.dart';
 import 'package:my_app/src/pages/welcome_page.dart';
 
 void main() => runApp(const MyApp());
@@ -9,10 +9,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      onGenerateRoute: AppRouter.onGenerateRoute,
       initialRoute: WelcomePage.routeName,
+      routes: {
+        '/welcome': (_) => const WelcomePage(),
+      },
     );
   }
 }
