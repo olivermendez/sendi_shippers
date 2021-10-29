@@ -5,6 +5,7 @@ import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/response_options.dart';
 import 'package:my_app/src/pages/page_seleted_index.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/widgets/shipper_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -55,7 +56,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      drawer: Drawer(),
+      drawer: ShipperDrawer(),
     );
   }
 }

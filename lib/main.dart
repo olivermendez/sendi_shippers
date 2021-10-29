@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/src/pages/page_seleted_index.dart';
 import 'package:my_app/src/pages/welcome_page.dart';
 
 void main() => runApp(const MyApp());
