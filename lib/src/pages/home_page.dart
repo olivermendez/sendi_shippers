@@ -37,30 +37,56 @@ class _HomePageState extends State<HomePage> {
       return nowListingResponse;
     }
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          title: const Text(
-            'Que quieres enviar?',
-            style: TextStyle(fontWeight: FontWeight.bold),
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: <Widget>[
+          _CustomAppBar(),
+          SliverFillRemaining(
+            child: FutureBuilder(
+              future: getData(),
+              builder: (context, AsyncSnapshot<OptionsResponse?> snapshot) {
+                if (!snapshot.hasData) {
+                  return const Center(child: CircularProgressIndicator());
+                } else {
+                  return DisplayOptions(snapshot.data!.options.commodities);
+                }
+              },
+            ),
           ),
-          backgroundColor: const Color.fromRGBO(37, 59, 128, 5),
-        ),
-        body: FutureBuilder(
-          future: getData(),
-          builder: (context, AsyncSnapshot<OptionsResponse?> snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.indigo,
-                ),
-              );
-            } else {
-              return DisplayOptions(snapshot.data!.options.commodities);
-            }
-          },
+        ],
+      ),
+      drawer: Drawer(),
+    );
+  }
+}
+
+class _CustomAppBar extends StatelessWidget {
+  //final Commodity listing;
+
+  //const _CustomAppBar(this.listing);
+
+  @override
+  Widget build(BuildContext context) {
+    return const SliverAppBar(
+      //backgroundColor: Color.fromRGBO(37, 59, 128, 5),
+      backgroundColor: Colors.black87,
+      expandedHeight: 100,
+      floating: false,
+      pinned: true,
+      title: Text(
+        "Hi, Oliver \nWhat do you want ship?",
+        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+      ),
+
+      centerTitle: false,
+      flexibleSpace: FlexibleSpaceBar(
+        titlePadding: EdgeInsets.all(0),
+        centerTitle: true,
+        background: FadeInImage(
+          placeholder: AssetImage('assets/loading.gif'),
+          image: AssetImage('assets/truck.png'),
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.bottomRight,
         ),
       ),
     );
