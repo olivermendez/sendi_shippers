@@ -78,17 +78,20 @@ class DisplayOptions extends StatelessWidget {
         itemBuilder: (context, index) {
           final opt = _optionsToDisplay[index];
 
-          return ListTile(
-              title: Text(opt.label),
-              subtitle: Text(opt.shortLabel),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SubCommoditiePage(
-                              seleted: _optionsToDisplay[index],
-                            )));
-              });
+          return Card(
+            elevation: 0,
+            child: ListTile(
+                title: Text(opt.label),
+                //subtitle: Text(opt.shortLabel),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SubCommoditiePage(
+                                seleted: _optionsToDisplay[index],
+                              )));
+                }),
+          );
         });
   }
 }

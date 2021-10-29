@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/src/pages/listing_detail.dart';
 
 class NewMovePage extends StatefulWidget {
   final String seleted;
@@ -27,10 +28,12 @@ class _NewMovePageState extends State<NewMovePage> {
             padding: const EdgeInsets.only(left: 50.0),
             child: Text(
               "You will move: " + widget.seleted,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          NewMoveForm(),
+          NewMoveForm(
+            listing: widget.seleted,
+          ),
         ],
       ),
     );
@@ -38,7 +41,8 @@ class _NewMovePageState extends State<NewMovePage> {
 }
 
 class NewMoveForm extends StatefulWidget {
-  NewMoveForm({Key? key}) : super(key: key);
+  final String listing;
+  NewMoveForm({required this.listing, Key? key}) : super(key: key);
 
   @override
   _NewMoveFormState createState() => _NewMoveFormState();
@@ -109,9 +113,17 @@ class _NewMoveFormState extends State<NewMoveForm> {
                   autocorrect: false,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child:
-                      ElevatedButton(onPressed: () {}, child: Text("Continue")),
+                  padding: const EdgeInsets.only(top: 30.0),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ListindDetailsPage(
+                                      listing: widget.listing,
+                                    )));
+                      },
+                      child: const Text("Continue")),
                 )
               ],
             ),

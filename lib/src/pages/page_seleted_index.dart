@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
-import 'package:my_app/src/pages/new_move.dart';
+import 'package:my_app/src/pages/listing_locations.dart';
 
 class SubCommoditiePage extends StatefulWidget {
   final Commodity seleted;
