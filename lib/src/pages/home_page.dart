@@ -33,9 +33,7 @@ class _HomePageState extends State<HomePage> {
           'accept': 'application/json',
         },
       );
-
       final nowListingResponse = OptionsResponse.fromRawJson(response.body);
-
       return nowListingResponse;
     }
 
@@ -55,7 +53,9 @@ class _HomePageState extends State<HomePage> {
           builder: (context, AsyncSnapshot<OptionsResponse?> snapshot) {
             if (!snapshot.hasData) {
               return const Center(
-                child: Text("error"),
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.indigo,
+                ),
               );
             } else {
               return DisplayOptions(snapshot.data!.options.commodities);

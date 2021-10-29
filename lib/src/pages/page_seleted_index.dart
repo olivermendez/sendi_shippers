@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
+import 'package:my_app/src/pages/new_move.dart';
 
 class SubCommoditiePage extends StatefulWidget {
   final Commodity seleted;
@@ -25,7 +26,14 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
               final opt = widget.seleted.subCommodities[index];
               return ListTile(
                 title: Text(opt.label),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NewMovePage(
+                                seleted: opt.label,
+                              )));
+                },
               );
             }));
   }
