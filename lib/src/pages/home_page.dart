@@ -62,17 +62,12 @@ class _HomePageState extends State<HomePage> {
 }
 
 class _CustomAppBar extends StatelessWidget {
-  //final Commodity listing;
-
-  //const _CustomAppBar(this.listing);
-
   @override
   Widget build(BuildContext context) {
     return const SliverAppBar(
       //backgroundColor: Color.fromRGBO(37, 59, 128, 5),
       backgroundColor: Colors.black87,
-      expandedHeight: 100,
-      floating: false,
+      expandedHeight: 90,
       pinned: true,
       title: Text(
         "Hi, Oliver \nWhat do you want ship?",
@@ -81,8 +76,8 @@ class _CustomAppBar extends StatelessWidget {
 
       centerTitle: false,
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: EdgeInsets.all(0),
-        centerTitle: true,
+        //titlePadding: EdgeInsets.all(0),
+        //centerTitle: true,
         background: FadeInImage(
           placeholder: AssetImage('assets/loading.gif'),
           image: AssetImage('assets/truck.png'),
@@ -106,9 +101,20 @@ class DisplayOptions extends StatelessWidget {
           final opt = _optionsToDisplay[index];
 
           return Card(
-            elevation: 0,
+            elevation: 1,
             child: ListTile(
                 title: Text(opt.label),
+                leading: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      minWidth: 44,
+                      minHeight: 44,
+                      maxWidth: 64,
+                      maxHeight: 64,
+                    ),
+                    child: FadeInImage(
+                      placeholder: const AssetImage('assets/loading.gif'),
+                      image: AssetImage("assets/${opt.route}"),
+                    )),
                 //subtitle: Text(opt.shortLabel),
                 onTap: () {
                   Navigator.push(

@@ -14,6 +14,7 @@ class _ListindDetailsPageState extends State<ListindDetailsPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Moving: ' + widget.listing),
+        backgroundColor: Colors.black87,
       ),
     );
   }

@@ -18,7 +18,7 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.seleted.label),
-          backgroundColor: const Color.fromRGBO(37, 59, 128, 5),
+          backgroundColor: Colors.black87,
         ),
         body: ListView.builder(
             itemCount: widget.seleted.subCommodities.length,

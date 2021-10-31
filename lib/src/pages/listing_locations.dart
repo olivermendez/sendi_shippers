@@ -16,7 +16,7 @@ class _NewMovePageState extends State<NewMovePage> {
       appBar: AppBar(
         title: const Text("New Move"),
         centerTitle: false,
-        backgroundColor: const Color.fromRGBO(37, 59, 128, 5),
+        backgroundColor: Colors.black87,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
