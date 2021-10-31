@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
-import 'package:my_app/src/pages/listing_locations.dart';
+//import 'package:my_app/src/pages/listing_locations.dart';
+import 'package:my_app/src/pages/options/boast_page.dart';
+import 'package:my_app/src/pages/options/household_goods_page.dart';
+import 'package:my_app/src/pages/options/motorcycles_page.dart';
+import 'package:my_app/src/pages/options/vehicles_page.dart';
 
 class SubCommoditiePage extends StatefulWidget {
   final Commodity seleted;
@@ -27,12 +31,49 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
               return ListTile(
                 title: Text(opt.label),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NewMovePage(
-                                seleted: opt.label,
-                              )));
+                  if (widget.seleted.label == "Vehicles") {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => VehiclePageForm(
+                                  seleted: widget.seleted,
+                                  item: opt.label,
+                                )));
+                  } else if (widget.seleted.label == "Household Items") {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HouseHoldGoodsPage(
+                                  seleted: widget.seleted,
+                                  item: opt.label,
+                                )));
+                  } else if (widget.seleted.label ==
+                      "Motorcycles & Power Sports") {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MotorcyclesPageForm(
+                                  seleted: widget.seleted,
+                                  item: opt.label,
+                                )));
+                  } else if (widget.seleted.label == "Boast") {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BoastPageForm(
+                                  seleted: widget.seleted,
+                                  item: opt.label,
+                                )));
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Scaffold(
+                                  appBar: AppBar(
+                                    title: const Text("Listing no found"),
+                                  ),
+                                )));
+                  }
                 },
               );
             }));

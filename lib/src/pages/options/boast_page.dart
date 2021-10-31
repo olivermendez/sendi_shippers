@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
 
-class HouseHoldGoodsPage extends StatelessWidget {
+class BoastPageForm extends StatelessWidget {
   final Commodity seleted;
   final String item;
-  const HouseHoldGoodsPage(
+  const BoastPageForm(
       {required this.seleted, required this.item, Key? key, String? label})
       : super(key: key);
 
-  static const String routeName = 'houseitems';
+  static String routeName = 'vehicles';
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(

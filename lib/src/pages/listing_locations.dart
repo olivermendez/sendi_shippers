@@ -40,6 +40,19 @@ class _NewMovePageState extends State<NewMovePage> {
   }
 }
 
+class NewCarMoveForm extends StatelessWidget {
+  const NewCarMoveForm({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("cards"),
+      ),
+    );
+  }
+}
+
 class NewMoveForm extends StatefulWidget {
   final String listing;
   NewMoveForm({required this.listing, Key? key}) : super(key: key);
