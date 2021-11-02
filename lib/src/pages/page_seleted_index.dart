@@ -56,7 +56,7 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
                                   seleted: widget.seleted,
                                   item: opt.label,
                                 )));
-                  } else if (widget.seleted.label == "Boast") {
+                  } else if (widget.seleted.label == "Boats") {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -70,6 +70,7 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
                         MaterialPageRoute(
                             builder: (context) => Scaffold(
                                   appBar: AppBar(
+                                    backgroundColor: Colors.red,
                                     title: const Text("Listing no found"),
                                   ),
                                 )));

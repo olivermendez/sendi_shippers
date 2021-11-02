@@ -8,7 +8,7 @@ class BoastPageForm extends StatelessWidget {
       {required this.seleted, required this.item, Key? key, String? label})
       : super(key: key);
 
-  static String routeName = 'vehicles';
+  //static String routeName = 'vehicles';
 
   @override
   Widget build(BuildContext context) {
