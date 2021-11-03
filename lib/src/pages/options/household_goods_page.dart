@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
+import 'package:my_app/src/pages/confirmation_page.dart';
 
 class HouseHoldGoodsPage extends StatelessWidget {
   final Commodity seleted;
@@ -249,7 +250,13 @@ class _PickUpLocationFromToState extends State<PickUpLocationFromTo> {
                   Padding(
                     padding: const EdgeInsets.only(top: 30.0),
                     child: ElevatedButton(
-                        onPressed: () {}, child: const Text("Continue")),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ConfirmationPage()));
+                        },
+                        child: const Text("Continue")),
                   )
                 ],
               ),
