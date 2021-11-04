@@ -23,9 +23,107 @@ class HouseHoldGoodsPage extends StatelessWidget {
         backgroundColor: Colors.black87,
         centerTitle: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: NewFurnitureMove(),
+      body: addDynamic(item),
+    );
+  }
+}
+
+addDynamic(String item) {
+  if (item == 'Furniture') {
+    return const FurnituresPage();
+  } else if (item == 'Home Electronics') {
+    return const HomeElectronicsPage();
+  } else if (item == 'Appliances') {
+    return const AppliancesPage();
+  } else if (item == 'Arcade Equipment') {
+    return const ArcadeEquipmentPage();
+  } else {
+    return Container(
+      color: Colors.red,
+      child: const Center(
+        child: Text(
+          "Listing no defined",
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+
+class FurnituresPage extends StatelessWidget {
+  const FurnituresPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("FurnituresPage to List"),
+      ),
+    );
+  }
+}
+
+class HomeElectronicsPage extends StatelessWidget {
+  const HomeElectronicsPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("HomeElectronicsPage to List"),
+      ),
+    );
+  }
+}
+
+class AppliancesPage extends StatelessWidget {
+  const AppliancesPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("HomeElectronicsPage to List"),
+      ),
+    );
+  }
+}
+
+class ArcadeEquipmentPage extends StatelessWidget {
+  const ArcadeEquipmentPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("ArcadeEquipment to List"),
+      ),
+    );
+  }
+}
+
+class OutdoorEquipmentPage extends StatelessWidget {
+  const OutdoorEquipmentPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("OutdoorEquipmentPage to List"),
+      ),
+    );
+  }
+}
+
+class SportingEquipmentPage extends StatelessWidget {
+  const SportingEquipmentPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("SportingEquipmentPage to List"),
       ),
     );
   }

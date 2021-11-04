@@ -26,6 +26,82 @@ class _MotorcyclesPageForm extends State<MotorcyclesPageForm> {
         backgroundColor: Colors.black87,
         centerTitle: false,
       ),
+      body: addDynamic(widget.item),
+    );
+  }
+}
+
+addDynamic(String item) {
+  if (item == 'Motorcycles & Mopeds') {
+    return const MotorcyclesAndMopedsPage();
+  } else if (item == 'All Terrain Vehicles') {
+    return const AllTerrainVehiclesPage();
+  } else if (item == 'Go Carts & Dune Buggies') {
+    return const GoCartsPage();
+  } else if (item == 'Snowmobiles') {
+    return const SnowmobilesPage();
+  } else {
+    return Container(
+      color: Colors.red,
+      child: const Center(
+        child: Text(
+          "Listing no defined",
+          style: TextStyle(
+              fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+      ),
+    );
+  }
+}
+
+class MotorcyclesAndMopedsPage extends StatelessWidget {
+  const MotorcyclesAndMopedsPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("MotorcyclesAndMopedsPage to List"),
+      ),
+    );
+  }
+}
+
+class AllTerrainVehiclesPage extends StatelessWidget {
+  const AllTerrainVehiclesPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("AllTerrainVehiclesPage to List"),
+      ),
+    );
+  }
+}
+
+class GoCartsPage extends StatelessWidget {
+  const GoCartsPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("GoCartsPage to List"),
+      ),
+    );
+  }
+}
+
+class SnowmobilesPage extends StatelessWidget {
+  const SnowmobilesPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text("SnowmobilesPage to List"),
+      ),
     );
   }
 }

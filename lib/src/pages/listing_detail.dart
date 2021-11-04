@@ -13,7 +13,7 @@ class _ListindDetailsPageState extends State<ListindDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Moving: ' + widget.listing),
+        title: Text('Moving product: ' + widget.listing),
         backgroundColor: Colors.black87,
       ),
     );
