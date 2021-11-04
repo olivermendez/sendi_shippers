@@ -110,13 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
 
             ElevatedButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
-                    (Route<dynamic> route) => false,
-                  );
-                },
+                onPressed: () {},
                 child: const Text(
                   "Register",
                   style: TextStyle(fontSize: 17),

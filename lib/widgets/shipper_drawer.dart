@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/models/token.dart';
 
 class ShipperDrawer extends StatefulWidget {
-  ShipperDrawer({Key? key}) : super(key: key);
+  final Token token;
+  ShipperDrawer({required this.token, Key? key}) : super(key: key);
 
   @override
   _ShipperDrawerState createState() => _ShipperDrawerState();
@@ -33,8 +35,8 @@ class _ShipperDrawerState extends State<ShipperDrawer> {
                       padding: EdgeInsets.only(top: 45.0, left: 20),
                       child: Column(
                         children: [
-                          Text("name"),
-                          Text("username"),
+                          Text(widget.token.user.name),
+                          Text(widget.token.user.username),
                         ],
                       ),
                     ),

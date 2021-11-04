@@ -3,19 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/response_options.dart';
+import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/page_seleted_index.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/widgets/shipper_drawer.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  static const String routeName = '/home';
-  static Route route() {
-    return MaterialPageRoute(
-        builder: (_) => const HomePage(),
-        settings: const RouteSettings(name: routeName));
-  }
+  final Token token;
+  const HomePage({required this.token, Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -41,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          _CustomAppBar(),
+          _CustomAppBar(token: widget.token),
           SliverFillRemaining(
             child: FutureBuilder(
               future: getData(),
@@ -56,26 +51,29 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      drawer: ShipperDrawer(),
+      drawer: ShipperDrawer(token: widget.token),
     );
   }
 }
 
 class _CustomAppBar extends StatelessWidget {
+  final Token token;
+  const _CustomAppBar({required this.token, Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return const SliverAppBar(
+    return SliverAppBar(
       //backgroundColor: Color.fromRGBO(37, 59, 128, 5),
       backgroundColor: Colors.black87,
       expandedHeight: 90,
       pinned: true,
       title: Text(
-        "Hi, Oliver \nWhat do you want ship?",
-        style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        "Hi, ${token.user.name} \nWhat do you want ship?",
+        style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
       ),
 
       centerTitle: false,
-      flexibleSpace: FlexibleSpaceBar(
+      flexibleSpace: const FlexibleSpaceBar(
         //titlePadding: EdgeInsets.all(0),
         //centerTitle: true,
         background: FadeInImage(
