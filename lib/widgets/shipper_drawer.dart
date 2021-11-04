@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/token.dart';
+import 'package:my_app/src/pages/payment_methods_page.dart';
 
 class ShipperDrawer extends StatefulWidget {
   final Token token;
@@ -44,7 +45,14 @@ class _ShipperDrawerState extends State<ShipperDrawer> {
                 )),
             Container(
               color: Colors.white,
-              child: const ListTile(
+              child: ListTile(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              PaymentMethods(token: widget.token)));
+                },
                 title: Text(
                   "Metodos de Pagos",
                   style: TextStyle(fontSize: 15),
