@@ -46,6 +46,11 @@ class _PaymentMethodsState extends State<PaymentMethods> {
           }
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        //tooltip: 'Increment Counter',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
@@ -83,7 +88,7 @@ class buildCreditCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 16.0),
                   child: Text(
                     opt.cardNumber.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontSize: 21,
                         fontFamily: 'CourrierPrime'),
@@ -113,6 +118,9 @@ class buildCreditCard extends StatelessWidget {
       },
     );
   }
+
+  //TODO: Add payment method
+
 }
 
 Column _buildDetailsBlock({@required String? label, @required String? value}) {
@@ -121,12 +129,12 @@ Column _buildDetailsBlock({@required String? label, @required String? value}) {
     children: <Widget>[
       Text(
         '$label',
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.grey, fontSize: 9, fontWeight: FontWeight.bold),
       ),
       Text(
         '$value',
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
       )
     ],
