@@ -1,5 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/commodities.dart';
+
+import 'package:http/http.dart' as http;
+import 'package:my_app/models/token.dart';
 
 class VehiclePageForm extends StatefulWidget {
   final Commodity seleted;
@@ -51,6 +57,132 @@ addDynamic(String item) {
         ),
       ),
     );
+  }
+}
+
+class NewMove extends StatefulWidget {
+  final Token token;
+  const NewMove({required this.token, Key? key}) : super(key: key);
+
+  @override
+  State<NewMove> createState() => _NewMoveState();
+}
+
+class _NewMoveState extends State<NewMove> {
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
+  String? _title;
+
+  String? _description;
+
+  int _quantity = 0;
+
+  final String _type = 'Furniture';
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _key,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: const [
+              Text(
+                "List Shipment",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const Divider(
+            height: 20,
+            color: Colors.white,
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              label: Text('Shipment Title'),
+              hintText: 'What type of furniture? i.e couch, chair',
+              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+              filled: true,
+              isDense: true,
+            ),
+            onChanged: (value) {
+              _title = value;
+            },
+            keyboardType: TextInputType.text,
+            autocorrect: false,
+          ),
+          const Divider(
+            height: 20,
+            color: Colors.white,
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              label: Text('Quantity'),
+              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+              filled: true,
+              isDense: true,
+            ),
+            keyboardType: TextInputType.number,
+            autocorrect: false,
+          ),
+          const Divider(
+            height: 20,
+            color: Colors.white,
+          ),
+          TextFormField(
+            maxLines: 3,
+            decoration: const InputDecoration(
+              label: Text('Add description'),
+              //hintText: 'What type of furniture? i.e couch, chair',
+              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+              filled: true,
+              isDense: true,
+            ),
+            onChanged: (value) {
+              _description = value;
+            },
+            keyboardType: TextInputType.text,
+            autocorrect: false,
+          ),
+          const Divider(
+            height: 20,
+            color: Colors.white,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                createListing(context);
+              },
+              child: const Text("Continue")),
+        ],
+      ),
+    );
+  }
+
+  void createListing(BuildContext context) async {
+    Map<String, dynamic> request = {
+      "title": _title,
+      "description": _description,
+      "commodity": _type
+    };
+
+    var url = Uri.parse('${Constants.apiUrl}listings');
+
+    var response = await http.post(
+      url,
+      body: jsonEncode(request),
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'Authorization': 'Bearer ${widget.token.token}'
+      },
+    );
+    var body = response.body;
+    var decodedJson = jsonDecode(body);
+    //var listing = CreateListingResponse.fromJson(decodedJson);
+
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => DimesionsDetails()));
   }
 }
 

@@ -7,6 +7,7 @@ import 'package:my_app/models/listing.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:my_app/src/pages/dimesions_detail_page.dart';
 
 class HouseHoldGoodsPage extends StatelessWidget {
   final Token token;
@@ -272,6 +273,7 @@ class _NewMoveState extends State<NewMove> {
           ),
           ElevatedButton(
               onPressed: () {
+                //TODO: Validar datos ingresados por el usuario.
                 createListing(context);
               },
               child: const Text("Continue")),
@@ -280,7 +282,7 @@ class _NewMoveState extends State<NewMove> {
     );
   }
 
-  void createListing(BuildContext context) async {
+  Future<void> createListing(BuildContext context) async {
     Map<String, dynamic> request = {
       "title": _title,
       "description": _description,
@@ -303,109 +305,11 @@ class _NewMoveState extends State<NewMove> {
     var listing = CreateListingResponse.fromJson(decodedJson);
 
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => DimesionsDetails()));
-  }
-}
-
-class DimesionsDetails extends StatelessWidget {
-  const DimesionsDetails({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text('Dimensions Details'),
-        backgroundColor: Colors.black87,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              child: Image.asset('assets/dimensions.png'),
-            ),
-            Divider(),
-            Row(
-              children: <Widget>[
-                const Expanded(child: Text('Length:')),
-                Expanded(
-                    child: TextFormField(
-                  decoration: const InputDecoration(
-                    label: Text(
-                      'cm',
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    filled: true,
-                    isDense: true,
-                  ),
-                )),
-              ],
-            ),
-            Divider(),
-            Row(
-              children: <Widget>[
-                const Expanded(child: Text('Width:')),
-                Expanded(
-                    child: TextFormField(
-                  decoration: const InputDecoration(
-                    label: Text(
-                      'cm',
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    filled: true,
-                    isDense: true,
-                  ),
-                )),
-              ],
-            ),
-            Divider(),
-            Row(
-              children: <Widget>[
-                const Expanded(child: Text('Height:')),
-                Expanded(
-                    child: TextFormField(
-                  decoration: const InputDecoration(
-                    label: Text(
-                      'cm',
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    filled: true,
-                    isDense: true,
-                  ),
-                )),
-              ],
-            ),
-            Divider(),
-            Row(
-              children: <Widget>[
-                const Expanded(child: Text('Weight:')),
-                Expanded(
-                    child: TextFormField(
-                  decoration: const InputDecoration(
-                    label: Text(
-                      'kg',
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    filled: true,
-                    isDense: true,
-                  ),
-                )),
-              ],
-            ),
-            Divider(),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                      onPressed: () {}, child: const Text("Continue")),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
+        context,
+        MaterialPageRoute(
+            builder: (context) => DimesionsDetails(
+                  listing: listing.listing,
+                  token: widget.token,
+                )));
   }
 }
