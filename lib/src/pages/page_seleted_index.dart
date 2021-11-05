@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
-//import 'package:my_app/src/pages/listing_locations.dart';
+import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/options/boast_page.dart';
 import 'package:my_app/src/pages/options/household_goods_page.dart';
 import 'package:my_app/src/pages/options/motorcycles_page.dart';
 import 'package:my_app/src/pages/options/vehicles_page.dart';
 
 class SubCommoditiePage extends StatefulWidget {
+  final Token token;
   final Commodity seleted;
-  const SubCommoditiePage({required this.seleted, Key? key}) : super(key: key);
+  const SubCommoditiePage(
+      {required this.seleted, required this.token, Key? key})
+      : super(key: key);
 
   static const String routenName = 'detail';
 
@@ -46,6 +49,7 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
                             builder: (context) => HouseHoldGoodsPage(
                                   seleted: widget.seleted,
                                   item: opt.label,
+                                  token: widget.token,
                                 )));
                   } else if (widget.seleted.label ==
                       "Motorcycles & Power Sports") {

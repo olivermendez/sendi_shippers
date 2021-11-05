@@ -44,7 +44,8 @@ class _HomePageState extends State<HomePage> {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
                 } else {
-                  return DisplayOptions(snapshot.data!.options.commodities);
+                  return DisplayOptions(
+                      snapshot.data!.options.commodities, widget.token);
                 }
               },
             ),
@@ -65,7 +66,7 @@ class _CustomAppBar extends StatelessWidget {
     return SliverAppBar(
       //backgroundColor: Color.fromRGBO(37, 59, 128, 5),
       backgroundColor: Colors.black87,
-      expandedHeight: 90,
+      //expandedHeight: 90,
       pinned: true,
       title: Text(
         "Hi, ${token.user.name} \nWhat do you want ship?",
@@ -88,8 +89,9 @@ class _CustomAppBar extends StatelessWidget {
 }
 
 class DisplayOptions extends StatelessWidget {
+  final Token token;
   final List<Commodity> _optionsToDisplay;
-  const DisplayOptions(this._optionsToDisplay);
+  const DisplayOptions(this._optionsToDisplay, this.token);
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +104,11 @@ class DisplayOptions extends StatelessWidget {
             elevation: 1,
             child: ListTile(
                 title: Text(opt.label),
+                subtitle: Text(opt.shortLabel),
                 leading: ConstrainedBox(
                     constraints: const BoxConstraints(
-                      minWidth: 44,
-                      minHeight: 44,
+                      minWidth: 64,
+                      minHeight: 64,
                       maxWidth: 64,
                       maxHeight: 64,
                     ),
@@ -120,6 +123,7 @@ class DisplayOptions extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => SubCommoditiePage(
                                 seleted: _optionsToDisplay[index],
+                                token: token,
                               )));
                 }),
           );

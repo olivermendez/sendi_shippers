@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class PaymentMethods extends StatefulWidget {
   final Token token;
-  PaymentMethods({required this.token, Key? key}) : super(key: key);
+  const PaymentMethods({required this.token, Key? key}) : super(key: key);
 
   @override
   _PaymentMethodsState createState() => _PaymentMethodsState();

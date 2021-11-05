@@ -63,7 +63,7 @@ class _ShipperDrawerState extends State<ShipperDrawer> {
               color: Colors.white,
               child: const ListTile(
                 title: Text(
-                  "Tus viajes",
+                  "My Shipments",
                   style: TextStyle(fontSize: 15),
                 ),
               ),

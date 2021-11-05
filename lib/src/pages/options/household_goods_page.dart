@@ -1,12 +1,24 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/commodities.dart';
+import 'package:my_app/models/listing_1.dart';
+import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/confirmation_page.dart';
 
+import 'package:http/http.dart' as http;
+
 class HouseHoldGoodsPage extends StatelessWidget {
+  final Token token;
   final Commodity seleted;
   final String item;
   const HouseHoldGoodsPage(
-      {required this.seleted, required this.item, Key? key, String? label})
+      {required this.seleted,
+      required this.item,
+      required this.token,
+      Key? key,
+      String? label})
       : super(key: key);
 
   //static const String routeName = 'houseitems';
@@ -17,26 +29,34 @@ class HouseHoldGoodsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Moving: " + item,
+          "New Move: " + item,
           style: const TextStyle(fontSize: 17),
         ),
         backgroundColor: Colors.black87,
         centerTitle: false,
       ),
-      body: addDynamic(item),
+      body: addDynamic(item, token),
     );
   }
 }
 
-addDynamic(String item) {
+addDynamic(String item, Token token) {
   if (item == 'Furniture') {
-    return const FurnituresPage();
+    return FurnituresPage(
+      token: token,
+    );
   } else if (item == 'Home Electronics') {
-    return const HomeElectronicsPage();
+    return HomeElectronicsPage(
+      token: token,
+    );
   } else if (item == 'Appliances') {
-    return const AppliancesPage();
+    return AppliancesPage(
+      token: token,
+    );
   } else if (item == 'Arcade Equipment') {
-    return const ArcadeEquipmentPage();
+    return ArcadeEquipmentPage(
+      token: token,
+    );
   } else {
     return Container(
       color: Colors.red,
@@ -52,80 +72,357 @@ addDynamic(String item) {
 }
 
 class FurnituresPage extends StatelessWidget {
-  const FurnituresPage({Key? key}) : super(key: key);
+  final Token token;
+  const FurnituresPage({required this.token, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text("FurnituresPage to List"),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: NewMove(
+            token: token,
+          ),
+        ),
       ),
     );
   }
 }
 
 class HomeElectronicsPage extends StatelessWidget {
-  const HomeElectronicsPage({Key? key}) : super(key: key);
+  final Token token;
+  const HomeElectronicsPage({required this.token, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text("HomeElectronicsPage to List"),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: NewMove(
+            token: token,
+          ),
+        ),
       ),
     );
   }
 }
 
 class AppliancesPage extends StatelessWidget {
-  const AppliancesPage({Key? key}) : super(key: key);
+  final Token token;
+  const AppliancesPage({required this.token, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text("HomeElectronicsPage to List"),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: NewMove(
+            token: token,
+          ),
+        ),
       ),
     );
   }
 }
 
 class ArcadeEquipmentPage extends StatelessWidget {
-  const ArcadeEquipmentPage({Key? key}) : super(key: key);
+  final Token token;
+  const ArcadeEquipmentPage({required this.token, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text("ArcadeEquipment to List"),
-      ),
+          child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: NewMove(
+          token: token,
+        ),
+      )),
     );
   }
 }
 
 class OutdoorEquipmentPage extends StatelessWidget {
-  const OutdoorEquipmentPage({Key? key}) : super(key: key);
+  final Token token;
+  const OutdoorEquipmentPage({required this.token, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text("OutdoorEquipmentPage to List"),
-      ),
+          child: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: NewMove(
+          token: token,
+        ),
+      )),
     );
   }
 }
 
 class SportingEquipmentPage extends StatelessWidget {
-  const SportingEquipmentPage({Key? key}) : super(key: key);
+  final Token token;
+  const SportingEquipmentPage({required this.token, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text("SportingEquipmentPage to List"),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: NewMove(
+            token: token,
+          ),
+        ),
       ),
     );
+  }
+}
+
+class NewMove extends StatelessWidget {
+  final Token token;
+  NewMove({required this.token, Key? key}) : super(key: key);
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
+  String? _title;
+  String? _description;
+  int _quantity = 0;
+  final String _type = 'Furniture';
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _key,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Row(
+            children: const [
+              Text(
+                "List Shipment",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const Divider(
+            height: 20,
+            color: Colors.white,
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              label: Text('Shipment Title'),
+              hintText: 'What type of furniture? i.e couch, chair',
+              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+              filled: true,
+              isDense: true,
+            ),
+            onChanged: (value) {
+              _title = value;
+            },
+            keyboardType: TextInputType.text,
+            autocorrect: false,
+          ),
+          const Divider(
+            height: 20,
+            color: Colors.white,
+          ),
+          TextFormField(
+            decoration: const InputDecoration(
+              label: Text('Quantity'),
+              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+              filled: true,
+              isDense: true,
+            ),
+            keyboardType: TextInputType.number,
+            autocorrect: false,
+          ),
+          const Divider(
+            height: 20,
+            color: Colors.white,
+          ),
+          TextFormField(
+            maxLines: 3,
+            decoration: const InputDecoration(
+              label: Text('Add description'),
+              //hintText: 'What type of furniture? i.e couch, chair',
+              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+              filled: true,
+              isDense: true,
+            ),
+            onChanged: (value) {
+              _description = value;
+            },
+            keyboardType: TextInputType.text,
+            autocorrect: false,
+          ),
+          const Divider(
+            height: 20,
+            color: Colors.white,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                createListing();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DimesionsDetails()));
+              },
+              child: const Text("Continue")),
+        ],
+      ),
+    );
+  }
+
+  void createListing() async {
+    Map<String, dynamic> request = {
+      "title": _title,
+      "description": _description,
+      "commodity": _type
+    };
+
+    var url = Uri.parse('${Constants.apiUrl}listings');
+
+    var response = await http.post(
+      url,
+      body: jsonEncode(request),
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'Authorization': 'Bearer ${token.token}'
+      },
+    );
+    var body = response.body;
+    var decodedJson = jsonDecode(body);
+    var listing = CreateListingResponse.fromJson(decodedJson);
+
+    print(listing.listing.id);
+  }
+}
+
+class DimesionsDetails extends StatelessWidget {
+  const DimesionsDetails({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Dimensions Details'),
+        backgroundColor: Colors.black87,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              child: Image.asset('assets/dimensions.png'),
+            ),
+            Divider(),
+            Row(
+              children: <Widget>[
+                const Expanded(child: Text('Length:')),
+                Expanded(
+                    child: TextFormField(
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'cm',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    filled: true,
+                    isDense: true,
+                  ),
+                )),
+              ],
+            ),
+            Divider(),
+            Row(
+              children: <Widget>[
+                const Expanded(child: Text('Width:')),
+                Expanded(
+                    child: TextFormField(
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'cm',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    filled: true,
+                    isDense: true,
+                  ),
+                )),
+              ],
+            ),
+            Divider(),
+            Row(
+              children: <Widget>[
+                const Expanded(child: Text('Height:')),
+                Expanded(
+                    child: TextFormField(
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'cm',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    filled: true,
+                    isDense: true,
+                  ),
+                )),
+              ],
+            ),
+            Divider(),
+            Row(
+              children: <Widget>[
+                const Expanded(child: Text('Weight:')),
+                Expanded(
+                    child: TextFormField(
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'kg',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    filled: true,
+                    isDense: true,
+                  ),
+                )),
+              ],
+            ),
+            Divider(),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PricePage()));
+                      },
+                      child: const Text("Continue")),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PricePage extends StatelessWidget {
+  const PricePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('price'),
+        ),
+        body: Container());
   }
 }
 
