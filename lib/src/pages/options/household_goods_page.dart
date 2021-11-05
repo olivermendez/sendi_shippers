@@ -3,9 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/commodities.dart';
-import 'package:my_app/models/listing_1.dart';
+import 'package:my_app/models/listing.dart';
 import 'package:my_app/models/token.dart';
-import 'package:my_app/src/pages/confirmation_page.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -20,8 +19,6 @@ class HouseHoldGoodsPage extends StatelessWidget {
       Key? key,
       String? label})
       : super(key: key);
-
-  //static const String routeName = 'houseitems';
 
   @override
   @override
@@ -184,14 +181,23 @@ class SportingEquipmentPage extends StatelessWidget {
   }
 }
 
-class NewMove extends StatelessWidget {
+class NewMove extends StatefulWidget {
   final Token token;
-  NewMove({required this.token, Key? key}) : super(key: key);
+  const NewMove({required this.token, Key? key}) : super(key: key);
+
+  @override
+  State<NewMove> createState() => _NewMoveState();
+}
+
+class _NewMoveState extends State<NewMove> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   String? _title;
+
   String? _description;
+
   int _quantity = 0;
+
   final String _type = 'Furniture';
 
   @override
@@ -266,11 +272,7 @@ class NewMove extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                createListing();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DimesionsDetails()));
+                createListing(context);
               },
               child: const Text("Continue")),
         ],
@@ -278,7 +280,7 @@ class NewMove extends StatelessWidget {
     );
   }
 
-  void createListing() async {
+  void createListing(BuildContext context) async {
     Map<String, dynamic> request = {
       "title": _title,
       "description": _description,
@@ -293,14 +295,15 @@ class NewMove extends StatelessWidget {
       headers: {
         'content-type': 'application/json',
         'accept': 'application/json',
-        'Authorization': 'Bearer ${token.token}'
+        'Authorization': 'Bearer ${widget.token.token}'
       },
     );
     var body = response.body;
     var decodedJson = jsonDecode(body);
     var listing = CreateListingResponse.fromJson(decodedJson);
 
-    print(listing.listing.id);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => DimesionsDetails()));
   }
 }
 
@@ -396,266 +399,12 @@ class DimesionsDetails extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const PricePage()));
-                      },
-                      child: const Text("Continue")),
+                      onPressed: () {}, child: const Text("Continue")),
                 ),
               ],
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class PricePage extends StatelessWidget {
-  const PricePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('price'),
-        ),
-        body: Container());
-  }
-}
-
-class NewFurnitureMove extends StatefulWidget {
-  NewFurnitureMove({Key? key}) : super(key: key);
-
-  @override
-  State<NewFurnitureMove> createState() => _NewFurnitureMoveState();
-}
-
-class _NewFurnitureMoveState extends State<NewFurnitureMove> {
-  final GlobalKey<FormState> _key = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _key,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text(
-            "List Shipment",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-          const Divider(
-            height: 20,
-            color: Colors.white,
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              label: Text('Funiture Type'),
-              hintText: 'What type of furniture? i.e couch, chair',
-              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
-              filled: true,
-              isDense: true,
-            ),
-            //controller: _username,
-            keyboardType: TextInputType.streetAddress,
-            autocorrect: false,
-          ),
-          const Divider(
-            height: 20,
-            color: Colors.white,
-          ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                  child: TextFormField(
-                decoration: const InputDecoration(
-                  label: Text(
-                    'LENGTH',
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  filled: true,
-                  isDense: true,
-                ),
-              )),
-              Expanded(
-                  child: TextFormField(
-                decoration: const InputDecoration(
-                  label: Text(
-                    'WIDTH',
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  filled: true,
-                  isDense: true,
-                ),
-              )),
-              Expanded(
-                  child: TextFormField(
-                decoration: const InputDecoration(
-                  label: Text(
-                    'HEIGHT',
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  filled: true,
-                  isDense: true,
-                ),
-              )),
-              Expanded(
-                  child: TextFormField(
-                decoration: const InputDecoration(
-                  label: Text(
-                    'Drop here',
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  filled: true,
-                  isDense: true,
-                ),
-              )),
-            ],
-          ),
-          const Divider(
-            height: 20,
-            color: Colors.white,
-          ),
-          Row(
-            children: [
-              Expanded(
-                  child: TextFormField(
-                decoration: const InputDecoration(
-                  label: Text(
-                    'WEIGHT',
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  filled: true,
-                  isDense: true,
-                ),
-              )),
-              Expanded(
-                  child: TextFormField(
-                decoration: const InputDecoration(
-                  label: Text(
-                    'Drop here',
-                    style: TextStyle(fontSize: 10),
-                  ),
-                  filled: true,
-                  isDense: true,
-                ),
-              )),
-            ],
-          ),
-          const Divider(
-            height: 20,
-            color: Colors.white,
-          ),
-          Expanded(
-              child: TextFormField(
-            decoration: const InputDecoration(
-              label: Text(
-                'Quantity',
-                style: TextStyle(fontSize: 10),
-              ),
-              filled: true,
-              isDense: true,
-            ),
-          )),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PickUpLocationFromTo()));
-              },
-              child: const Text("Continue")),
-        ],
-      ),
-    );
-  }
-}
-
-class PickUpLocationFromTo extends StatefulWidget {
-  PickUpLocationFromTo({Key? key}) : super(key: key);
-
-  @override
-  _PickUpLocationFromToState createState() => _PickUpLocationFromToState();
-}
-
-class _PickUpLocationFromToState extends State<PickUpLocationFromTo> {
-  final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('DATA'),
-        backgroundColor: Colors.black87,
-        centerTitle: false,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-            key: _key,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const Text(
-                    "Pickup Location",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  const Divider(height: 20, color: Colors.white),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Pick up location',
-                      filled: true,
-                      isDense: true,
-                    ),
-                    //controller: _username,
-                    keyboardType: TextInputType.streetAddress,
-                    autocorrect: false,
-                  ),
-                  const Divider(height: 20, color: Colors.white),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Delivery location',
-                      filled: true,
-                      isDense: true,
-                    ),
-                    //controller: _username,
-                    keyboardType: TextInputType.streetAddress,
-                    autocorrect: false,
-                  ),
-                  const Divider(height: 40, color: Colors.white),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child: Text("When do you need your shitment deliver?",
-                        style: TextStyle(fontSize: 17)),
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      //labelText: 'Delivery location',
-                      filled: true,
-                      isDense: true,
-                      hintText: 'M/D/YYYY',
-                    ),
-                    //controller: _username,
-                    keyboardType: TextInputType.datetime,
-                    autocorrect: false,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ConfirmationPage()));
-                        },
-                        child: const Text("Continue")),
-                  )
-                ],
-              ),
-            )),
       ),
     );
   }
