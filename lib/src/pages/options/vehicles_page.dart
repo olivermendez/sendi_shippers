@@ -31,11 +31,11 @@ class _VehiclePageFormState extends State<VehiclePageForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      //backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           "Moving: " + widget.item,
-          style: TextStyle(fontSize: 17),
+          style: const TextStyle(fontSize: 17),
         ),
         backgroundColor: Colors.black87,
         centerTitle: false,
@@ -77,26 +77,102 @@ class CarsAndLightTrucksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Center(
-        child: NewMoveVehicles(
-          token: token,
+    Future<BodyTypeResponse?> getBodyType() async {
+      var url = Uri.parse('${Constants.apiUrl}vehicle/bodytypes');
+
+      var response = await http.get(
+        url,
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      );
+      final optionsResponse = BodyTypeResponse.fromRawJson(response.body);
+      return optionsResponse;
+    }
+
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Center(
+          child: FutureBuilder(
+            future: getBodyType(),
+            builder: (context, AsyncSnapshot<BodyTypeResponse?> snapshot) {
+              if (!snapshot.hasData) {
+                return const Center(child: CircularProgressIndicator());
+              } else {
+                return DisplayBodyTypeOptions(
+                    snapshot.data!.options.bodytypes, token);
+              }
+            },
+          ),
         ),
       ),
     );
   }
 }
 
-class NewMoveVehicles extends StatefulWidget {
+class DisplayBodyTypeOptions extends StatelessWidget {
   final Token token;
-  const NewMoveVehicles({required this.token, Key? key}) : super(key: key);
+  final List<Bodytype> bodytypesOptions;
+  // ignore: use_key_in_widget_constructors
+  const DisplayBodyTypeOptions(this.bodytypesOptions, this.token);
 
   @override
-  State<NewMoveVehicles> createState() => _NewMoveVehicles();
+  Widget build(BuildContext context) {
+    final Bodytype bodySeleted;
+    return ListView.builder(
+        itemCount: bodytypesOptions.length,
+        itemBuilder: (context, index) {
+          final opt = bodytypesOptions[index];
+          final bodySeleted = bodytypesOptions[index].details;
+          return Card(
+            elevation: 1,
+            child: ListTile(
+                title: Text(opt.value),
+                //subtitle: Text('hola'),
+                leading: ConstrainedBox(
+                    constraints: const BoxConstraints(
+                      minWidth: 64,
+                      minHeight: 64,
+                      maxWidth: 64,
+                      maxHeight: 64,
+                    ),
+                    child: FadeInImage(
+                      placeholder: const AssetImage('assets/loading.gif'),
+                      image: AssetImage("assets/bodytypes/${opt.image}"),
+                    )),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => New(
+                                token: token,
+                                bodySeleted: bodytypesOptions[index],
+                                image: opt.image,
+                              )));
+                }),
+          );
+        });
+  }
 }
 
-class _NewMoveVehicles extends State<NewMoveVehicles> {
+class New extends StatefulWidget {
+  final Bodytype bodySeleted;
+  final Token token;
+  final String image;
+  const New(
+      {required this.token,
+      required this.bodySeleted,
+      required this.image,
+      Key? key})
+      : super(key: key);
+
+  @override
+  State<New> createState() => _New();
+}
+
+class _New extends State<New> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   String bodytype = '';
@@ -113,153 +189,130 @@ class _NewMoveVehicles extends State<NewMoveVehicles> {
 
   @override
   Widget build(BuildContext context) {
-    List<BodyTypeResponse> bodytypes;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text('text'),
+        backgroundColor: Colors.black87,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: ListView.builder(
+          itemCount: widget.bodySeleted.details.length,
+          itemBuilder: (context, index) {
+            final opt = widget.bodySeleted.details[index];
 
-    Future<BodyTypeResponse?> getBodyType() async {
-      var url = Uri.parse('${Constants.apiUrl}vehicle/bodytypes');
-
-      var response = await http.get(
-        url,
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        },
-      );
-      final optionsResponse = BodyTypeResponse.fromRawJson(response.body);
-      return optionsResponse;
-    }
-
-    String dropdownValue = 'Coupe';
-
-    return Form(
-      key: _key,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: const [
-              Text(
-                "LIST A SHIPMENT",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          const Divider(
-            height: 10,
-            color: Colors.white,
-          ),
-          DropdownButton<String>(
-            hint: Text('Body type'),
-            borderRadius: BorderRadius.circular(10),
-
-            icon: const Icon(Icons.arrow_downward),
-            iconSize: 20,
-            //elevation: 16,
-            //style: const TextStyle(color: Colors.deepPurple),
-            underline: Container(
-              height: 1,
-              color: Colors.grey,
-            ),
-            onChanged: (String? newValue) {
-              setState(() {
-                dropdownValue = newValue!;
-              });
-            },
-            items: <String>['Coupe', 'Two', 'Free', 'Four']
-                .map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
-          ),
-          const Divider(
-            height: 10,
-            color: Colors.white,
-          ),
-          Container(
-            alignment: Alignment.center,
-            height: 150,
-            width: 200,
-            child: Image.asset('assets/bodytypes/coupe.png'),
-          ),
-          Container(
-            color: Colors.amber[30],
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+            return Form(
+              //key: _key,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
-                  Text(
-                    'Average Dimensions',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: const [
+                      Text(
+                        "LIST A SHIPMENT",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ],
                   ),
-                  Text(
-                    '4.62m x 1.42m x 1.78m',
-                    style: TextStyle(color: Colors.grey),
+                  const Divider(
+                    height: 10,
+                    color: Colors.white,
                   ),
-                  Text(
-                    'Average Weight',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  const Divider(
+                    height: 10,
+                    color: Colors.white,
                   ),
-                  Text(
-                    '550kg',
-                    style: TextStyle(color: Colors.grey),
+                  Container(
+                      alignment: Alignment.center,
+                      height: 150,
+                      width: 200,
+                      child: FadeInImage(
+                        placeholder: const AssetImage('assets/loading.gif'),
+                        image: AssetImage("assets/bodytypes/${widget.image}"),
+                      )),
+                  Container(
+                    color: Colors.amber[30],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          const Text(
+                            'Average Dimensions',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            opt.dimensions,
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          const Text(
+                            'Average Weight',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(
+                            opt.weight,
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
+                  const Divider(),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text('Shipment Title'),
+                      hintText: 'What type of furniture? i.e couch, chair',
+                      hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+                      filled: true,
+                      isDense: true,
+                    ),
+                    onChanged: (value) {
+                      // _title = value;
+                    },
+                    keyboardType: TextInputType.text,
+                    autocorrect: false,
+                  ),
+                  const Divider(
+                    height: 20,
+                    color: Colors.white,
+                  ),
+                  TextFormField(
+                    maxLines: 3,
+                    decoration: const InputDecoration(
+                      label: Text('Add description'),
+                      //hintText: 'What type of furniture? i.e couch, chair',
+                      hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
+                      filled: true,
+                      isDense: true,
+                    ),
+                    onChanged: (value) {
+                      //_description = value;
+                    },
+                    keyboardType: TextInputType.text,
+                    autocorrect: false,
+                  ),
+                  const Divider(
+                    height: 20,
+                    color: Colors.white,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        //createListing(context);
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => NewMovePage(
+                                      seleted: 'hola',
+                                    )));
+                      },
+                      child: const Text("Continue")),
                 ],
               ),
-            ),
-          ),
-          const Divider(),
-          TextFormField(
-            decoration: const InputDecoration(
-              label: Text('Shipment Title'),
-              hintText: 'What type of furniture? i.e couch, chair',
-              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
-              filled: true,
-              isDense: true,
-            ),
-            onChanged: (value) {
-              // _title = value;
-            },
-            keyboardType: TextInputType.text,
-            autocorrect: false,
-          ),
-          const Divider(
-            height: 20,
-            color: Colors.white,
-          ),
-          TextFormField(
-            maxLines: 3,
-            decoration: const InputDecoration(
-              label: Text('Add description'),
-              //hintText: 'What type of furniture? i.e couch, chair',
-              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
-              filled: true,
-              isDense: true,
-            ),
-            onChanged: (value) {
-              //_description = value;
-            },
-            keyboardType: TextInputType.text,
-            autocorrect: false,
-          ),
-          const Divider(
-            height: 20,
-            color: Colors.white,
-          ),
-          ElevatedButton(
-              onPressed: () {
-                //createListing(context);
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => NewMovePage(
-                              seleted: 'hola',
-                            )));
-              },
-              child: const Text("Continue")),
-        ],
+            );
+          },
+        ),
       ),
     );
   }
