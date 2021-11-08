@@ -2,16 +2,23 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:my_app/config/constant.dart';
+import 'package:my_app/models/bodytypes.dart';
 import 'package:my_app/models/commodities.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:my_app/models/token.dart';
+import 'package:my_app/src/pages/listing_locations.dart';
 
 class VehiclePageForm extends StatefulWidget {
+  final Token token;
   final Commodity seleted;
   final String item;
   const VehiclePageForm(
-      {required this.seleted, required this.item, Key? key, String? label})
+      {required this.seleted,
+      required this.item,
+      required this.token,
+      Key? key,
+      String? label})
       : super(key: key);
 
   static String routeName = 'vehicles';
@@ -24,6 +31,7 @@ class _VehiclePageFormState extends State<VehiclePageForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           "Moving: " + widget.item,
@@ -32,14 +40,16 @@ class _VehiclePageFormState extends State<VehiclePageForm> {
         backgroundColor: Colors.black87,
         centerTitle: false,
       ),
-      body: addDynamic(widget.item),
+      body: addDynamic(widget.item, widget.token),
     );
   }
 }
 
-addDynamic(String item) {
+addDynamic(String item, Token token) {
   if (item == 'Cars & Light Trucks') {
-    return const CarsAndLightTrucksPage();
+    return CarsAndLightTrucksPage(
+      token: token,
+    );
   } else if (item == 'Trailers') {
     return const TrailersPage();
   } else if (item == 'Vehicle Parts') {
@@ -60,27 +70,67 @@ addDynamic(String item) {
   }
 }
 
-class NewMove extends StatefulWidget {
+class CarsAndLightTrucksPage extends StatelessWidget {
   final Token token;
-  const NewMove({required this.token, Key? key}) : super(key: key);
-
-  @override
-  State<NewMove> createState() => _NewMoveState();
-}
-
-class _NewMoveState extends State<NewMove> {
-  final GlobalKey<FormState> _key = GlobalKey<FormState>();
-
-  String? _title;
-
-  String? _description;
-
-  int _quantity = 0;
-
-  final String _type = 'Furniture';
+  const CarsAndLightTrucksPage({required this.token, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Center(
+        child: NewMoveVehicles(
+          token: token,
+        ),
+      ),
+    );
+  }
+}
+
+class NewMoveVehicles extends StatefulWidget {
+  final Token token;
+  const NewMoveVehicles({required this.token, Key? key}) : super(key: key);
+
+  @override
+  State<NewMoveVehicles> createState() => _NewMoveVehicles();
+}
+
+class _NewMoveVehicles extends State<NewMoveVehicles> {
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
+  String bodytype = '';
+  String dimensions = '';
+  String weight = '';
+  bool operable = false;
+  bool convertible = false;
+  bool modified = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<BodyTypeResponse> bodytypes;
+
+    Future<BodyTypeResponse?> getBodyType() async {
+      var url = Uri.parse('${Constants.apiUrl}vehicle/bodytypes');
+
+      var response = await http.get(
+        url,
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      );
+      final optionsResponse = BodyTypeResponse.fromRawJson(response.body);
+      return optionsResponse;
+    }
+
+    String dropdownValue = 'Coupe';
+
     return Form(
       key: _key,
       child: Column(
@@ -89,15 +139,78 @@ class _NewMoveState extends State<NewMove> {
           Row(
             children: const [
               Text(
-                "List Shipment",
+                "LIST A SHIPMENT",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ],
           ),
           const Divider(
-            height: 20,
+            height: 10,
             color: Colors.white,
           ),
+          DropdownButton<String>(
+            hint: Text('Body type'),
+            borderRadius: BorderRadius.circular(10),
+
+            icon: const Icon(Icons.arrow_downward),
+            iconSize: 20,
+            //elevation: 16,
+            //style: const TextStyle(color: Colors.deepPurple),
+            underline: Container(
+              height: 1,
+              color: Colors.grey,
+            ),
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownValue = newValue!;
+              });
+            },
+            items: <String>['Coupe', 'Two', 'Free', 'Four']
+                .map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+          ),
+          const Divider(
+            height: 10,
+            color: Colors.white,
+          ),
+          Container(
+            alignment: Alignment.center,
+            height: 150,
+            width: 200,
+            child: Image.asset('assets/bodytypes/coupe.png'),
+          ),
+          Container(
+            color: Colors.amber[30],
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const <Widget>[
+                  Text(
+                    'Average Dimensions',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '4.62m x 1.42m x 1.78m',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                  Text(
+                    'Average Weight',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    '550kg',
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const Divider(),
           TextFormField(
             decoration: const InputDecoration(
               label: Text('Shipment Title'),
@@ -107,23 +220,9 @@ class _NewMoveState extends State<NewMove> {
               isDense: true,
             ),
             onChanged: (value) {
-              _title = value;
+              // _title = value;
             },
             keyboardType: TextInputType.text,
-            autocorrect: false,
-          ),
-          const Divider(
-            height: 20,
-            color: Colors.white,
-          ),
-          TextFormField(
-            decoration: const InputDecoration(
-              label: Text('Quantity'),
-              hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
-              filled: true,
-              isDense: true,
-            ),
-            keyboardType: TextInputType.number,
             autocorrect: false,
           ),
           const Divider(
@@ -140,7 +239,7 @@ class _NewMoveState extends State<NewMove> {
               isDense: true,
             ),
             onChanged: (value) {
-              _description = value;
+              //_description = value;
             },
             keyboardType: TextInputType.text,
             autocorrect: false,
@@ -151,7 +250,13 @@ class _NewMoveState extends State<NewMove> {
           ),
           ElevatedButton(
               onPressed: () {
-                createListing(context);
+                //createListing(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NewMovePage(
+                              seleted: 'hola',
+                            )));
               },
               child: const Text("Continue")),
         ],
@@ -161,9 +266,9 @@ class _NewMoveState extends State<NewMove> {
 
   void createListing(BuildContext context) async {
     Map<String, dynamic> request = {
-      "title": _title,
-      "description": _description,
-      "commodity": _type
+      //"title": _title,
+      //"description": _description,
+      //"commodity": _type
     };
 
     var url = Uri.parse('${Constants.apiUrl}listings');
@@ -183,19 +288,6 @@ class _NewMoveState extends State<NewMove> {
 
     // Navigator.push(
     //     context, MaterialPageRoute(builder: (context) => DimesionsDetails()));
-  }
-}
-
-class CarsAndLightTrucksPage extends StatelessWidget {
-  const CarsAndLightTrucksPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("CarsAndLightTrucks Page to List"),
-      ),
-    );
   }
 }
 

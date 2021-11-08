@@ -41,6 +41,7 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
                             builder: (context) => VehiclePageForm(
                                   seleted: widget.seleted,
                                   item: opt.label,
+                                  token: widget.token,
                                 )));
                   } else if (widget.seleted.label == "Household Items") {
                     Navigator.push(

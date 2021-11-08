@@ -60,6 +60,7 @@ flutter:
   assets:
     - data/options.json
     - assets/
+    - assets/bodytypes/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
