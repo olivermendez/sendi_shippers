@@ -5,13 +5,6 @@ import 'createshipment.dart';
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
-  static const String routenName = '/register';
-  static Route route() {
-    return MaterialPageRoute(
-        builder: (_) => const RegisterPage(),
-        settings: const RouteSettings(name: routenName));
-  }
-
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
@@ -43,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
           'Register Page',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: const Color.fromRGBO(37, 59, 128, 5),
+        backgroundColor: Color.fromRGBO(3, 9, 23, 1),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

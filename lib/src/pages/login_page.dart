@@ -154,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
 
             TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/register');
+                  Navigator.pushNamed(context, 'opt-verify');
                 },
                 child: const Text("Are you new user ?, Register Now"))
           ],

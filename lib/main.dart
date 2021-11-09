@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/src/pages/home.dart';
+import 'package:my_app/src/pages/opt_verification_page.dart';
+import 'package:my_app/src/pages/register_page.dart';
 import 'package:my_app/src/pages/welcome_page.dart';
 
 void main() => runApp(const MyApp());
@@ -23,6 +25,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/welcome': (_) => const WelcomePage(),
         'home': (_) => Home(),
+        'register': (_) => const RegisterPage(),
+        'opt-verify': (_) => OPTVerification(),
       },
     );
   }
