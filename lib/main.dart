@@ -12,10 +12,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color.fromRGBO(3, 9, 23, 1),
+          ),
           buttonTheme: const ButtonThemeData(
-        buttonColor: Color.fromRGBO(3, 9, 23, 1),
-        textTheme: ButtonTextTheme.primary,
-      )),
+            buttonColor: Color.fromRGBO(3, 9, 23, 1),
+            textTheme: ButtonTextTheme.primary,
+          )),
       initialRoute: WelcomePage.routeName,
       routes: {
         '/welcome': (_) => const WelcomePage(),

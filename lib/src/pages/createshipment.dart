@@ -64,7 +64,6 @@ class _CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      //backgroundColor: Color.fromRGBO(37, 59, 128, 5),
       backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
       //expandedHeight: 90,
       pinned: true,

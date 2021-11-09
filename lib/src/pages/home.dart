@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
 
     List<Widget> _widgetOptions = <Widget>[
       CreateShipmentPage(token: token as Token),
-      MyShipmentPage(),
+      MyShipmentPage(token: token),
     ];
     return Scaffold(
       body: Center(
@@ -37,15 +37,17 @@ class _HomeState extends State<Home> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.add_circle),
+            // ignore: deprecated_member_use
             title: Text('Create'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.check_circle),
+            // ignore: deprecated_member_use
             title: Text('My Ship'),
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color.fromRGBO(3, 9, 23, 1),
+        selectedItemColor: Colors.green,
         onTap: _onItemTapped,
       ),
     );
