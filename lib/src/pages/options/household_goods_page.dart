@@ -7,7 +7,6 @@ import 'package:my_app/models/listing.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:my_app/src/pages/dimesions_detail_page.dart';
 
 class HouseHoldGoodsPage extends StatelessWidget {
   final Token token;
@@ -303,13 +302,189 @@ class _NewMoveState extends State<NewMove> {
     var body = response.body;
     var decodedJson = jsonDecode(body);
     var listing = CreateListingResponse.fromJson(decodedJson);
+    print(listing.listing.id);
 
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => DimesionsDetails(
-                  listing: listing.listing,
+                  id: listing.listing.id,
                   token: widget.token,
                 )));
+  }
+}
+
+class DimesionsDetails extends StatelessWidget {
+  final String id;
+  final Token token;
+  DimesionsDetails({required this.id, required this.token, Key? key})
+      : super(key: key);
+
+  TextEditingController _length = new TextEditingController();
+  TextEditingController _width = new TextEditingController();
+  TextEditingController _height = new TextEditingController();
+  TextEditingController _weight = new TextEditingController();
+
+  late int length, width, height, weight;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Text('Dimensions Details'),
+        backgroundColor: Colors.black87,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              child: Image.asset('assets/dimensions.png'),
+            ),
+            Divider(),
+            Row(
+              children: <Widget>[
+                const Expanded(child: Text('Length:')),
+                Expanded(
+                    child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  controller: _length,
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'cm',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    filled: true,
+                    isDense: true,
+                  ),
+                )),
+              ],
+            ),
+            Divider(),
+            Row(
+              children: <Widget>[
+                const Expanded(child: Text('Width:')),
+                Expanded(
+                    child: TextFormField(
+                  controller: _width,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'cm',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    filled: true,
+                    isDense: true,
+                  ),
+                )),
+              ],
+            ),
+            Divider(),
+            Row(
+              children: <Widget>[
+                const Expanded(child: Text('Height:')),
+                Expanded(
+                    child: TextFormField(
+                  controller: _height,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'cm',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    filled: true,
+                    isDense: true,
+                  ),
+                )),
+              ],
+            ),
+            Divider(),
+            Row(
+              children: <Widget>[
+                const Expanded(child: Text('Weight:')),
+                Expanded(
+                    child: TextFormField(
+                  controller: _weight,
+                  decoration: const InputDecoration(
+                    label: Text(
+                      'kg',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    filled: true,
+                    isDense: true,
+                  ),
+                )),
+              ],
+            ),
+            Divider(),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                      onPressed: () {
+                        createDimesions(context);
+                      },
+                      child: const Text("Continue")),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> createDimesions(BuildContext context) async {
+    print(_length);
+
+    length = int.parse(_length.text);
+    width = int.parse(_width.text);
+    height = int.parse(_height.text);
+    weight = int.parse(_weight.text);
+
+    Map<String, dynamic> request = {
+      "length:": length,
+      "width": width,
+      "height": height,
+      "weight": weight,
+    };
+
+    print(length);
+
+    var url = Uri.parse('${Constants.apiUrl}listings/$id/furniture');
+
+    var response = await http.post(
+      url,
+      body: jsonEncode(request),
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'Authorization': 'Bearer ${token.token}'
+      },
+    );
+
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Confirmation()));
+    //var body = response.body;
+    //var decodedJson = jsonDecode(body);
+    //var listing = CreateListingResponse.fromJson(decodedJson);
+  }
+}
+
+class Confirmation extends StatelessWidget {
+  const Confirmation({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Confirmation Page'),
+      ),
+      body: Center(
+        child: Text("Confirmation Page"),
+      ),
+    );
   }
 }

@@ -222,7 +222,7 @@ class _New extends State<New> {
                               ),
                               Text(
                                 opt.dimensions,
-                                style: TextStyle(color: Colors.grey),
+                                style: const TextStyle(color: Colors.grey),
                               ),
                               const Text(
                                 'Average Weight',
@@ -230,7 +230,7 @@ class _New extends State<New> {
                               ),
                               Text(
                                 opt.weight,
-                                style: TextStyle(color: Colors.grey),
+                                style: const TextStyle(color: Colors.grey),
                               ),
                             ],
                           ),
