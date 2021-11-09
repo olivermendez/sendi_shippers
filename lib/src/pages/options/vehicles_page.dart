@@ -33,9 +33,9 @@ class _VehiclePageFormState extends State<VehiclePageForm> {
     return Scaffold(
       //backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
-          "Moving: " + widget.item,
-          style: const TextStyle(fontSize: 17),
+        title: const Text(
+          "Select your body Type ",
+          style: TextStyle(fontSize: 17),
         ),
         backgroundColor: Colors.black87,
         centerTitle: false,
@@ -120,16 +120,16 @@ class DisplayBodyTypeOptions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Bodytype bodySeleted;
     return ListView.builder(
         itemCount: bodytypesOptions.length,
         itemBuilder: (context, index) {
           final opt = bodytypesOptions[index];
-          final bodySeleted = bodytypesOptions[index].details;
+          //final bodySeleted = bodytypesOptions[index].details;
           return Card(
-            elevation: 1,
+            elevation: 0,
             child: ListTile(
                 title: Text(opt.value),
+                trailing: const Icon(Icons.arrow_right_alt),
                 //subtitle: Text('hola'),
                 leading: ConstrainedBox(
                     constraints: const BoxConstraints(
@@ -192,7 +192,7 @@ class _New extends State<New> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('text'),
+        title: Text(" Moving Car Type: " + widget.bodySeleted.value),
         backgroundColor: Colors.black87,
       ),
       body: Padding(
@@ -207,63 +207,53 @@ class _New extends State<New> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Row(
-                    children: const [
-                      Text(
-                        "LIST A SHIPMENT",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    height: 10,
-                    color: Colors.white,
-                  ),
-                  const Divider(
-                    height: 10,
-                    color: Colors.white,
-                  ),
-                  Container(
-                      alignment: Alignment.center,
-                      height: 150,
-                      width: 200,
-                      child: FadeInImage(
-                        placeholder: const AssetImage('assets/loading.gif'),
-                        image: AssetImage("assets/bodytypes/${widget.image}"),
-                      )),
-                  Container(
-                    color: Colors.amber[30],
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Text(
-                            'Average Dimensions',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                  Row(children: [
+                    Expanded(
+                      child: Container(
+                        color: Colors.amber[30],
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              const Text(
+                                'Average Dimensions',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                opt.dimensions,
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                              const Text(
+                                'Average Weight',
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                opt.weight,
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ],
                           ),
-                          Text(
-                            opt.dimensions,
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                          const Text(
-                            'Average Weight',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            opt.weight,
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
+                    Expanded(
+                      child: Container(
+                          alignment: Alignment.center,
+                          height: 150,
+                          width: 200,
+                          child: FadeInImage(
+                            placeholder: const AssetImage('assets/loading.gif'),
+                            image:
+                                AssetImage("assets/bodytypes/${widget.image}"),
+                          )),
+                    ),
+                  ]),
                   const Divider(),
                   TextFormField(
                     decoration: const InputDecoration(
                       label: Text('Shipment Title'),
-                      hintText: 'What type of furniture? i.e couch, chair',
+                      helperText: 'e.g. 2015 Chevrolet Master',
                       hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
                       filled: true,
                       isDense: true,
