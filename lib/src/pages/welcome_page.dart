@@ -15,13 +15,26 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Center(
             child: Text(
+              "Welcome",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20.0,
+                  color: Colors.white),
+            ),
+          ),
+          const Center(
+            child: Text(
               "SHIPPERS",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 40.0,
+                  color: Colors.white),
             ),
           ),
           const SizedBox(
@@ -54,5 +67,19 @@ class WelcomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class Welcome extends StatefulWidget {
+  Welcome({Key? key}) : super(key: key);
+
+  @override
+  _WelcomeState createState() => _WelcomeState();
+}
+
+class _WelcomeState extends State<Welcome> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
   }
 }

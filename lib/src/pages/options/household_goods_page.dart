@@ -196,7 +196,7 @@ class _NewMoveState extends State<NewMove> {
 
   String? _description;
 
-  int _quantity = 0;
+  final int _quantity = 0;
 
   final String _type = 'Furniture';
 
@@ -255,7 +255,7 @@ class _NewMoveState extends State<NewMove> {
             maxLines: 3,
             decoration: const InputDecoration(
               label: Text('Add description'),
-              //hintText: 'What type of furniture? i.e couch, chair',
+              hintText: 'Instructions you would like to give to your mover?',
               hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
               filled: true,
               isDense: true,
@@ -320,10 +320,10 @@ class DimesionsDetails extends StatelessWidget {
   DimesionsDetails({required this.id, required this.token, Key? key})
       : super(key: key);
 
-  TextEditingController _length = new TextEditingController();
-  TextEditingController _width = new TextEditingController();
-  TextEditingController _height = new TextEditingController();
-  TextEditingController _weight = new TextEditingController();
+  final TextEditingController _length = TextEditingController();
+  final TextEditingController _width = TextEditingController();
+  final TextEditingController _height = TextEditingController();
+  final TextEditingController _weight = TextEditingController();
 
   late int length, width, height, weight;
 
@@ -437,18 +437,21 @@ class DimesionsDetails extends StatelessWidget {
   }
 
   Future<void> createDimesions(BuildContext context) async {
-    print(_length);
+    print("controller" + _length.text);
 
     length = int.parse(_length.text);
     width = int.parse(_width.text);
     height = int.parse(_height.text);
     weight = int.parse(_weight.text);
 
+    print(length);
+    //TODO: por alguna razon el lenght no llega al db
+
     Map<String, dynamic> request = {
-      "length:": length,
       "width": width,
       "height": height,
       "weight": weight,
+      "length:": length,
     };
 
     print(length);
@@ -467,9 +470,6 @@ class DimesionsDetails extends StatelessWidget {
 
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => Confirmation()));
-    //var body = response.body;
-    //var decodedJson = jsonDecode(body);
-    //var listing = CreateListingResponse.fromJson(decodedJson);
   }
 }
 

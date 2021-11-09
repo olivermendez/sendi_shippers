@@ -8,15 +8,15 @@ import 'package:my_app/src/pages/page_seleted_index.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/widgets/shipper_drawer.dart';
 
-class HomePage extends StatefulWidget {
+class CreateShipmentPage extends StatefulWidget {
   final Token token;
-  const HomePage({required this.token, Key? key}) : super(key: key);
+  const CreateShipmentPage({required this.token, Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<CreateShipmentPage> createState() => _CreateShipmentPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _CreateShipmentPageState extends State<CreateShipmentPage> {
   @override
   Widget build(BuildContext context) {
     Future<OptionsResponse?> getData() async {
@@ -65,7 +65,7 @@ class _CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       //backgroundColor: Color.fromRGBO(37, 59, 128, 5),
-      backgroundColor: Colors.black87,
+      backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
       //expandedHeight: 90,
       pinned: true,
       title: Text(

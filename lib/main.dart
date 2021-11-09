@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/src/pages/home.dart';
 import 'package:my_app/src/pages/welcome_page.dart';
 
 void main() => runApp(const MyApp());
@@ -10,9 +11,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          buttonTheme: const ButtonThemeData(
+        buttonColor: Color.fromRGBO(3, 9, 23, 1),
+        textTheme: ButtonTextTheme.primary,
+      )),
       initialRoute: WelcomePage.routeName,
       routes: {
         '/welcome': (_) => const WelcomePage(),
+        'home': (_) => Home(),
       },
     );
   }

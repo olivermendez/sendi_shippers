@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:my_app/config/constant.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/models/token.dart';
+import 'package:my_app/src/pages/home.dart';
 
-import 'home_page.dart';
+import 'createshipment.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         elevation: 0,
         title: const Text('Login Page'),
-        backgroundColor: Colors.black87,
+        backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -179,10 +180,6 @@ class _LoginPageState extends State<LoginPage> {
     var decodedJson = jsonDecode(body);
     var token = Token.fromJson(decodedJson);
 
-    Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (context) => HomePage(token: token)),
-      (Route<dynamic> route) => false,
-    );
+    Navigator.pushNamed(context, 'home', arguments: token);
   }
 }
