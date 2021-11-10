@@ -33,7 +33,7 @@ class _RegisterPageState extends State<RegisterPage> {
       appBar: AppBar(
         elevation: 0,
         title: const Text(
-          'Register Page',
+          'Become SHIPPER',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         backgroundColor: Color.fromRGBO(3, 9, 23, 1),

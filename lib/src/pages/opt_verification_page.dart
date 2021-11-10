@@ -58,7 +58,7 @@ class VerifyNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String error = 'no error';
-    const code = 56754;
+    const code = '56754';
     return Scaffold(
       appBar: AppBar(
         title: const Text('Verify Number'),
@@ -75,12 +75,14 @@ class VerifyNumber extends StatelessWidget {
               child: TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return "Please enter some text";
-                  } else
-                    return "Please enter valid email";
+                    return "Please enter the code";
+                  } else {
+                    return "$value is Invalid";
+                  }
                 },
                 controller: insertCode,
-                decoration: const InputDecoration(helperText: 'code'),
+                decoration:
+                    const InputDecoration(helperText: 'Check your message'),
               ),
             ),
             Row(
@@ -88,8 +90,7 @@ class VerifyNumber extends StatelessWidget {
                 Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate() &&
-                              insertCode.text == code.toString()) {
+                          if (insertCode.text == code) {
                             Navigator.pushNamed(context, 'register');
                           } else {
                             return;
