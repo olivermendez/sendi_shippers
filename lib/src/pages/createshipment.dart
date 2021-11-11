@@ -37,17 +37,21 @@ class _CreateShipmentPageState extends State<CreateShipmentPage> {
       body: CustomScrollView(
         slivers: <Widget>[
           _CustomAppBar(token: widget.token),
-          SliverFillRemaining(
-            child: FutureBuilder(
-              future: getData(),
-              builder: (context, AsyncSnapshot<OptionsResponse?> snapshot) {
-                if (!snapshot.hasData) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  return DisplayOptions(
-                      snapshot.data!.options.commodities, widget.token);
-                }
-              },
+          MediaQuery.removePadding(
+            context: context,
+            removeTop: true,
+            child: SliverFillRemaining(
+              child: FutureBuilder(
+                future: getData(),
+                builder: (context, AsyncSnapshot<OptionsResponse?> snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else {
+                    return DisplayOptions(
+                        snapshot.data!.options.commodities, widget.token);
+                  }
+                },
+              ),
             ),
           ),
         ],
