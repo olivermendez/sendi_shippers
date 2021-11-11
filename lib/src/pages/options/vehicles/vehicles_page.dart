@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
 import 'airplanes.dart';
+import 'bodytypes.dart';
 import 'cars.dart';
 import 'parts.dart';
 import 'trailers.dart';
