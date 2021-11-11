@@ -13,22 +13,43 @@ class MyShipmentPage extends StatelessWidget {
   const MyShipmentPage({required this.token, Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: Container(
-            padding: const EdgeInsets.all(8.0),
-            child: const Text('My Shipments')),
-      ),
-      body: noShipmentCreated(),
-      drawer: ShipperDrawer(token: token),
-    );
-  }
+  Widget build(BuildContext context) => DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            centerTitle: false,
+            bottom: const TabBar(
+              tabs: [
+                Tab(
+                  text: 'Active',
+                ),
+                Tab(
+                  text: 'Booked',
+                ),
+                Tab(
+                  text: 'Delivered',
+                )
+              ],
+            ),
+            title: Container(
+                padding: const EdgeInsets.all(8.0),
+                child: const Text('My Shipments')),
+          ),
+          body: TabBarView(
+            children: [
+              activedShipment(),
+              bookedShipment(),
+              deliveredShipment(),
+            ],
+          ),
+          //drawer: ShipperDrawer(token: token),
+        ),
+      );
 
-  Widget noShipmentCreated() {
+  Widget activedShipment() {
     Future<DynamicListingResponse?> getListingByUser() async {
-      var url = Uri.parse('${Constants.apiUrl}listings/user/${token.user.id}');
+      var url =
+          Uri.parse('${Constants.apiUrl}listings/user/${token.user.id}/active');
 
       var response = await http.get(
         url,
@@ -46,6 +67,62 @@ class MyShipmentPage extends StatelessWidget {
       builder: (context, AsyncSnapshot<DynamicListingResponse?> snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
+        } else {
+          return DisplayOptions(snapshot.data!.listing);
+        }
+      },
+    );
+  }
+
+  Widget deliveredShipment() {
+    Future<DynamicListingResponse?> getListingByUser() async {
+      var url = Uri.parse(
+          '${Constants.apiUrl}listings/user/${token.user.id}/delivered');
+
+      var response = await http.get(
+        url,
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      );
+      final listingByUser = DynamicListingResponse.fromRawJson(response.body);
+      return listingByUser;
+    }
+
+    return FutureBuilder(
+      future: getListingByUser(),
+      builder: (context, AsyncSnapshot<DynamicListingResponse?> snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: Text('No listing delivered'));
+        } else {
+          return DisplayOptions(snapshot.data!.listing);
+        }
+      },
+    );
+  }
+
+  Widget bookedShipment() {
+    Future<DynamicListingResponse?> getListingByUser() async {
+      var url =
+          Uri.parse('${Constants.apiUrl}listings/user/${token.user.id}/booked');
+
+      var response = await http.get(
+        url,
+        headers: {
+          'content-type': 'application/json',
+          'accept': 'application/json',
+        },
+      );
+      final listingByUser = DynamicListingResponse.fromRawJson(response.body);
+      return listingByUser;
+    }
+
+    return FutureBuilder(
+      future: getListingByUser(),
+      builder: (context, AsyncSnapshot<DynamicListingResponse?> snapshot) {
+        if (!snapshot.hasData) {
+          return const Center(child: Text('No listing delivered'));
         } else {
           return DisplayOptions(snapshot.data!.listing);
         }

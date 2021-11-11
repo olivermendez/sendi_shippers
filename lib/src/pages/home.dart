@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/createshipment.dart';
+import 'package:my_app/src/pages/myaccount.dart';
 import 'package:my_app/src/pages/myshipments_page.dart';
 
 class Home extends StatefulWidget {
@@ -27,6 +28,7 @@ class _HomeState extends State<Home> {
     List<Widget> _widgetOptions = <Widget>[
       CreateShipmentPage(token: token as Token),
       MyShipmentPage(token: token),
+      MyAccountPage(token: token)
     ];
     return Scaffold(
       body: Center(
@@ -44,6 +46,11 @@ class _HomeState extends State<Home> {
             icon: Icon(Icons.check_circle),
             // ignore: deprecated_member_use
             title: Text('My Ship'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.check_circle),
+            // ignore: deprecated_member_use
+            title: Text('My Account'),
           ),
         ],
         currentIndex: _selectedIndex,

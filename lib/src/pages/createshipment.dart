@@ -56,7 +56,7 @@ class _CreateShipmentPageState extends State<CreateShipmentPage> {
           ),
         ],
       ),
-      drawer: ShipperDrawer(token: widget.token),
+      //drawer: ShipperDrawer(token: widget.token),
     );
   }
 }
@@ -69,13 +69,12 @@ class _CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
-      //expandedHeight: 90,
+      expandedHeight: 70,
       pinned: true,
       title: Text(
         "Hi, ${token.user.name} \nWhat do you want ship?",
         style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
       ),
-
       centerTitle: false,
       flexibleSpace: const FlexibleSpaceBar(
         //titlePadding: EdgeInsets.all(0),

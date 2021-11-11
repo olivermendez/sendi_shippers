@@ -179,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
     var body = response.body;
     var decodedJson = jsonDecode(body);
     var token = Token.fromJson(decodedJson);
-
-    Navigator.pushNamed(context, 'home', arguments: token);
+    Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false,
+        arguments: token);
   }
 }

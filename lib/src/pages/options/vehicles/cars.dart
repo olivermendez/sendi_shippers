@@ -205,7 +205,6 @@ Widget carsForm(Token token, String image) {
                             _quantity.text,
                             'vehicles',
                             'cars',
-                            'assets/bodytypes/$image',
                             token);
                       },
                       child: const Text("Continue")),
@@ -224,15 +223,13 @@ class Conection {
       String _quantity,
       String _comodity,
       String _subcomodity,
-      String imageRoute,
       Token token) async {
     Map<String, dynamic> request = {
       "title": _title,
       "description": _description,
       "quantity": _quantity,
-      "commodity": _comodity,
+      "comodity": _comodity,
       "subcomodity": _subcomodity,
-      "photo": imageRoute
     };
 
     //var url = Uri.parse('${Constants.apiUrl}listings/${token.user.id}/vehicle');
