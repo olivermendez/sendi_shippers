@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/commodities.dart';
-import 'package:my_app/models/listing.dart';
+import 'package:my_app/models/listing/response.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
@@ -196,9 +196,10 @@ class _NewMoveState extends State<NewMove> {
 
   String? _description;
 
-  final int _quantity = 0;
+  String? _quantity;
 
-  final String _type = 'Furniture';
+  final String _comodity = 'household';
+  final String _subcomodity = 'furniture';
 
   @override
   Widget build(BuildContext context) {
@@ -238,6 +239,9 @@ class _NewMoveState extends State<NewMove> {
             color: Colors.white,
           ),
           TextFormField(
+            onChanged: (value) {
+              _quantity = value;
+            },
             decoration: const InputDecoration(
               label: Text('Quantity'),
               hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
@@ -285,7 +289,9 @@ class _NewMoveState extends State<NewMove> {
     Map<String, dynamic> request = {
       "title": _title,
       "description": _description,
-      "commodity": _type
+      "quantity": _quantity,
+      "commodity": _comodity,
+      "subcomodity": _subcomodity,
     };
 
     var url = Uri.parse('${Constants.apiUrl}listings');
@@ -301,7 +307,7 @@ class _NewMoveState extends State<NewMove> {
     );
     var body = response.body;
     var decodedJson = jsonDecode(body);
-    var listing = CreateListingResponse.fromJson(decodedJson);
+    var listing = ListingResponse.fromJson(decodedJson);
     print(listing.listing.id);
 
     Navigator.push(

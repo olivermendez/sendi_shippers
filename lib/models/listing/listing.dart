@@ -1,50 +1,30 @@
 import 'dart:convert';
 
-class CreateListingResponse {
-  CreateListingResponse({
-    required this.success,
-    required this.listing,
-  });
-
-  bool success;
-  Listing listing;
-
-  factory CreateListingResponse.fromRawJson(String str) =>
-      CreateListingResponse.fromJson(json.decode(str));
-
-  String toRawJson() => json.encode(toJson());
-
-  factory CreateListingResponse.fromJson(Map<String, dynamic> json) =>
-      CreateListingResponse(
-        success: json["success"],
-        listing: Listing.fromJson(json["listing"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "success": success,
-        "listing": listing.toJson(),
-      };
-}
-
 class Listing {
   Listing({
+    required this.id,
+    required this.status,
     required this.title,
     required this.description,
+    required this.quantity,
     required this.photo,
     required this.comodity,
+    required this.subcomodity,
     required this.user,
-    required this.id,
     required this.createdAt,
     required this.v,
     required this.listingId,
   });
 
+  String id;
+  String status;
   String title;
   String description;
+  String quantity;
   String photo;
   String comodity;
+  String subcomodity;
   String user;
-  String id;
   DateTime createdAt;
   int v;
   String listingId;
@@ -54,24 +34,30 @@ class Listing {
   String toRawJson() => json.encode(toJson());
 
   factory Listing.fromJson(Map<String, dynamic> json) => Listing(
+        id: json["_id"],
+        status: json["status"],
         title: json["title"],
         description: json["description"],
+        quantity: json["quantity"],
         photo: json["photo"],
         comodity: json["comodity"],
+        subcomodity: json["subcomodity"],
         user: json["user"],
-        id: json["_id"],
         createdAt: DateTime.parse(json["createdAt"]),
         v: json["__v"],
         listingId: json["id"],
       );
 
   Map<String, dynamic> toJson() => {
+        "_id": id,
+        "status": status,
         "title": title,
         "description": description,
+        "quantity": quantity,
         "photo": photo,
         "comodity": comodity,
+        "subcomodity": subcomodity,
         "user": user,
-        "_id": id,
         "createdAt": createdAt.toIso8601String(),
         "__v": v,
         "id": listingId,
