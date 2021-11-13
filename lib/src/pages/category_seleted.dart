@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/options/boast/boast_page.dart';
-import 'package:my_app/src/pages/options/household/household_page.dart';
+import 'package:my_app/src/pages/options/household/household_init.dart';
 import 'package:my_app/src/pages/options/motorcycles/motorcycles_page.dart';
 import 'package:my_app/src/pages/options/vehicles/vehicles_init.dart';
 
