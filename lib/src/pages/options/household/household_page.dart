@@ -496,36 +496,3 @@ class _DimesionsDetailsState extends State<DimesionsDetails> {
                 )));
   }
 }
-
-class Confirmation extends StatelessWidget {
-  final Listing listing;
-  String body;
-  Confirmation({required this.listing, required this.body, Key? key})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var dimensions = jsonDecode(body);
-    var length = dimensions['data']['length'].toString();
-    var width = dimensions['data']['width'].toString();
-    var height = dimensions['data']['height'].toString();
-    var weight = dimensions['data']['weight'].toString();
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Confirmation Page'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Text(length),
-            Text(width),
-            Text(height),
-            Text(weight),
-          ],
-        ),
-      ),
-    );
-  }
-}
