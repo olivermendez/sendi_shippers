@@ -32,11 +32,11 @@ class CarsAndLightTrucksPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Select your body Type ",
+          "Select your Body Type ",
           style: TextStyle(fontSize: 17),
         ),
-        backgroundColor: Colors.black87,
         centerTitle: false,
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),

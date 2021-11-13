@@ -33,8 +33,10 @@ class _New extends State<New> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(" Moving Car Type: " + widget.bodySeleted.value),
-        backgroundColor: Colors.black87,
+        title: Text(" Moving: " + widget.bodySeleted.value),
+        backgroundColor: Color.fromRGBO(3, 9, 23, 1),
+        elevation: 0,
+        centerTitle: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

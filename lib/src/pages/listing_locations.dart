@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:my_app/src/pages/listing_detail.dart';
 
@@ -66,8 +68,14 @@ class _NewMoveFormState extends State<NewMoveForm> {
 
   @override
   Widget build(BuildContext context) {
+    var dimensions = jsonDecode(widget.listing);
+    var length = dimensions['data']['length'].toString();
+    var width = dimensions['data']['width'].toString();
+    var height = dimensions['data']['height'].toString();
+    var weight = dimensions['data']['weight'].toString();
+
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(20.0),
       child: Form(
           key: _key,
           child: SingleChildScrollView(
@@ -76,14 +84,14 @@ class _NewMoveFormState extends State<NewMoveForm> {
               children: [
                 TextFormField(
                   decoration: const InputDecoration(
-                      labelText: 'Pick up location',
-                      filled: true,
-                      isDense: true,
-                      icon: Icon(
-                        Icons.location_on,
-                        size: 30,
-                      )),
-                  //controller: _username,
+                    labelText: 'Pick up location',
+                    filled: true,
+                    isDense: true,
+                    //icon: Icon(
+                    //Icons.location_on,
+                    //size: 30,
+                    //)
+                  ),
                   keyboardType: TextInputType.streetAddress,
                   autocorrect: false,
                 ),
@@ -92,36 +100,33 @@ class _NewMoveFormState extends State<NewMoveForm> {
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
-                      labelText: 'Delivery location',
-                      filled: true,
-                      isDense: true,
-                      icon: Icon(
+                    labelText: 'Delivery location',
+                    filled: true,
+                    isDense: true,
+                    /* icon: Icon(
                         Icons.where_to_vote,
                         size: 30,
-                      )),
-                  //controller: _username,
+                      ) */
+                  ),
                   keyboardType: TextInputType.streetAddress,
                   autocorrect: false,
                 ),
                 const Divider(
                   height: 40,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 5.0, left: 45, bottom: 10),
-                  child: Text("When do you need your shitment deliver?",
-                      style: TextStyle(fontSize: 17)),
-                ),
+                const Text("When do you need your shitment deliver?",
+                    style: TextStyle(fontSize: 17)),
                 TextFormField(
                   decoration: const InputDecoration(
-                      //labelText: 'Delivery location',
-                      filled: true,
-                      isDense: true,
-                      hintText: 'M/D/YYYY',
-                      icon: Icon(
+                    //labelText: 'Delivery location',
+                    filled: true,
+                    isDense: true,
+                    hintText: 'M/D/YYYY',
+                    /*  icon: Icon(
                         Icons.schedule,
                         size: 30,
-                      )),
-                  //controller: _username,
+                      ) */
+                  ),
                   keyboardType: TextInputType.datetime,
                   autocorrect: false,
                 ),

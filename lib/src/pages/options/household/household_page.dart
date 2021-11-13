@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/commodities.dart';
+import 'package:my_app/models/listing/listing.dart';
 import 'package:my_app/models/listing/response.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:my_app/src/pages/listing_locations.dart';
 
 class HouseHoldGoodsPage extends StatelessWidget {
   final Token token;
@@ -314,21 +316,30 @@ class _NewMoveState extends State<NewMove> {
         context,
         MaterialPageRoute(
             builder: (context) => DimesionsDetails(
-                  id: listing.listing.id,
+                  listing: listing.listing,
                   token: widget.token,
                 )));
   }
 }
 
-class DimesionsDetails extends StatelessWidget {
-  final String id;
+class DimesionsDetails extends StatefulWidget {
+  final Listing listing;
+
   final Token token;
-  DimesionsDetails({required this.id, required this.token, Key? key})
+  DimesionsDetails({required this.listing, required this.token, Key? key})
       : super(key: key);
 
+  @override
+  State<DimesionsDetails> createState() => _DimesionsDetailsState();
+}
+
+class _DimesionsDetailsState extends State<DimesionsDetails> {
   final TextEditingController _length = TextEditingController();
+
   final TextEditingController _width = TextEditingController();
+
   final TextEditingController _height = TextEditingController();
+
   final TextEditingController _weight = TextEditingController();
 
   late int length, width, height, weight;
@@ -346,10 +357,8 @@ class DimesionsDetails extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Container(
-              child: Image.asset('assets/dimensions.png'),
-            ),
-            Divider(),
+            Image.asset('assets/dimensions.png'),
+            const Divider(),
             Row(
               children: <Widget>[
                 const Expanded(child: Text('Length:')),
@@ -368,7 +377,7 @@ class DimesionsDetails extends StatelessWidget {
                 )),
               ],
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: <Widget>[
                 const Expanded(child: Text('Width:')),
@@ -387,7 +396,7 @@ class DimesionsDetails extends StatelessWidget {
                 )),
               ],
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: <Widget>[
                 const Expanded(child: Text('Height:')),
@@ -406,7 +415,7 @@ class DimesionsDetails extends StatelessWidget {
                 )),
               ],
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: <Widget>[
                 const Expanded(child: Text('Weight:')),
@@ -424,7 +433,7 @@ class DimesionsDetails extends StatelessWidget {
                 )),
               ],
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: [
                 Expanded(
@@ -462,7 +471,8 @@ class DimesionsDetails extends StatelessWidget {
 
     print(length);
 
-    var url = Uri.parse('${Constants.apiUrl}listings/$id/furniture');
+    var url =
+        Uri.parse('${Constants.apiUrl}listings/${widget.listing.id}/furniture');
 
     var response = await http.post(
       url,
@@ -470,26 +480,51 @@ class DimesionsDetails extends StatelessWidget {
       headers: {
         'content-type': 'application/json',
         'accept': 'application/json',
-        'Authorization': 'Bearer ${token.token}'
+        'Authorization': 'Bearer ${widget.token.token}'
       },
     );
 
+    var body = response.body;
+    print(body);
+
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Confirmation()));
+        context,
+        MaterialPageRoute(
+            builder: (context) => NewMovePage(
+                  //listing: widget.listing,
+                  seleted: body,
+                )));
   }
 }
 
 class Confirmation extends StatelessWidget {
-  const Confirmation({Key? key}) : super(key: key);
+  final Listing listing;
+  String body;
+  Confirmation({required this.listing, required this.body, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var dimensions = jsonDecode(body);
+    var length = dimensions['data']['length'].toString();
+    var width = dimensions['data']['width'].toString();
+    var height = dimensions['data']['height'].toString();
+    var weight = dimensions['data']['weight'].toString();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Confirmation Page'),
       ),
-      body: Center(
-        child: Text("Confirmation Page"),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Text(length),
+            Text(width),
+            Text(height),
+            Text(weight),
+          ],
+        ),
       ),
     );
   }
