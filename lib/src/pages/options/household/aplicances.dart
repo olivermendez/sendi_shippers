@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/token.dart';
-import 'package:my_app/src/pages/options/household/moving.dart';
+import 'package:my_app/src/pages/options/household/moving_household.dart';
 
 class AppliancesPage extends StatelessWidget {
   final Token token;

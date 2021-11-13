@@ -7,7 +7,7 @@ import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
 
-import '../../listing_locations.dart';
+import 'locations.dart';
 
 class DimesionsDetails extends StatefulWidget {
   final Listing listing;
@@ -22,13 +22,9 @@ class DimesionsDetails extends StatefulWidget {
 
 class _DimesionsDetailsState extends State<DimesionsDetails> {
   final TextEditingController _length = TextEditingController();
-
   final TextEditingController _width = TextEditingController();
-
   final TextEditingController _height = TextEditingController();
-
   final TextEditingController _weight = TextEditingController();
-
   late int length, width, height, weight;
 
   @override
@@ -171,15 +167,12 @@ class _DimesionsDetailsState extends State<DimesionsDetails> {
       },
     );
 
-    var body = response.body;
-    print(body);
-
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => NewMovePage(
-                  //listing: widget.listing,
-                  seleted: body,
-                )));
+            builder: (context) => LocationsHouseholdItems(
+                //listing: widget.listing,
+                listingCreated: widget.listing,
+                token: widget.token)));
   }
 }

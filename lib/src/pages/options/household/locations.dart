@@ -2,17 +2,22 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:my_app/models/listing/listing.dart';
+import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/listing_detail.dart';
 
-class NewMovePage extends StatefulWidget {
+class LocationsHouseholdItems extends StatefulWidget {
   final Listing listingCreated;
-  NewMovePage({required this.listingCreated, Key? key}) : super(key: key);
+  final Token token;
+  LocationsHouseholdItems(
+      {required this.listingCreated, required this.token, Key? key})
+      : super(key: key);
 
   @override
-  _NewMovePageState createState() => _NewMovePageState();
+  _LocationsHouseholdItemsState createState() =>
+      _LocationsHouseholdItemsState();
 }
 
-class _NewMovePageState extends State<NewMovePage> {
+class _LocationsHouseholdItemsState extends State<LocationsHouseholdItems> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +41,7 @@ class _NewMovePageState extends State<NewMovePage> {
           ),
           NewMoveForm(
             listingCreated: widget.listingCreated,
+            token: widget.token,
           ),
         ],
       ),
@@ -45,7 +51,9 @@ class _NewMovePageState extends State<NewMovePage> {
 
 class NewMoveForm extends StatefulWidget {
   final Listing listingCreated;
-  NewMoveForm({required this.listingCreated, Key? key}) : super(key: key);
+  final Token token;
+  NewMoveForm({required this.listingCreated, required this.token, Key? key})
+      : super(key: key);
 
   @override
   _NewMoveFormState createState() => _NewMoveFormState();
@@ -115,7 +123,16 @@ class _NewMoveFormState extends State<NewMoveForm> {
                 Padding(
                   padding: const EdgeInsets.only(top: 30.0),
                   child: ElevatedButton(
-                      onPressed: () {}, child: const Text("Continue")),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ListindDetailsPage(
+                                      listingCreated: widget.listingCreated,
+                                      token: widget.token,
+                                    )));
+                      },
+                      child: const Text("Continue")),
                 )
               ],
             ),

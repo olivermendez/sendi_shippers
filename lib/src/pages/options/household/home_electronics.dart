@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/token.dart';
 
-import 'moving.dart';
+import 'moving_household.dart';
 
 class HomeElectronicsPage extends StatelessWidget {
   final Token token;

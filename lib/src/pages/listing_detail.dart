@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/models/listing/listing.dart';
+import 'package:my_app/models/token.dart';
+import 'package:my_app/src/pages/listing_created.dart';
 
 class ListindDetailsPage extends StatefulWidget {
-  final String listing;
-  const ListindDetailsPage({required this.listing, Key? key}) : super(key: key);
+  final Token token;
+  final Listing listingCreated;
+  const ListindDetailsPage(
+      {required this.listingCreated, required this.token, Key? key})
+      : super(key: key);
 
   @override
   _ListindDetailsPageState createState() => _ListindDetailsPageState();
@@ -43,7 +49,11 @@ class _ListindDetailsPageState extends State<ListindDetailsPage> {
           style: TextStyle(color: Colors.white),
         ),
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ListingCreatedPage(token: widget.token)));
         },
         backgroundColor: Colors.blue,
       ),
@@ -59,8 +69,7 @@ class _ListindDetailsPageState extends State<ListindDetailsPage> {
                 width: 300,
                 child: PageView(
                   children: <Widget>[
-                    Image.network(
-                        "https://luxloungeefr.com/wp-content/uploads/2015/03/blue-custom.png"),
+                    Image.network(widget.listingCreated.photo),
                     Image.network(
                         "https://luxloungeefr.com/wp-content/uploads/2015/03/blue-custom.png"),
                     Image.network(
@@ -79,10 +88,10 @@ class _ListindDetailsPageState extends State<ListindDetailsPage> {
                       children: <Widget>[
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
-                              "Yellow Chair",
-                              style: TextStyle(
+                              widget.listingCreated.title,
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 29,
                               ),
@@ -91,11 +100,11 @@ class _ListindDetailsPageState extends State<ListindDetailsPage> {
                               height: 11.0,
                             ),
                             Text(
-                              "title",
+                              widget.listingCreated.title,
                               style: TextStyle(color: Colors.grey),
                             ),
                             Text(
-                              "description",
+                              widget.listingCreated.description,
                               style: TextStyle(color: Colors.grey),
                             ),
                             SizedBox(
