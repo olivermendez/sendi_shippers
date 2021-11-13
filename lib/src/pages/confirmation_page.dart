@@ -6,11 +6,11 @@ class ConfirmationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DateTime selectedDate = DateTime.now();
-    String date = "";
+    const String date = "";
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Confirmation Page'),
+        title: const Text('Confirmation Page'),
         backgroundColor: Colors.black87,
         centerTitle: false,
       ),
@@ -19,15 +19,15 @@ class ConfirmationPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Your Shipment'),
-            Text('CHAIR',
+            const Text('Your Shipment'),
+            const Text('CHAIR',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-            Text('Total Weight: 23kg'),
-            Divider(height: 30),
-            Text('Pickup & delivery'),
-            Divider(height: 10, color: Colors.white),
+            const Text('Total Weight: 23kg'),
+            const Divider(height: 30),
+            const Text('Pickup & delivery'),
+            const Divider(height: 10, color: Colors.white),
             RichText(
-              text: TextSpan(
+              text: const TextSpan(
                 style: TextStyle(color: Colors.black),
                 children: [
                   WidgetSpan(
@@ -39,9 +39,9 @@ class ConfirmationPage extends StatelessWidget {
                 ],
               ),
             ),
-            Divider(height: 10, color: Colors.white),
+            const Divider(height: 10, color: Colors.white),
             RichText(
-              text: TextSpan(
+              text: const TextSpan(
                 style: TextStyle(color: Colors.black),
                 children: [
                   WidgetSpan(
@@ -53,20 +53,20 @@ class ConfirmationPage extends StatelessWidget {
                 ],
               ),
             ),
-            Divider(height: 30),
-            Text(
+            const Divider(height: 30),
+            const Text(
               'Shipping Dates',
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
-            Divider(height: 10, color: Colors.white),
-            Text('Pick up Date Range'),
+            const Divider(height: 10, color: Colors.white),
+            const Text('Pick up Date Range'),
             Text(
                 "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
-            Divider(height: 10, color: Colors.white),
-            Text('Delivery Date Range'),
+            const Divider(height: 10, color: Colors.white),
+            const Text('Delivery Date Range'),
             Text(
                 "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
-            Divider(height: 30, color: Colors.white),
+            const Divider(height: 30, color: Colors.white),
             ElevatedButton(
                 onPressed: () {}, child: const Text("Create Listing")),
           ],

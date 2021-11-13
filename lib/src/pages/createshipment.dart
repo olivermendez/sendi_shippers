@@ -4,9 +4,8 @@ import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/response_options.dart';
 import 'package:my_app/models/token.dart';
-import 'package:my_app/src/pages/page_seleted_index.dart';
+import 'package:my_app/src/pages/category_seleted.dart';
 import 'package:http/http.dart' as http;
-import 'package:my_app/widgets/shipper_drawer.dart';
 
 class CreateShipmentPage extends StatefulWidget {
   final Token token;

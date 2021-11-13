@@ -23,13 +23,6 @@ class New extends StatefulWidget {
 }
 
 class _New extends State<New> {
-  String bodytype = '';
-  String dimensions = '';
-  String weight = '';
-  bool operable = false;
-  bool convertible = false;
-  bool modified = false;
-
   @override
   void initState() {
     super.initState();
@@ -50,7 +43,8 @@ class _New extends State<New> {
           itemBuilder: (context, index) {
             final opt = widget.bodySeleted.details[index];
 
-            return typeCarSelectedImage(opt, widget.image, widget.token);
+            return selectYourBodyTypeListView(
+                opt, widget.image, widget.token, context);
           },
         ),
       ),
@@ -58,7 +52,8 @@ class _New extends State<New> {
   }
 }
 
-Widget typeCarSelectedImage(Detail opt, String image, Token token) {
+Widget selectYourBodyTypeListView(
+    Detail opt, String image, Token token, BuildContext context) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
@@ -104,12 +99,12 @@ Widget typeCarSelectedImage(Detail opt, String image, Token token) {
         ),
       ]),
       const Divider(),
-      carsForm(token, image)
+      vehicleInitialForm(token, image, context)
     ],
   );
 }
 
-Widget carsForm(Token token, String image) {
+Widget vehicleInitialForm(Token token, String image, BuildContext context) {
   TextEditingController _title = TextEditingController();
   TextEditingController _description = TextEditingController();
   TextEditingController _quantity = TextEditingController();
@@ -206,6 +201,11 @@ Widget carsForm(Token token, String image) {
                             'vehicles',
                             'cars',
                             token);
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ConfirmVehicleListing()));
                       },
                       child: const Text("Continue")),
                 ),
@@ -214,6 +214,19 @@ Widget carsForm(Token token, String image) {
           ],
         ),
       ));
+}
+
+class ConfirmVehicleListing extends StatelessWidget {
+  const ConfirmVehicleListing({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('confirmation'),
+      ),
+    );
+  }
 }
 
 class Conection {

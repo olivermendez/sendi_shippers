@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
             title: Text('My Ship'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.check_circle),
+            icon: Icon(Icons.account_circle),
             // ignore: deprecated_member_use
             title: Text('My Account'),
           ),
