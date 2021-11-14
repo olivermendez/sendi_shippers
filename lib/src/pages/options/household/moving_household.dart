@@ -2,26 +2,33 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:my_app/config/constant.dart';
+import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/listing/response.dart';
 import 'package:my_app/models/token.dart';
 import 'package:http/http.dart' as http;
 import 'dimensions_details.dart';
 
-class NewMove extends StatefulWidget {
+class InitialForm extends StatefulWidget {
   final Token token;
-  const NewMove({required this.token, Key? key}) : super(key: key);
+  final Commodity seleted;
+  final String subCommoditySeleted;
+
+  const InitialForm({
+    required this.token,
+    Key? key,
+    required this.seleted,
+    required this.subCommoditySeleted,
+  }) : super(key: key);
 
   @override
-  State<NewMove> createState() => _NewMoveState();
+  State<InitialForm> createState() => _InitialFormState();
 }
 
-class _NewMoveState extends State<NewMove> {
+class _InitialFormState extends State<InitialForm> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
-  String? _title;
-  String? _description;
-  String? _quantity;
-  final String _comodity = 'household';
-  final String _subcomodity = 'furniture';
+  final TextEditingController _title = TextEditingController();
+  final TextEditingController _description = TextEditingController();
+  final TextEditingController _quantity = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +50,7 @@ class _NewMoveState extends State<NewMove> {
             color: Colors.white,
           ),
           TextFormField(
+            controller: _title,
             decoration: const InputDecoration(
               label: Text('Shipment Title'),
               hintText: 'What type of furniture? i.e couch, chair',
@@ -50,9 +58,6 @@ class _NewMoveState extends State<NewMove> {
               filled: true,
               isDense: true,
             ),
-            onChanged: (value) {
-              _title = value;
-            },
             keyboardType: TextInputType.text,
             autocorrect: false,
           ),
@@ -61,9 +66,7 @@ class _NewMoveState extends State<NewMove> {
             color: Colors.white,
           ),
           TextFormField(
-            onChanged: (value) {
-              _quantity = value;
-            },
+            controller: _quantity,
             decoration: const InputDecoration(
               label: Text('Quantity'),
               hintStyle: TextStyle(fontSize: 13, color: Colors.grey),
@@ -78,6 +81,7 @@ class _NewMoveState extends State<NewMove> {
             color: Colors.white,
           ),
           TextFormField(
+            controller: _description,
             maxLines: 3,
             decoration: const InputDecoration(
               label: Text('Add description'),
@@ -86,9 +90,6 @@ class _NewMoveState extends State<NewMove> {
               filled: true,
               isDense: true,
             ),
-            onChanged: (value) {
-              _description = value;
-            },
             keyboardType: TextInputType.text,
             autocorrect: false,
           ),
@@ -97,9 +98,9 @@ class _NewMoveState extends State<NewMove> {
             color: Colors.white,
           ),
           ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 //TODO: Validar datos ingresados por el usuario.
-                createListing(context);
+                await createListing(context);
               },
               child: const Text("Continue")),
         ],
@@ -109,11 +110,11 @@ class _NewMoveState extends State<NewMove> {
 
   Future<void> createListing(BuildContext context) async {
     Map<String, dynamic> request = {
-      "title": _title,
-      "description": _description,
-      "quantity": _quantity,
-      "commodity": _comodity,
-      "subcomodity": _subcomodity,
+      "title": _title.text,
+      "description": _description.text,
+      "quantity": _quantity.text,
+      "commodity": widget.seleted.label,
+      "subcomodity": widget.subCommoditySeleted,
     };
 
     var url = Uri.parse('${Constants.apiUrl}listings');
@@ -132,12 +133,14 @@ class _NewMoveState extends State<NewMove> {
     var listing = ListingResponse.fromJson(decodedJson);
     print(listing.listing.id);
 
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => DimesionsDetails(
-                  listing: listing.listing,
-                  token: widget.token,
-                )));
+    if (listing.listing.comodity == 'household') {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SecondFormDetails(
+                    listing: listing.listing,
+                    token: widget.token,
+                  )));
+    }
   }
 }

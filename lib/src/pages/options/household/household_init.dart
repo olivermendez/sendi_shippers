@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
 
 import 'package:my_app/models/token.dart';
-import 'package:my_app/src/pages/options/household/outdoor_equipment.dart';
-import 'package:my_app/src/pages/options/household/sporting_equipment.dart';
+import 'package:my_app/src/pages/options/household/outdoor_equipments/outdoor_equipment.dart';
+import 'package:my_app/src/pages/options/household/sporting_equipments/sporting_equipment.dart';
 
-import 'aplicances.dart';
-import 'arcarde_equipment.dart';
-import 'furnitures.dart';
+import 'apliances/aplicances.dart';
+import 'arcade_equipment/arcarde_equipment.dart';
+import 'furnitures/furnitures.dart';
 import 'home_electronics/home_electronics.dart';
 import 'pianos/pianos.dart';
 
@@ -45,6 +45,8 @@ addDynamic(String item, Token token, Commodity comoditySeleted,
   if (item == 'Furniture') {
     return FurnituresPage(
       token: token,
+      seleted: comoditySeleted,
+      subCommoditySeleted: subCommoditySeleted,
     );
   } else if (item == 'Home Electronics') {
     return HomeElectronicsPage(
@@ -55,23 +57,32 @@ addDynamic(String item, Token token, Commodity comoditySeleted,
   } else if (item == 'Appliances') {
     return AppliancesPage(
       token: token,
+      seleted: comoditySeleted,
+      subCommoditySeleted: subCommoditySeleted,
     );
   } else if (item == 'Outdoor Equipment') {
     return OutdoorEquipmentPage(
       token: token,
+      seleted: comoditySeleted,
+      subCommoditySeleted: subCommoditySeleted,
     );
   } else if (item == 'Sporting Equipment') {
     return SportingEquipmentPage(
       token: token,
+      seleted: comoditySeleted,
+      subCommoditySeleted: subCommoditySeleted,
     );
   } else if (item == 'Arcade Equipment') {
     return ArcadeEquipmentPage(
       token: token,
+      seleted: comoditySeleted,
+      subCommoditySeleted: subCommoditySeleted,
     );
   } else if (item == 'Pianos') {
     return PianosPage(
-      token: token,
-    );
+        token: token,
+        seleted: comoditySeleted,
+        subCommoditySeleted: subCommoditySeleted);
   } else {
     return Container(
       color: Colors.red,

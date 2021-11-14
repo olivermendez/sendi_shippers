@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/listing/listing.dart';
 
-import 'confirmation_page.dart';
-
 class DetailPageListing extends StatefulWidget {
   final Listing listing;
   const DetailPageListing({Key? key, required this.listing}) : super(key: key);

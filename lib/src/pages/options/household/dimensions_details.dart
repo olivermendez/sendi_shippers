@@ -9,18 +9,18 @@ import 'package:http/http.dart' as http;
 
 import 'locations.dart';
 
-class DimesionsDetails extends StatefulWidget {
+class SecondFormDetails extends StatefulWidget {
   final Listing listing;
 
   final Token token;
-  DimesionsDetails({required this.listing, required this.token, Key? key})
+  SecondFormDetails({required this.listing, required this.token, Key? key})
       : super(key: key);
 
   @override
-  State<DimesionsDetails> createState() => _DimesionsDetailsState();
+  State<SecondFormDetails> createState() => _SecondFormDetailsState();
 }
 
-class _DimesionsDetailsState extends State<DimesionsDetails> {
+class _SecondFormDetailsState extends State<SecondFormDetails> {
   final TextEditingController _length = TextEditingController();
   final TextEditingController _width = TextEditingController();
   final TextEditingController _height = TextEditingController();
@@ -135,7 +135,7 @@ class _DimesionsDetailsState extends State<DimesionsDetails> {
   }
 
   Future<void> createDimesions(BuildContext context) async {
-    print("controller" + _length.text);
+    print("controller: " + _length.text);
 
     length = int.parse(_length.text);
     width = int.parse(_width.text);
@@ -146,10 +146,10 @@ class _DimesionsDetailsState extends State<DimesionsDetails> {
     //TODO: por alguna razon el lenght no llega al db
 
     Map<String, dynamic> request = {
+      "length:": length,
       "width": width,
       "height": height,
       "weight": weight,
-      "length:": length,
     };
 
     print(length);
@@ -170,9 +170,7 @@ class _DimesionsDetailsState extends State<DimesionsDetails> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => LocationsHouseholdItems(
-                //listing: widget.listing,
-                listingCreated: widget.listing,
-                token: widget.token)));
+            builder: (context) => ThirdFormLocations(
+                listingCreated: widget.listing, token: widget.token)));
   }
 }

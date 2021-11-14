@@ -4,12 +4,11 @@ import 'package:my_app/models/token.dart';
 
 import '../moving_household.dart';
 
-class PianosPage extends StatelessWidget {
+class FurnituresPage extends StatelessWidget {
   final Commodity seleted;
   final String subCommoditySeleted;
   final Token token;
-
-  const PianosPage(
+  const FurnituresPage(
       {required this.token,
       required this.seleted,
       required this.subCommoditySeleted,
@@ -18,11 +17,8 @@ class PianosPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('movieng pianos'),
-      ),
-      body: Center(
+    return Container(
+      child: Center(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: InitialForm(
