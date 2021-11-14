@@ -96,7 +96,7 @@ class _ListindDetailsPageState extends State<ListindDetailsPage> {
                                 fontSize: 29,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 11.0,
                             ),
                             Text(
@@ -107,7 +107,7 @@ class _ListindDetailsPageState extends State<ListindDetailsPage> {
                               widget.listingCreated.description,
                               style: TextStyle(color: Colors.grey),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 11.0,
                             ),
                           ],

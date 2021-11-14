@@ -25,62 +25,66 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.seleted.label),
-          backgroundColor: Colors.black87,
+          backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
         ),
         body: ListView.builder(
             itemCount: widget.seleted.subCommodities.length,
             itemBuilder: (context, index) {
               final opt = widget.seleted.subCommodities[index];
-              return ListTile(
-                title: Text(opt.label),
-                onTap: () {
-                  if (widget.seleted.label == "Vehicles") {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => VehiclePageForm(
-                                  seleted: widget.seleted,
-                                  item: opt.label,
-                                  token: widget.token,
-                                )));
-                  } else if (widget.seleted.label == "Household Items") {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HouseHoldGoodsPage(
-                                  seleted: widget.seleted,
-                                  item: opt.label,
-                                  token: widget.token,
-                                )));
-                  } else if (widget.seleted.label ==
-                      "Motorcycles & Power Sports") {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MotorcyclesPageForm(
-                                  seleted: widget.seleted,
-                                  item: opt.label,
-                                )));
-                  } else if (widget.seleted.label == "Boats") {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => BoastPageForm(
-                                  seleted: widget.seleted,
-                                  item: opt.label,
-                                )));
-                  } else {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                                  appBar: AppBar(
-                                    backgroundColor: Colors.red,
-                                    title: const Text("Listing no found"),
-                                  ),
-                                )));
-                  }
-                },
+              return Card(
+                elevation: 0,
+                child: ListTile(
+                  title: Text(opt.label),
+                  trailing: const Icon(Icons.arrow_right_alt),
+                  onTap: () {
+                    if (widget.seleted.label == "Vehicles") {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VehiclePageForm(
+                                    seleted: widget.seleted,
+                                    item: opt.label,
+                                    token: widget.token,
+                                  )));
+                    } else if (widget.seleted.label == "Household Items") {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HouseHoldGoodsPage(
+                                    seleted: widget.seleted,
+                                    item: opt.label,
+                                    token: widget.token,
+                                  )));
+                    } else if (widget.seleted.label ==
+                        "Motorcycles & Power Sports") {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MotorcyclesPageForm(
+                                    seleted: widget.seleted,
+                                    item: opt.label,
+                                  )));
+                    } else if (widget.seleted.label == "Boats") {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BoastPageForm(
+                                    seleted: widget.seleted,
+                                    item: opt.label,
+                                  )));
+                    } else {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Scaffold(
+                                    appBar: AppBar(
+                                      backgroundColor: Colors.red,
+                                      title: const Text("Listing no found"),
+                                    ),
+                                  )));
+                    }
+                  },
+                ),
               );
             }));
   }

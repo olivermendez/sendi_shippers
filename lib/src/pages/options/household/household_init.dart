@@ -32,7 +32,7 @@ class HouseHoldGoodsPage extends StatelessWidget {
           "New Move: " + item,
           style: const TextStyle(fontSize: 17),
         ),
-        backgroundColor: Colors.black87,
+        backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
         centerTitle: false,
       ),
       body: addDynamic(item, token),

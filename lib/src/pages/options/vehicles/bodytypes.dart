@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/bodytypes.dart';
 import 'package:my_app/models/token.dart';
-import 'package:my_app/src/pages/options/vehicles/bodytypes.dart';
 
 import 'cars.dart';
 
@@ -75,7 +74,12 @@ class DisplayBodyTypeOptions extends StatelessWidget {
             elevation: 0,
             child: ListTile(
                 title: Text(opt.value),
-                trailing: const Icon(Icons.arrow_right_alt),
+                trailing: const Text(
+                  'SELECT',
+                  style: TextStyle(color: Colors.blue, fontSize: 10),
+                ),
+
+                //trailing: const Icon(Icons.arrow_right_alt),
                 //subtitle: Text('hola'),
                 leading: ConstrainedBox(
                     constraints: const BoxConstraints(
@@ -92,7 +96,7 @@ class DisplayBodyTypeOptions extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => New(
+                          builder: (context) => SendVehicle(
                                 token: token,
                                 bodySeleted: bodytypesOptions[index],
                                 image: opt.image,
