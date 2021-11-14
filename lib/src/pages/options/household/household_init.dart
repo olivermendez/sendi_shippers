@@ -27,14 +27,6 @@ class HouseHoldGoodsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "New Move: " + item,
-          style: const TextStyle(fontSize: 17),
-        ),
-        backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
-        centerTitle: false,
-      ),
       body: addDynamic(item, token, seleted, item),
     );
   }
