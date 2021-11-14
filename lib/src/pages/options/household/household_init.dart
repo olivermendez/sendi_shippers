@@ -8,7 +8,7 @@ import 'package:my_app/src/pages/options/household/sporting_equipment.dart';
 import 'aplicances.dart';
 import 'arcarde_equipment.dart';
 import 'furnitures.dart';
-import 'home_electronics.dart';
+import 'home_electronics/home_electronics.dart';
 import 'pianos/pianos.dart';
 
 class HouseHoldGoodsPage extends StatelessWidget {
@@ -35,12 +35,13 @@ class HouseHoldGoodsPage extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
         centerTitle: false,
       ),
-      body: addDynamic(item, token),
+      body: addDynamic(item, token, seleted, item),
     );
   }
 }
 
-addDynamic(String item, Token token) {
+addDynamic(String item, Token token, Commodity comoditySeleted,
+    String subCommoditySeleted) {
   if (item == 'Furniture') {
     return FurnituresPage(
       token: token,
@@ -48,6 +49,8 @@ addDynamic(String item, Token token) {
   } else if (item == 'Home Electronics') {
     return HomeElectronicsPage(
       token: token,
+      selected: comoditySeleted,
+      subCommoditySeleted: subCommoditySeleted,
     );
   } else if (item == 'Appliances') {
     return AppliancesPage(

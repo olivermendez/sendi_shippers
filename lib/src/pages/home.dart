@@ -5,7 +5,6 @@ import 'package:my_app/src/pages/myaccount.dart';
 import 'package:my_app/src/pages/myshipments_page.dart';
 
 class Home extends StatefulWidget {
-  //final Token token;
   Home({Key? key}) : super(key: key);
 
   @override

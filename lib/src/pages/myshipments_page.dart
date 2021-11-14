@@ -7,6 +7,8 @@ import 'package:my_app/widgets/shipper_drawer.dart';
 
 import 'package:http/http.dart' as http;
 
+import 'detail_page_listing_created.dart';
+
 class MyShipmentPage extends StatelessWidget {
   final Token token;
 
@@ -164,7 +166,7 @@ class DisplayOptions extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              ShipmentInformation(listing: opt)));
+                              DetailPageListing(listing: opt)));
                 }),
           );
         });

@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/listing/response.dart';
 import 'package:my_app/models/token.dart';
-
 import 'package:http/http.dart' as http;
-
 import 'dimensions_details.dart';
 
 class NewMove extends StatefulWidget {
