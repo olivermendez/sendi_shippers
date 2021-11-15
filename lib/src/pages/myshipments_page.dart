@@ -69,7 +69,7 @@ class MyShipmentPage extends StatelessWidget {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());
         } else {
-          return DisplayOptions(snapshot.data!.listing);
+          return DisplayOptions(snapshot.data!.listing, token);
         }
       },
     );
@@ -97,7 +97,7 @@ class MyShipmentPage extends StatelessWidget {
         if (!snapshot.hasData) {
           return const Center(child: Text('No listing delivered'));
         } else {
-          return DisplayOptions(snapshot.data!.listing);
+          return DisplayOptions(snapshot.data!.listing, token);
         }
       },
     );
@@ -125,7 +125,7 @@ class MyShipmentPage extends StatelessWidget {
         if (!snapshot.hasData) {
           return const Center(child: Text('No listing delivered'));
         } else {
-          return DisplayOptions(snapshot.data!.listing);
+          return DisplayOptions(snapshot.data!.listing, token);
         }
       },
     );
@@ -133,8 +133,9 @@ class MyShipmentPage extends StatelessWidget {
 }
 
 class DisplayOptions extends StatelessWidget {
+  final Token token;
   final List<Listing> listing;
-  const DisplayOptions(this.listing);
+  const DisplayOptions(this.listing, this.token);
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +166,7 @@ class DisplayOptions extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              DetailPageListing(listing: opt)));
+                              DetailPageListing(listing: opt, token: token)));
                 }),
           );
         });

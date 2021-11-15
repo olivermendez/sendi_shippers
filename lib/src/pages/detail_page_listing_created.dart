@@ -1,9 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/listing/listing.dart';
+import 'package:my_app/models/token.dart';
+
+import 'package:http/http.dart' as http;
 
 class DetailPageListing extends StatefulWidget {
+  final Token token;
   final Listing listing;
-  const DetailPageListing({Key? key, required this.listing}) : super(key: key);
+  const DetailPageListing({
+    Key? key,
+    required this.listing,
+    required this.token,
+  }) : super(key: key);
 
   @override
   _DetailPageListingState createState() => _DetailPageListingState();
@@ -30,8 +41,7 @@ class _DetailPageListingState extends State<DetailPageListing> {
                 listing: widget.listing,
               ),
               ButtonActionOnListing(
-                listing: widget.listing,
-              )
+                  listing: widget.listing, token: widget.token)
             ]),
           )
         ],
@@ -132,7 +142,7 @@ class ListingDetails extends StatelessWidget {
           ),
         ),
         const Divider(
-          color: Colors.black,
+          color: Colors.black12,
         ),
         ListTile(
             title: const Text(
@@ -142,10 +152,10 @@ class ListingDetails extends StatelessWidget {
             trailing: const Icon(Icons.question_answer, color: Colors.blue),
             onTap: () {}),
         const Divider(
-          color: Colors.black,
+          color: Colors.black12,
         ),
         const Padding(
-          padding: EdgeInsets.only(left: 15.0),
+          padding: EdgeInsets.only(left: 15.0, top: 10),
           child: Text(
             "Listing Details",
             style: TextStyle(fontWeight: FontWeight.bold),
@@ -173,8 +183,10 @@ class ListingDetails extends StatelessWidget {
 }
 
 class ButtonActionOnListing extends StatelessWidget {
+  final Token token;
   final Listing listing;
-  const ButtonActionOnListing({required this.listing, Key? key})
+  const ButtonActionOnListing(
+      {required this.listing, required this.token, Key? key})
       : super(key: key);
 
   @override
@@ -186,8 +198,7 @@ class ButtonActionOnListing extends StatelessWidget {
         child: MaterialButton(
           color: Colors.red[900],
           onPressed: () {
-            /* Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ConfirmationPage())); */
+            deleteListing(context);
           },
           child: const Text(
             'Delete listing',
@@ -196,6 +207,26 @@ class ButtonActionOnListing extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> deleteListing(context) async {
+    var url = Uri.parse('${Constants.apiUrl}listings/${listing.id}');
+
+    var response = await http.delete(
+      url,
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'Authorization': 'Bearer ${token.token}'
+      },
+    );
+
+    Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false,
+        arguments: token);
+    var body = response.body;
+    var decodedJson = jsonDecode(body);
+
+    print(decodedJson['msg']);
   }
 }
 
