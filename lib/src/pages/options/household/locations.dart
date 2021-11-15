@@ -5,7 +5,7 @@ import 'package:my_app/models/token.dart';
 class ThirdFormLocations extends StatefulWidget {
   final Listing listingCreated;
   final Token token;
-  ThirdFormLocations(
+  const ThirdFormLocations(
       {required this.listingCreated, required this.token, Key? key})
       : super(key: key);
 
