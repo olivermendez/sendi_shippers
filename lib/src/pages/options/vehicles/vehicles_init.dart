@@ -40,7 +40,11 @@ addDynamic(String item, Token token, Commodity comoditySeleted,
   } else if (item == 'Trailers') {
     return const TrailersPage();
   } else if (item == 'Vehicle Parts') {
-    return const VehiclePartsPage();
+    return VehiclePartsPage(
+      seleted: comoditySeleted,
+      subCommoditySeleted: subCommoditySeleted,
+      token: token,
+    );
   } else if (item == 'ATVS & Power Sports') {
     return ATVSPage(
       seleted: comoditySeleted,
