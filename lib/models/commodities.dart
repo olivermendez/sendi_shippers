@@ -64,10 +64,12 @@ class SubCommodity {
   SubCommodity({
     required this.value,
     required this.label,
+    required this.image,
   });
 
   String value;
   String label;
+  String? image;
 
   factory SubCommodity.fromRawJson(String str) =>
       SubCommodity.fromJson(json.decode(str));
@@ -75,12 +77,8 @@ class SubCommodity {
   String toRawJson() => json.encode(toJson());
 
   factory SubCommodity.fromJson(Map<String, dynamic> json) => SubCommodity(
-        value: json["value"],
-        label: json["label"],
-      );
+      value: json["value"], label: json["label"], image: json['image']);
 
-  Map<String, dynamic> toJson() => {
-        "value": value,
-        "label": label,
-      };
+  Map<String, dynamic> toJson() =>
+      {"value": value, "label": label, "image": image};
 }

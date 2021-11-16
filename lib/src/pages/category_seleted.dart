@@ -35,6 +35,18 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
                 elevation: 0,
                 child: ListTile(
                   title: Text(opt.label),
+                  leading: ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        minWidth: 64,
+                        minHeight: 64,
+                        maxWidth: 64,
+                        maxHeight: 64,
+                      ),
+                      child: FadeInImage(
+                        placeholder: const AssetImage('assets/loading.gif'),
+                        image: AssetImage("assets/vehicles/${opt.image}"),
+                      )),
+                  //leading: Image.asset('assets/vehicles/${opt.image}'),
                   trailing: const Icon(Icons.arrow_right_alt),
                   onTap: () {
                     if (widget.seleted.label == "Vehicles") {
