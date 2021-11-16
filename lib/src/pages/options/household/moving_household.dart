@@ -93,6 +93,12 @@ class _InitialFormState extends State<InitialForm> {
             keyboardType: TextInputType.text,
             autocorrect: false,
           ),
+          TextButton(
+              onPressed: () {
+                showModalBottomSheet(
+                    context: context, builder: (builder) => bottonSheet());
+              },
+              child: const Text('Add image')),
           const Divider(
             height: 20,
             color: Colors.white,
@@ -103,6 +109,36 @@ class _InitialFormState extends State<InitialForm> {
                 await createListing(context);
               },
               child: const Text("Continue")),
+        ],
+      ),
+    );
+  }
+
+  Widget bottonSheet() {
+    return Container(
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Choose Listing Photo',
+            style: TextStyle(fontSize: 20),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: const Text('Gallery Photo'),
+              ),
+              TextButton(onPressed: () {}, child: const Text('Camera'))
+            ],
+          )
         ],
       ),
     );

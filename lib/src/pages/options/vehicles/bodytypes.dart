@@ -5,7 +5,7 @@ import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/bodytypes.dart';
 import 'package:my_app/models/token.dart';
 
-import 'cars.dart';
+import 'cars/cars.dart';
 
 class CarsAndLightTrucksPage extends StatelessWidget {
   final Token token;
@@ -69,7 +69,6 @@ class DisplayBodyTypeOptions extends StatelessWidget {
         itemCount: bodytypesOptions.length,
         itemBuilder: (context, index) {
           final opt = bodytypesOptions[index];
-          //final bodySeleted = bodytypesOptions[index].details;
           return Card(
             elevation: 0,
             child: ListTile(
@@ -78,9 +77,6 @@ class DisplayBodyTypeOptions extends StatelessWidget {
                   'SELECT',
                   style: TextStyle(color: Colors.blue, fontSize: 10),
                 ),
-
-                //trailing: const Icon(Icons.arrow_right_alt),
-                //subtitle: Text('hola'),
                 leading: ConstrainedBox(
                     constraints: const BoxConstraints(
                       minWidth: 64,

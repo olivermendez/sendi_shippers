@@ -213,6 +213,12 @@ class _vehicleInitialFormState extends State<vehicleInitialForm> {
               height: 20,
               color: Colors.white,
             ),
+            TextButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                      context: context, builder: (builder) => bottonSheet());
+                },
+                child: const Text('Add image')),
             Row(
               children: [
                 Expanded(
@@ -235,6 +241,36 @@ class _vehicleInitialFormState extends State<vehicleInitialForm> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget bottonSheet() {
+    return Container(
+      height: 100,
+      width: MediaQuery.of(context).size.width,
+      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            'Choose Listing Photo',
+            style: TextStyle(fontSize: 20),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextButton(
+                onPressed: () {},
+                child: const Text('Gallery Photo'),
+              ),
+              TextButton(onPressed: () {}, child: const Text('Camera'))
+            ],
+          )
+        ],
       ),
     );
   }

@@ -5,8 +5,8 @@ class TrailersPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: const Center(
+    return Scaffold(
+      body: const Center(
         child: Text("Trailers Page to List"),
       ),
     );
