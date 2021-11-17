@@ -62,8 +62,8 @@ flutter:
     - assets/
     - assets/bodytypes/
     - assets/parts/
-    - assets/vehicles/
-    - assets/household/
+    - assets/sub/
+    - assets/motorbodytypes/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

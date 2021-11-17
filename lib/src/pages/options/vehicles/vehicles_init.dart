@@ -3,6 +3,7 @@ import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
 import 'atvs/atvs.dart';
 import 'bodytypes.dart';
+import 'motor/bodytypes.dart';
 import 'parts/parts.dart';
 import 'trailers/trailers.dart';
 
@@ -43,6 +44,10 @@ addDynamic(String item, Token token, Commodity comoditySeleted,
     return VehiclePartsPage(
       seleted: comoditySeleted,
       subCommoditySeleted: subCommoditySeleted,
+      token: token,
+    );
+  } else if (item == 'Motorcycles & Mopeds') {
+    return MotorcyclesBodyTypes(
       token: token,
     );
   } else if (item == 'ATVS & Power Sports') {
