@@ -44,7 +44,7 @@ class MotorcyclesBodyTypes extends StatelessWidget {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               } else {
-                return DisplayBodyTypeOptions(
+                return DisplayBodyTypeOptions2(
                     snapshot.data!.options.bodytypesmotor, token);
               }
             },
@@ -55,41 +55,54 @@ class MotorcyclesBodyTypes extends StatelessWidget {
   }
 }
 
-class DisplayBodyTypeOptions extends StatelessWidget {
+class DisplayBodyTypeOptions2 extends StatelessWidget {
   final Token token;
   final List<Bodytypesmotor> bodytypesOptions;
 
-  const DisplayBodyTypeOptions(this.bodytypesOptions, this.token);
+  const DisplayBodyTypeOptions2(this.bodytypesOptions, this.token);
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        itemCount: bodytypesOptions.length,
-        itemBuilder: (context, index) {
-          final opt = bodytypesOptions[index];
-          return Card(
-            elevation: 0,
-            child: ListTile(
-                title: Text(opt.value),
-                trailing: const Text(
-                  'SELECT',
-                  style: TextStyle(color: Colors.blue, fontSize: 10),
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          mainAxisSpacing: 5, crossAxisSpacing: 5, crossAxisCount: 3),
+      itemBuilder: (context, index) {
+        final opt = bodytypesOptions[index];
+        return InkWell(
+          onTap: () {},
+          child: Center(
+            child: Card(
+              child: Container(
+                height: 110,
+                width: 110,
+                color: Colors.white38,
+                child: Column(
+                  children: [
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        minWidth: 64,
+                        minHeight: 64,
+                        maxWidth: 64,
+                        maxHeight: 64,
+                      ),
+                      child: FadeInImage(
+                        placeholder: const AssetImage('assets/loading.gif'),
+                        image: AssetImage("assets/motorbodytypes/${opt.image}"),
+                      ),
+                    ),
+                    Text(opt.value),
+                    Text(
+                      opt.details.weight,
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ],
                 ),
-                subtitle: Text(opt.details.weight),
-                leading: ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    minWidth: 64,
-                    minHeight: 64,
-                    maxWidth: 64,
-                    maxHeight: 64,
-                  ),
-                  child: FadeInImage(
-                    placeholder: const AssetImage('assets/loading.gif'),
-                    image: AssetImage("assets/motorbodytypes/${opt.image}"),
-                  ),
-                ),
-                onTap: () {}),
-          );
-        });
+              ),
+            ),
+          ),
+        );
+      },
+      itemCount: bodytypesOptions.length,
+    );
   }
 }

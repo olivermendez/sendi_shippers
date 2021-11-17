@@ -23,13 +23,18 @@ class HomeElectronicsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: InitialForm(
-          token: token,
-          seleted: selected,
-          subCommoditySeleted: subCommoditySeleted,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(subCommoditySeleted),
+      ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: InitialForm(
+            token: token,
+            seleted: selected,
+            subCommoditySeleted: subCommoditySeleted,
+          ),
         ),
       ),
     );
