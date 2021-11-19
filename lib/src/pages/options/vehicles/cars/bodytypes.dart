@@ -5,7 +5,7 @@ import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/bodytypes.dart';
 import 'package:my_app/models/token.dart';
 
-import 'cars/cars.dart';
+import 'cars.dart';
 
 class CarsAndLightTrucksPage extends StatelessWidget {
   final Token token;

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/motorbodytypes.dart';
 import 'package:my_app/models/token.dart';
+import 'package:my_app/src/pages/options/vehicles/motor/send_motorcycles.dart';
 
 class MotorcyclesBodyTypes extends StatelessWidget {
   final Token token;
@@ -44,7 +45,7 @@ class MotorcyclesBodyTypes extends StatelessWidget {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               } else {
-                return DisplayBodyTypeOptions2(
+                return DisplayBodyTypeOptions(
                     snapshot.data!.options.bodytypesmotor, token);
               }
             },
@@ -55,11 +56,11 @@ class MotorcyclesBodyTypes extends StatelessWidget {
   }
 }
 
-class DisplayBodyTypeOptions2 extends StatelessWidget {
+class DisplayBodyTypeOptions extends StatelessWidget {
   final Token token;
   final List<Bodytypesmotor> bodytypesOptions;
 
-  const DisplayBodyTypeOptions2(this.bodytypesOptions, this.token);
+  const DisplayBodyTypeOptions(this.bodytypesOptions, this.token);
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,15 @@ class DisplayBodyTypeOptions2 extends StatelessWidget {
       itemBuilder: (context, index) {
         final opt = bodytypesOptions[index];
         return InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SendMotorcyclesPage(
+                          token: token,
+                          bodySeleted: bodytypesOptions[index],
+                        )));
+          },
           child: Center(
             child: Card(
               child: Container(

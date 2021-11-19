@@ -6,8 +6,8 @@ import 'package:my_app/src/pages/options/vehicles/sail_boast/sail_boast.dart';
 import 'package:my_app/src/pages/options/vehicles/trucks/commercial_trucks.dart';
 import 'package:my_app/src/pages/options/vehicles/watercrafts/watercrafts.dart';
 import 'atvs/atvs.dart';
-import 'bodytypes.dart';
-import 'motor/bodytypes.dart';
+import 'cars/bodytypes.dart';
+import 'motor/motorbodytypes.dart';
 import 'parts/parts.dart';
 
 class VehiclePageForm extends StatefulWidget {
