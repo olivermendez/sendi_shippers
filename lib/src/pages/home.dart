@@ -4,6 +4,7 @@ import 'package:my_app/src/pages/createshipment.dart';
 import 'package:my_app/src/pages/myshipments_page.dart';
 
 import 'account.dart';
+import 'location.dart';
 
 class Home extends StatefulWidget {
   Home({Key? key}) : super(key: key);
@@ -28,7 +29,8 @@ class _HomeState extends State<Home> {
     List<Widget> _widgetOptions = <Widget>[
       CreateShipmentPage(token: token as Token),
       MyShipmentPage(token: token),
-      Profile(token: token)
+      Profile(token: token),
+
       //MyAccountPage(token: token)
     ];
     return Scaffold(

@@ -6,6 +6,7 @@ import 'package:my_app/models/response_options.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/category_seleted.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/src/services/commodities/commodities.services.dart';
 
 class CreateShipmentPage extends StatefulWidget {
   final Token token;
@@ -32,7 +33,11 @@ class _CreateShipmentPageState extends State<CreateShipmentPage> {
       return nowListingResponse;
     }
 
+    final dog = ServicesApi().getData;
+    print(dog);
+
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       body: CustomScrollView(
         slivers: <Widget>[
           _CustomAppBar(token: widget.token),
@@ -104,14 +109,15 @@ class DisplayOptions extends StatelessWidget {
           return Card(
             elevation: 1,
             child: ListTile(
-                title: Text(opt.label),
+                title: Text(opt.label,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
                 subtitle: Text(opt.shortLabel),
                 leading: ConstrainedBox(
                     constraints: const BoxConstraints(
-                      minWidth: 64,
-                      minHeight: 64,
-                      maxWidth: 64,
-                      maxHeight: 64,
+                      minWidth: 74,
+                      minHeight: 74,
+                      maxWidth: 74,
+                      maxHeight: 74,
                     ),
                     child: FadeInImage(
                       placeholder: const AssetImage('assets/loading.gif'),

@@ -18,6 +18,7 @@ class VehiclePartsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(subCommoditySeleted),
         ),
@@ -59,7 +60,7 @@ class _FormDetailsATVSState extends State<FormDetailsATVS> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'DIMENSIONS DETAILS',
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),

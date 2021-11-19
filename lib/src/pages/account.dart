@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/models/token.dart';
+import 'package:my_app/src/pages/location.dart';
 
 class Profile extends StatelessWidget {
   final Token token;
@@ -158,7 +159,12 @@ class Profile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LocationPage()));
+                    },
                     child: const Text(
                       "EDIT ACCOUNT",
                       style: TextStyle(
