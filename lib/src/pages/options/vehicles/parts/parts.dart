@@ -38,8 +38,7 @@ class VehiclePartsPage extends StatelessWidget {
 
 class FormDetailsATVS extends StatefulWidget {
   final Token token;
-
-  FormDetailsATVS({required this.token, Key? key}) : super(key: key);
+  const FormDetailsATVS({required this.token, Key? key}) : super(key: key);
 
   @override
   State<FormDetailsATVS> createState() => _FormDetailsATVSState();

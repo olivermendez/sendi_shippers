@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_app/models/motorbodytypes.dart';
 import 'package:my_app/models/token.dart';
 
+import '../vehicleform.dart';
+import 'motorform.dart';
+
 class SendMotorcyclesPage extends StatelessWidget {
   final Bodytypesmotor bodySeleted;
   final Token token;
@@ -14,6 +17,7 @@ class SendMotorcyclesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Moving: " + bodySeleted.value),
       ),
@@ -23,11 +27,10 @@ class SendMotorcyclesPage extends StatelessWidget {
           Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Expanded(
               child: Container(
-                color: Colors.amber[30],
+                color: Colors.amber[50],
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       const Text(
@@ -62,6 +65,10 @@ class SendMotorcyclesPage extends StatelessWidget {
             ),
           ]),
           const Divider(),
+          MotorcyclesForm(
+            bodySeleted: bodySeleted,
+            token: token,
+          )
         ],
       ),
     );
