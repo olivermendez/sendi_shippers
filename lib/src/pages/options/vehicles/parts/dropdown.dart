@@ -16,8 +16,8 @@ class HandlingUnitState extends State<HandlingUnit> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 10, bottom: 10),
+        const Padding(
+          padding: EdgeInsets.only(top: 10, bottom: 10),
           child: Text(
             'HANDLING UNIT',
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),

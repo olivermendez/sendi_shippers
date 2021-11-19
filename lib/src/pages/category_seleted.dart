@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/options/household/household_init.dart';
-import 'package:my_app/src/pages/options/motorcycles/motorcycles_page.dart';
 import 'package:my_app/src/pages/options/vehicles/vehicles_init.dart';
 
 class SubCommoditiePage extends StatefulWidget {
@@ -64,15 +63,6 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
                                     seleted: widget.seleted,
                                     item: opt.label,
                                     token: widget.token,
-                                  )));
-                    } else if (widget.seleted.label ==
-                        "Motorcycles & Power Sports") {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MotorcyclesPageForm(
-                                    seleted: widget.seleted,
-                                    item: opt.label,
                                   )));
                     } else {
                       Navigator.push(
