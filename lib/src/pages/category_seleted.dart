@@ -4,6 +4,8 @@ import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/options/household/household_init.dart';
 import 'package:my_app/src/pages/options/vehicles/vehicles_init.dart';
 
+import 'options/animals/animals_init.dart';
+
 class SubCommoditiePage extends StatefulWidget {
   final Token token;
   final Commodity seleted;
@@ -60,6 +62,15 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => HouseHoldGoodsPage(
+                                    seleted: widget.seleted,
+                                    item: opt.label,
+                                    token: widget.token,
+                                  )));
+                    } else if (widget.seleted.label == "Animals") {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AnimalInit(
                                     seleted: widget.seleted,
                                     item: opt.label,
                                     token: widget.token,

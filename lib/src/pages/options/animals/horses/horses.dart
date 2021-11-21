@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
 
+import '../initial_form.dart';
+
 class HorsesPage extends StatelessWidget {
   final Commodity seleted;
   final String subCommoditySeleted;
@@ -15,6 +17,14 @@ class HorsesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(subCommoditySeleted),
+      ),
+      body: InitialFormAnimals(
+        token: token,
+        subCommoditySeleted: subCommoditySeleted,
+      ),
+    );
   }
 }

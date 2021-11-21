@@ -32,19 +32,19 @@ class _AnimalInitState extends State<AnimalInit> {
 
 addDynamic(String item, Token token, Commodity comoditySeleted,
     String subCommoditySeleted) {
-  if (item == 'Cars & Light Trucks') {
+  if (item == 'Cats') {
     return CatPage(
       seleted: comoditySeleted,
       subCommoditySeleted: subCommoditySeleted,
       token: token,
     );
-  } else if (item == 'Vehicle Parts') {
+  } else if (item == 'Dogs') {
     return DogPage(
       seleted: comoditySeleted,
       subCommoditySeleted: subCommoditySeleted,
       token: token,
     );
-  } else if (item == 'ATVS & Power Sports') {
+  } else if (item == 'Horses') {
     return HorsesPage(
       seleted: comoditySeleted,
       subCommoditySeleted: subCommoditySeleted,
