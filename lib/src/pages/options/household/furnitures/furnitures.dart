@@ -18,16 +18,15 @@ class FurnituresPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(title: Text(subCommoditySeleted)),
-      body: Container(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: InitialForm(
-              token: token,
-              seleted: seleted,
-              subCommoditySeleted: subCommoditySeleted,
-            ),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: InitialForm(
+            token: token,
+            seleted: seleted,
+            subCommoditySeleted: subCommoditySeleted,
           ),
         ),
       ),
