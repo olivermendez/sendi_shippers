@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/token.dart';
+import 'package:my_app/src/pages/options/animals/second_form.dart';
 
 class InitialFormAnimals extends StatefulWidget {
   final Token token;
@@ -38,24 +39,34 @@ class _InitialFormAnimalsState extends State<InitialFormAnimals> {
                   )),
               TextFormField(
                   controller: _petName,
-                  decoration: const InputDecoration(
-                    label: Text('Pet name'),
+                  decoration: InputDecoration(
+                    label: Text(widget.subCommoditySeleted + ' name'),
                   )),
               TextFormField(
                   controller: _petBreed,
-                  decoration: const InputDecoration(
-                    label: Text('Pet Breed'),
+                  decoration: InputDecoration(
+                    label: Text(widget.subCommoditySeleted + ' Breed'),
                   )),
               TextFormField(
                   controller: _petWeight,
-                  decoration: const InputDecoration(
-                      label: Text('Pet Weight'), hintText: 'kg')),
+                  decoration: InputDecoration(
+                      label: Text(widget.subCommoditySeleted + ' Weight'),
+                      hintText: 'kg')),
               const Divider(),
               Row(
                 children: [
                   Expanded(
                       child: ElevatedButton(
-                          onPressed: () {}, child: const Text('continue')))
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SecondFormLocationAnimals(
+                                          token: widget.token,
+                                        )));
+                          },
+                          child: const Text('continue')))
                 ],
               )
             ],
