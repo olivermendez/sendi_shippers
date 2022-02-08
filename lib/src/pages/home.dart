@@ -4,10 +4,9 @@ import 'package:my_app/src/pages/createshipment.dart';
 import 'package:my_app/src/pages/myshipments_page.dart';
 
 import 'account.dart';
-import 'location.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();

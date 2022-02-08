@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       initialRoute: WelcomePage.routeName,
       routes: {
         '/welcome': (_) => const WelcomePage(),
-        'home': (_) => Home(),
+        'home': (_) => const Home(),
         'register': (_) => const RegisterPage(),
         'opt-verify': (_) => OPTVerification(),
       },
