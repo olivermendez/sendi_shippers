@@ -29,7 +29,7 @@ class MotorcyclesBodyTypes extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Motorcycles Body Type ",
+          "Motorcycles Body Type",
           style: TextStyle(fontSize: 17),
         ),
         centerTitle: false,
@@ -60,6 +60,7 @@ class DisplayBodyTypeOptions extends StatelessWidget {
   final Token token;
   final List<Bodytypesmotor> bodytypesOptions;
 
+  // ignore: use_key_in_widget_constructors
   const DisplayBodyTypeOptions(this.bodytypesOptions, this.token);
 
   @override

@@ -42,17 +42,17 @@ class _HomeState extends State<Home> {
           BottomNavigationBarItem(
             icon: Icon(Icons.add_circle),
             // ignore: deprecated_member_use
-            title: Text('Create'),
+            label: 'Create',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.check_circle),
             // ignore: deprecated_member_use
-            title: Text('My Ship'),
+            label: 'My Ship',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle),
             // ignore: deprecated_member_use
-            title: Text('My Account'),
+            label: 'My Account',
           ),
         ],
         currentIndex: _selectedIndex,
