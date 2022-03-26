@@ -4,33 +4,33 @@ import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/options/household/household_init.dart';
 import 'package:my_app/src/pages/options/vehicles/vehicles_init.dart';
 
-import 'options/animals/animals_init.dart';
+import '../../widgets/export_widgets.dart';
+import '../options/animals/animals_init.dart';
 
-class SubCommoditiePage extends StatefulWidget {
+class CommodityCategory extends StatefulWidget {
   final Token token;
-  final Commodity seleted;
-  const SubCommoditiePage(
-      {required this.seleted, required this.token, Key? key})
+  final Commodity category;
+  const CommodityCategory(
+      {required this.category, required this.token, Key? key})
       : super(key: key);
 
   static const String routenName = 'detail';
 
   @override
-  _SubCommoditiePageState createState() => _SubCommoditiePageState();
+  _CommodityCategoryState createState() => _CommodityCategoryState();
 }
 
-class _SubCommoditiePageState extends State<SubCommoditiePage> {
+class _CommodityCategoryState extends State<CommodityCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.seleted.label),
-          backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
+        appBar: CustomAppBarForCategory(
+          categoryName: widget.category.label,
         ),
         body: ListView.builder(
-            itemCount: widget.seleted.subCommodities.length,
+            itemCount: widget.category.subCommodities.length,
             itemBuilder: (context, index) {
-              final opt = widget.seleted.subCommodities[index];
+              final opt = widget.category.subCommodities[index];
               return Card(
                 elevation: 0,
                 child: ListTile(
@@ -48,30 +48,30 @@ class _SubCommoditiePageState extends State<SubCommoditiePage> {
                       )),
                   trailing: const Icon(Icons.arrow_right_alt),
                   onTap: () {
-                    if (widget.seleted.label == "Vehicles") {
+                    if (widget.category.label == "Vehicles") {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => VehiclePageForm(
-                                    seleted: widget.seleted,
+                                    seleted: widget.category,
                                     item: opt.label,
                                     token: widget.token,
                                   )));
-                    } else if (widget.seleted.label == "Household Items") {
+                    } else if (widget.category.label == "Household Items") {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => HouseHoldGoodsPage(
-                                    seleted: widget.seleted,
+                                    seleted: widget.category,
                                     item: opt.label,
                                     token: widget.token,
                                   )));
-                    } else if (widget.seleted.label == "Animals") {
+                    } else if (widget.category.label == "Animals") {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => AnimalInit(
-                                    seleted: widget.seleted,
+                                    seleted: widget.category,
                                     item: opt.label,
                                     token: widget.token,
                                   )));

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/src/pages/home.dart';
+import 'package:my_app/src/pages/home/home.dart';
 import 'package:my_app/src/pages/opt_verification_page.dart';
-import 'package:my_app/src/pages/register_page.dart';
-import 'package:my_app/src/pages/welcome_page.dart';
+import 'package:my_app/src/pages/sign_up/register_page.dart';
+import 'package:my_app/src/pages/onboarding_pages/welcome_page.dart';
 
 void main() => runApp(const MyApp());
 

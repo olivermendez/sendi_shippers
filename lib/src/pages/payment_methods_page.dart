@@ -32,7 +32,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Payment Methods'),
+        title: const Text('Payment Methods'),
         backgroundColor: Colors.black87,
       ),
       body: FutureBuilder(
@@ -55,11 +55,13 @@ class _PaymentMethodsState extends State<PaymentMethods> {
   }
 }
 
+// ignore: camel_case_types
 class buildCreditCard extends StatelessWidget {
   final List<YourPaymentsMethod> details;
 
   const buildCreditCard({required this.details, Key? key}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: details.length,

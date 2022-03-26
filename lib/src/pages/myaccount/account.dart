@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/location.dart';
 
-class Profile extends StatelessWidget {
+class MyAccount extends StatelessWidget {
   final Token token;
-  const Profile({required this.token, Key? key}) : super(key: key);
+  const MyAccount({required this.token, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class Profile extends StatelessWidget {
                     image: DecorationImage(
                         image: AssetImage('assets/backimage.jpg'),
                         fit: BoxFit.cover)),
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   height: 200,
                   child: Container(
@@ -85,14 +84,6 @@ class Profile extends StatelessWidget {
                       ))) */
               const SizedBox(
                 height: 15,
-              ),
-              const Text(
-                "Car || Moto",
-                style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.black45,
-                    letterSpacing: 2.0,
-                    fontWeight: FontWeight.w300),
               ),
               Card(
                 margin:

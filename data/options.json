@@ -1,882 +1,663 @@
 {
-  
-    "options": [
-  
-      {
-  
-        "value": "HouseholdGoods",
-  
-        "label": "Household Goods",
-  
-        "shortLabel": "Household Goods",
+  "options": [
+    {
+      "value": "HouseholdGoods",
 
-        "route": "/house-hold",
+      "label": "Household Goods",
 
-        "icon": "tv_outlined",
-  
-        "subCommodities": [
-  
-          {
-  
-            "value": "Furniture",
-  
-            "label": "Furniture"
-  
-          },
-  
-          {
-  
-            "value": "HomeElectronics",
-  
-            "label": "Home Electronics"
-  
-          },
-  
-          {
-  
-            "value": "Appliances",
-  
-            "label": "Appliances"
-  
-          },
-  
-          {
-  
-            "value": "ArcadeEquipment",
-  
-            "label": "Arcade Equipment"
-  
-          },
-  
-          {
-  
-            "value": "LawnOutdoorEquipment",
-  
-            "label": "Lawn & Outdoor Equipment"
-  
-          },
-  
-          {
-  
-            "value": "SportingEquipment",
-  
-            "label": "Sporting Equipment"
-  
-          },
-  
-          {
-  
-            "value": "HouseholdPlants",
-  
-            "label": "Household Plants"
-  
-          },
-  
-          {
-  
-            "value": "OtherHouseholdGoods",
-  
-            "label": "Other Household Goods"
-  
-          }
-  
-        ]
-  
-      },
-  
-      {
-  
-        "value": "HouseholdOfficeMoves",
-  
-        "label": "Household & Office Moves",
-  
-        "shortLabel": "Household & Office Moves",
+      "shortLabel": "Household Goods",
 
-        "route": "/house-and-offices-moves",
+      "route": "/house-hold",
 
-        "icon": "bedroom_child_outlined",
-  
-        "subCommodities": [
-  
-          {
-  
-            "value": "SmallStudio",
-  
-            "label": "Small Studio"
-  
-          },
-  
-          {
-  
-            "value": "LargeStudioor1BRApartment",
-  
-            "label": "Large Studio or 1 BR Apt"
-  
-          },
-  
-          {
-  
-            "value": "TwoBRApt",
-  
-            "label": "2 BR Apt"
-  
-          },
-  
-          {
-  
-            "value": "ThreeBRAptorTwoBRhouse",
-  
-            "label": "3 BR Apt or 2 BR House"
-  
-          },
-  
-          {
-  
-            "value": "ThreeBRhouse",
-  
-            "label": "3 BR House"
-  
-          },
-  
-          {
-  
-            "value": "FourBRhouse",
-  
-            "label": "4 BR House"
-  
-          },
-  
-          {
-  
-            "value": "FivePlusBRhouse",
-  
-            "label": "5+ BR House"
-  
-          },
-  
-          {
-  
-            "value": "Office",
-  
-            "label": "Office"
-  
-          },
-  
-          {
-  
-            "value": "MobileHomes",
-  
-            "label": "Mobile Homes"
-  
-          },
-  
-          {
-  
-            "value": "TradeshowEquipment2",
-  
-            "label": "Tradeshow Equipment"
-  
-          },
-  
-          {
-  
-            "value": "TrailerHomes",
-  
-            "label": "Trailer Homes"
-  
-          },
-  
-          {
-  
-            "value": "OtherHouseholdOfficeMoves",
-  
-            "label": "Other Household & Office Moves"
-  
-          }
-  
-        ]
-  
-      },
-  
-      {
-  
-        "value": "Vehicles",
-  
-        "label": "Vehicles",
-  
-        "shortLabel": "Vehicles",
+      "icon": "tv_outlined",
 
-        "route": "/vehicles-comodity",
+      "subCommodities": [
+        {
+          "value": "Furniture",
 
-        "icon": "car_repair_outlined",
-  
-        "subCommodities": [
-  
-          {
-  
-            "value": "CarsLightTrucks",
-  
-            "label": "Cars & Light Trucks"
-  
-          },
-  
-          {
-  
-            "value": "RecreationalVehiclesRVs",
-  
-            "label": "Recreational Vehicles (RVs)"
-  
-          },
-  
-          {
-  
-            "value": "Trailers",
-  
-            "label": "Trailers"
-  
-          },
-  
-          {
-  
-            "value": "TrailerHomes2",
-  
-            "label": "Trailer Homes"
-  
-          },
-  
-          {
-  
-            "value": "VehicleParts",
-  
-            "label": "Vehicle Parts"
-  
-          },
-  
-          {
-  
-            "value": "Airplanes",
-  
-            "label": "Airplanes"
-  
-          },
-  
-          {
-  
-            "value": "AntiqueVehicles",
-  
-            "label": "Antique Vehicles"
-  
-          },
-  
-          {
-  
-            "value": "OtherVehicles",
-  
-            "label": "Other Vehicles"
-  
-          }
-  
-        ]
-  
-      },
-  
-      {
-  
-        "value": "MotorcyclesPowerSports",
-  
-        "label": "Motorcycles & Power Sports",
-  
-        "shortLabel": "Motorcycles & Power Sports",
+          "label": "Furniture"
+        },
 
-        "route": "/motocycles",
+        {
+          "value": "HomeElectronics",
 
-        "icon": "two_wheeler_outlined",
-  
-        "subCommodities": [
-  
-          {
-  
-            "value": "MotorcyclesMopeds",
-  
-            "label": "Motorcycles & Mopeds"
-  
-          },
-  
-          {
-  
-            "value": "AllTerrainVehicles",
-  
-            "label": "All Terrain Vehicles"
-  
-          },
-  
-          {
-  
-            "value": "GoCartsDuneBuggies",
-  
-            "label": "Go Carts & Dune Buggies"
-  
-          },
-  
-          {
-  
-            "value": "Snowmobiles",
-  
-            "label": "Snowmobiles"
-  
-          },
-  
-          {
-  
-            "value": "OtherPowerSports",
-  
-            "label": "Other Power Sports"
-  
-          }
-  
-        ]
-  
-      },
-  
-      {
-  
-        "value": "Boats",
-  
-        "label": "Boats",
-  
-        "shortLabel": "Boats",
+          "label": "Home Electronics"
+        },
 
-        "route": "/boats-comodity",
+        {
+          "value": "Appliances",
 
-        "icon": "sailing_outlined",
-  
-        "subCommodities": [
-  
-          {
-  
-            "value": "PowerBoats",
-  
-            "label": "Power Boats"
-  
-          },
-  
-          {
-  
-            "value": "SailBoats",
-  
-            "label": "Sail Boats"
-  
-          },
-  
-          {
-  
-            "value": "PersonalWatercraft",
-  
-            "label": "Personal Watercraft"
-  
-          },
-  
-          {
-  
-            "value": "BoatParts",
-  
-            "label": "Boat Parts"
-  
-          },
-  
-          {
-  
-            "value": "OtherBoats",
-  
-            "label": "Other Boats"
-  
-          }
-  
-        ]
-  
-      },
-  
-      {
-  
-        "value": "HeavyEquipment",
-  
-        "label": "Heavy Equipment",
-  
-        "shortLabel": "Heavy Equipment",
+          "label": "Appliances"
+        },
 
-        "route": "/heavy-equipment",
+        {
+          "value": "ArcadeEquipment",
 
-        "icon": "point_of_sale_outlined",
-  
-        "subCommodities": [
-  
-          {
-  
-            "value": "Agricultural",
-  
-            "label": "Agricultural"
-  
-          },
-  
-          {
-  
-            "value": "AsphaltConcrete",
-  
-            "label": "Asphalt/Concrete"
-  
-          },
-  
-          {
-  
-            "value": "Attachments",
-  
-            "label": "Attachments"
-  
-          },
-  
-          {
-  
-            "value": "Compactors",
-  
-            "label": "Compactors"
-  
-          },
-  
-          {
-  
-            "value": "Cranes",
-  
-            "label": "Cranes"
-  
-          },
-  
-          {
-  
-            "value": "Drills",
-  
-            "label": "Drills"
-  
-          },
-  
-          {
-  
-            "value": "Environmental",
-  
-            "label": "Environmental"
-  
-          },
-  
-          {
-  
-            "value": "Excavators",
-  
-            "label": "Excavators"
-  
-          },
-  
-          {
-  
-            "value": "Generators",
-  
-            "label": "Generators"
-  
-          },
-  
-          {
-  
-            "value": "HeavyConstruction",
-  
-            "label": "Heavy Construction"
-  
-          },
-  
-          {
-  
-            "value": "IndustrialPlant",
-  
-            "label": "Industrial Plant"
-  
-          },
-  
-          {
-  
-            "value": "Lifts",
-  
-            "label": "Lifts"
-  
-          },
-  
-          {
-  
-            "value": "LightConstruction",
-  
-            "label": "Light Construction"
-  
-          },
-  
-          {
-  
-            "value": "Logging",
-  
-            "label": "Logging"
-  
-          },
-  
-          {
-  
-            "value": "Mining",
-  
-            "label": "Mining"
-  
-          },
-  
-          {
-  
-            "value": "OilPipeline",
-  
-            "label": "Oil & Pipeline"
-  
-          },
-  
-          {
-  
-            "value": "Railroad",
-  
-            "label": "Railroad"
-  
-          },
-  
-          {
-  
-            "value": "Structures",
-  
-            "label": "Structures"
-  
-          },
-  
-          {
-  
-            "value": "Tractors",
-  
-            "label": "Tractors"
-  
-          },
-  
-          {
-  
-            "value": "Trailers2",
-  
-            "label": "Trailers"
-  
-          },
-  
-          {
-  
-            "value": "Trucks",
-  
-            "label": "Trucks"
-  
-          },
-  
-          {
-  
-            "value": "Utility",
-  
-            "label": "Utility"
-  
-          },
-  
-          {
-  
-            "value": "OtherHeavyEquipment",
-  
-            "label": "Other Heavy Equipment"
-  
-          }
-  
-        ]
-  
-      },
-  
-      {
-  
-        "value": "Pets",
-  
-        "label": "Pets",
-  
-        "shortLabel": "Pets",
+          "label": "Arcade Equipment"
+        },
 
-        "route": "/pets",
+        {
+          "value": "LawnOutdoorEquipment",
 
-        "icon": "pets_outlined",
+          "label": "Lawn & Outdoor Equipment"
+        },
 
-      
-        "subCommodities": [
-  
-          {
-  
-            "value": "Cats",
-  
-            "label": "Cats"
-  
-          },
-  
-          {
-  
-            "value": "Dogs",
-  
-            "label": "Dogs"
-  
-          },
-  
-          {
-  
-            "value": "LiveFish",
-  
-            "label": "Live Fish"
-  
-          },
-  
-          {
-  
-            "value": "OtherPetsLivestock",
-  
-            "label": "Other Pets & Livestock"
-  
-          }
-  
-        ]
-  
-      },
-  
-      {
-  
-        "value": "SpecialCareItems",
-  
-        "label": "Special Care Items",
-  
-        "shortLabel": "Special Care Items",
+        {
+          "value": "SportingEquipment",
 
-        "route": "/spacial-care-items",
+          "label": "Sporting Equipment"
+        },
 
-        "icon": "piano_outlined",
-  
-        "subCommodities": [
-  
-          {
-  
-            "value": "Antiques",
-  
-            "label": "Antiques"
-  
-          },
-  
-          {
-  
-            "value": "Art",
-  
-            "label": "Art"
-  
-          },
-  
-          {
-  
-            "value": "GlassBreakables",
-  
-            "label": "Glass/Breakables"
-  
-          },
-  
-          {
-  
-            "value": "Pianos",
-  
-            "label": "Pianos"
-  
-          },
-  
-          {
-  
-            "value": "PoolTables",
-  
-            "label": "Pool Tables"
-  
-          },
-  
-          {
-  
-            "value": "OtherSpecialCareItems",
-  
-            "label": "Other Special Care Items"
-  
-          }
-  
-        ]
-  
-      },
-  
-      {
-  
-        "value": "FoodAgriculturalGoods",
-  
-        "label": "Food & Agricultural Goods",
-  
-        "shortLabel": "Food & Agricultural Goods",
+        {
+          "value": "HouseholdPlants",
 
-        "route": "/food-goods",
+          "label": "Household Plants"
+        },
 
-        "icon": "cake_outlined",
-  
-        "subCommodities": [
-  
-          {
-  
-            "value": "FreshProduce",
-  
-            "label": "Fresh Produce"
-  
-          },
-  
-          {
-  
-            "value": "RefrigeratedFood",
-  
-            "label": "Refrigerated Food"
-  
-          },
-  
-          {
-  
-            "value": "MeatFishSeafood",
-  
-            "label": "Meat, Fish, Seafood"
-  
-          },
-  
-          {
-  
-            "value": "AgriculturalFarmSupplies",
-  
-            "label": "Agricultural/Farm Supplies"
-  
-          },
-  
-          {
-  
-            "value": "GrainFeedHay",
-  
-            "label": "Grain, Feed, Hay"
-  
-          },
-  
-          {
-  
-            "value": "CerealGrainsincludingseed",
-  
-            "label": "Cereal Grains (including seed)"
-  
-          },
-  
-          {
-  
-            "value": "AnimalFeedProductsofAnimalOrigin",
-  
-            "label": "Animal Feed & Products of Animal Origin"
-  
-          },
-  
-          {
-  
-            "value": "MilledGrainProductsPreparationsandBakeryProducts",
-  
-            "label": "Milled Grain Products & Preparations, and Bakery Products"
-  
-          },
-  
-          {
-  
-            "value": "Beverages",
-  
-            "label": "Beverages"
-  
-          },
-  
-          {
-  
-            "value": "AlcoholicBeverages",
-  
-            "label": "Alcoholic Beverages"
-  
-          },
-  
-          {
-  
-            "value": "OtherPreparedFoodstuffsandFatsandOils",
-  
-            "label": "Other Prepared Foodstuffs, and Fats and Oils"
-  
-          },
-  
-          {
-  
-            "value": "TobaccoProducts",
-  
-            "label": "Tobacco Products"
-  
-          },
-  
-          {
-  
-            "value": "OtherFoodAgriculture",
-  
-            "label": "Other Food & Agriculture"
-  
-          }
-  
-        ]
-  
-      },
-  
-      {
-  
-        "value": "Other",
-  
-        "label": "Other",
-  
-        "shortLabel": "Other",
+        {
+          "value": "OtherHouseholdGoods",
 
-        "route": "/other-items",
-  
-        "subCommodities": [
-  
-          {
-  
-            "value": "SmallPackages",
-  
-            "label": "Small Packages"
-  
-          },
-  
-          {
-  
-            "value": "Junk",
-  
-            "label": "Junk"
-  
-          },
-  
-          {
-  
-            "value": "Passengers",
-  
-            "label": "Passengers"
-  
-          }
-  
-        ]
-  
-      }
-  
-    ]
-  
+          "label": "Other Household Goods"
+        }
+      ]
+    },
+
+    {
+      "value": "HouseholdOfficeMoves",
+
+      "label": "Household & Office Moves",
+
+      "shortLabel": "Household & Office Moves",
+
+      "route": "/house-and-offices-moves",
+
+      "icon": "bedroom_child_outlined",
+
+      "subCommodities": [
+        {
+          "value": "SmallStudio",
+
+          "label": "Small Studio"
+        },
+
+        {
+          "value": "LargeStudioor1BRApartment",
+
+          "label": "Large Studio or 1 BR Apt"
+        },
+
+        {
+          "value": "TwoBRApt",
+
+          "label": "2 BR Apt"
+        },
+
+        {
+          "value": "ThreeBRAptorTwoBRhouse",
+
+          "label": "3 BR Apt or 2 BR House"
+        },
+
+        {
+          "value": "ThreeBRhouse",
+
+          "label": "3 BR House"
+        },
+
+        {
+          "value": "FourBRhouse",
+
+          "label": "4 BR House"
+        },
+
+        {
+          "value": "FivePlusBRhouse",
+
+          "label": "5+ BR House"
+        },
+
+        {
+          "value": "Office",
+
+          "label": "Office"
+        },
+
+        {
+          "value": "MobileHomes",
+
+          "label": "Mobile Homes"
+        },
+
+        {
+          "value": "TradeshowEquipment2",
+
+          "label": "Tradeshow Equipment"
+        },
+
+        {
+          "value": "TrailerHomes",
+
+          "label": "Trailer Homes"
+        },
+
+        {
+          "value": "OtherHouseholdOfficeMoves",
+
+          "label": "Other Household & Office Moves"
+        }
+      ]
+    },
+
+    {
+      "value": "Vehicles",
+
+      "label": "Vehicles",
+
+      "shortLabel": "Vehicles",
+
+      "route": "/vehicles-comodity",
+
+      "icon": "car_repair_outlined",
+
+      "subCommodities": [
+        {
+          "value": "CarsLightTrucks",
+
+          "label": "Cars & Light Trucks"
+        },
+
+        {
+          "value": "RecreationalVehiclesRVs",
+
+          "label": "Recreational Vehicles (RVs)"
+        },
+
+        {
+          "value": "Trailers",
+
+          "label": "Trailers"
+        },
+
+        {
+          "value": "TrailerHomes2",
+
+          "label": "Trailer Homes"
+        },
+
+        {
+          "value": "VehicleParts",
+
+          "label": "Vehicle Parts"
+        },
+
+        {
+          "value": "Airplanes",
+
+          "label": "Airplanes"
+        },
+
+        {
+          "value": "AntiqueVehicles",
+
+          "label": "Antique Vehicles"
+        },
+
+        {
+          "value": "OtherVehicles",
+
+          "label": "Other Vehicles"
+        }
+      ]
+    },
+
+    {
+      "value": "MotorcyclesPowerSports",
+
+      "label": "Motorcycles & Power Sports",
+
+      "shortLabel": "Motorcycles & Power Sports",
+
+      "route": "/motocycles",
+
+      "icon": "two_wheeler_outlined",
+
+      "subCommodities": [
+        {
+          "value": "MotorcyclesMopeds",
+
+          "label": "Motorcycles & Mopeds"
+        },
+
+        {
+          "value": "AllTerrainVehicles",
+
+          "label": "All Terrain Vehicles"
+        },
+
+        {
+          "value": "GoCartsDuneBuggies",
+
+          "label": "Go Carts & Dune Buggies"
+        },
+
+        {
+          "value": "Snowmobiles",
+
+          "label": "Snowmobiles"
+        },
+
+        {
+          "value": "OtherPowerSports",
+
+          "label": "Other Power Sports"
+        }
+      ]
+    },
+
+    {
+      "value": "Boats",
+
+      "label": "Boats",
+
+      "shortLabel": "Boats",
+
+      "route": "/boats-comodity",
+
+      "icon": "sailing_outlined",
+
+      "subCommodities": [
+        {
+          "value": "PowerBoats",
+
+          "label": "Power Boats"
+        },
+
+        {
+          "value": "SailBoats",
+
+          "label": "Sail Boats"
+        },
+
+        {
+          "value": "PersonalWatercraft",
+
+          "label": "Personal Watercraft"
+        },
+
+        {
+          "value": "BoatParts",
+
+          "label": "Boat Parts"
+        },
+
+        {
+          "value": "OtherBoats",
+
+          "label": "Other Boats"
+        }
+      ]
+    },
+
+    {
+      "value": "HeavyEquipment",
+
+      "label": "Heavy Equipment",
+
+      "shortLabel": "Heavy Equipment",
+
+      "route": "/heavy-equipment",
+
+      "icon": "point_of_sale_outlined",
+
+      "subCommodities": [
+        {
+          "value": "Agricultural",
+
+          "label": "Agricultural"
+        },
+
+        {
+          "value": "AsphaltConcrete",
+
+          "label": "Asphalt/Concrete"
+        },
+
+        {
+          "value": "Attachments",
+
+          "label": "Attachments"
+        },
+
+        {
+          "value": "Compactors",
+
+          "label": "Compactors"
+        },
+
+        {
+          "value": "Cranes",
+
+          "label": "Cranes"
+        },
+
+        {
+          "value": "Drills",
+
+          "label": "Drills"
+        },
+
+        {
+          "value": "Environmental",
+
+          "label": "Environmental"
+        },
+
+        {
+          "value": "Excavators",
+
+          "label": "Excavators"
+        },
+
+        {
+          "value": "Generators",
+
+          "label": "Generators"
+        },
+
+        {
+          "value": "HeavyConstruction",
+
+          "label": "Heavy Construction"
+        },
+
+        {
+          "value": "IndustrialPlant",
+
+          "label": "Industrial Plant"
+        },
+
+        {
+          "value": "Lifts",
+
+          "label": "Lifts"
+        },
+
+        {
+          "value": "LightConstruction",
+
+          "label": "Light Construction"
+        },
+
+        {
+          "value": "Logging",
+
+          "label": "Logging"
+        },
+
+        {
+          "value": "Mining",
+
+          "label": "Mining"
+        },
+
+        {
+          "value": "OilPipeline",
+
+          "label": "Oil & Pipeline"
+        },
+
+        {
+          "value": "Railroad",
+
+          "label": "Railroad"
+        },
+
+        {
+          "value": "Structures",
+
+          "label": "Structures"
+        },
+
+        {
+          "value": "Tractors",
+
+          "label": "Tractors"
+        },
+
+        {
+          "value": "Trailers2",
+
+          "label": "Trailers"
+        },
+
+        {
+          "value": "Trucks",
+
+          "label": "Trucks"
+        },
+
+        {
+          "value": "Utility",
+
+          "label": "Utility"
+        },
+
+        {
+          "value": "OtherHeavyEquipment",
+
+          "label": "Other Heavy Equipment"
+        }
+      ]
+    },
+
+    {
+      "value": "Pets",
+
+      "label": "Pets",
+
+      "shortLabel": "Pets",
+
+      "route": "/pets",
+
+      "icon": "pets_outlined",
+
+      "subCommodities": [
+        {
+          "value": "Cats",
+
+          "label": "Cats"
+        },
+
+        {
+          "value": "Dogs",
+
+          "label": "Dogs"
+        },
+
+        {
+          "value": "LiveFish",
+
+          "label": "Live Fish"
+        },
+
+        {
+          "value": "OtherPetsLivestock",
+
+          "label": "Other Pets & Livestock"
+        }
+      ]
+    },
+
+    {
+      "value": "SpecialCareItems",
+
+      "label": "Special Care Items",
+
+      "shortLabel": "Special Care Items",
+
+      "route": "/spacial-care-items",
+
+      "icon": "piano_outlined",
+
+      "subCommodities": [
+        {
+          "value": "Antiques",
+
+          "label": "Antiques"
+        },
+
+        {
+          "value": "Art",
+
+          "label": "Art"
+        },
+
+        {
+          "value": "GlassBreakables",
+
+          "label": "Glass/Breakables"
+        },
+
+        {
+          "value": "Pianos",
+
+          "label": "Pianos"
+        },
+
+        {
+          "value": "PoolTables",
+
+          "label": "Pool Tables"
+        },
+
+        {
+          "value": "OtherSpecialCareItems",
+
+          "label": "Other Special Care Items"
+        }
+      ]
+    },
+
+    {
+      "value": "FoodAgriculturalGoods",
+
+      "label": "Food & Agricultural Goods",
+
+      "shortLabel": "Food & Agricultural Goods",
+
+      "route": "/food-goods",
+
+      "icon": "cake_outlined",
+
+      "subCommodities": [
+        {
+          "value": "FreshProduce",
+
+          "label": "Fresh Produce"
+        },
+
+        {
+          "value": "RefrigeratedFood",
+
+          "label": "Refrigerated Food"
+        },
+
+        {
+          "value": "MeatFishSeafood",
+
+          "label": "Meat, Fish, Seafood"
+        },
+
+        {
+          "value": "AgriculturalFarmSupplies",
+
+          "label": "Agricultural/Farm Supplies"
+        },
+
+        {
+          "value": "GrainFeedHay",
+
+          "label": "Grain, Feed, Hay"
+        },
+
+        {
+          "value": "CerealGrainsincludingseed",
+
+          "label": "Cereal Grains (including seed)"
+        },
+
+        {
+          "value": "AnimalFeedProductsofAnimalOrigin",
+
+          "label": "Animal Feed & Products of Animal Origin"
+        },
+
+        {
+          "value": "MilledGrainProductsPreparationsandBakeryProducts",
+
+          "label": "Milled Grain Products & Preparations, and Bakery Products"
+        },
+
+        {
+          "value": "Beverages",
+
+          "label": "Beverages"
+        },
+
+        {
+          "value": "AlcoholicBeverages",
+
+          "label": "Alcoholic Beverages"
+        },
+
+        {
+          "value": "OtherPreparedFoodstuffsandFatsandOils",
+
+          "label": "Other Prepared Foodstuffs, and Fats and Oils"
+        },
+
+        {
+          "value": "TobaccoProducts",
+
+          "label": "Tobacco Products"
+        },
+
+        {
+          "value": "OtherFoodAgriculture",
+
+          "label": "Other Food & Agriculture"
+        }
+      ]
+    },
+
+    {
+      "value": "Other",
+
+      "label": "Other",
+
+      "shortLabel": "Other",
+
+      "route": "/other-items",
+
+      "subCommodities": [
+        {
+          "value": "SmallPackages",
+
+          "label": "Small Packages"
+        },
+
+        {
+          "value": "Junk",
+
+          "label": "Junk"
+        },
+
+        {
+          "value": "Passengers",
+
+          "label": "Passengers"
+        }
+      ]
+    }
+  ]
 }

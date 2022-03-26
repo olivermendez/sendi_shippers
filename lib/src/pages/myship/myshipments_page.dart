@@ -6,7 +6,7 @@ import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
 
-import 'detail_page_listing_created.dart';
+import '../detail_page_listing_created.dart';
 
 class MyShipmentPage extends StatelessWidget {
   final Token token;

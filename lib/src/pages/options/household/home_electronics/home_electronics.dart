@@ -180,7 +180,8 @@ class SecondFormDetails extends StatefulWidget {
   final Listing listing;
 
   final Token token;
-  SecondFormDetails({required this.listing, required this.token, Key? key})
+  const SecondFormDetails(
+      {required this.listing, required this.token, Key? key})
       : super(key: key);
 
   @override

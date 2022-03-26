@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/token.dart';
-import 'package:my_app/src/pages/home.dart';
+import 'package:my_app/src/pages/home/home.dart';
 
 class ListingCreatedPage extends StatelessWidget {
   final Token token;
@@ -10,7 +10,7 @@ class ListingCreatedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green,
-      body: Center(
+      body: const Center(
         child: Text('Listing created'),
       ),
       floatingActionButton: FloatingActionButton(
@@ -18,7 +18,7 @@ class ListingCreatedPage extends StatelessWidget {
           Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false,
               arguments: token);
         },
-        child: Text('Go home'),
+        child: const Text('Go home'),
       ),
     );
   }

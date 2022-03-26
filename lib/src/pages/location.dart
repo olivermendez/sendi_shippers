@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 class LocationPage extends StatelessWidget {
   final _controller = LocationController();
 
+  LocationPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<LocationController>(
@@ -14,11 +16,12 @@ class LocationPage extends StatelessWidget {
         appBar: AppBar(),
         body: Consumer<LocationController>(
             builder: (ctx, controller, __) => GoogleMap(
-                onMapCreated: _controller.onMapCreated,
-                markers: controller.markers,
-                initialCameraPosition: controller.initialCameraPosition,
-                myLocationButtonEnabled: false,
-                onTap: controller.Ontap)),
+                  onMapCreated: _controller.onMapCreated,
+                  markers: controller.markers,
+                  initialCameraPosition: controller.initialCameraPosition,
+                  myLocationButtonEnabled: false,
+                  onTap: controller.Ontap,
+                )),
       ),
     );
   }
