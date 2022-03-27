@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/options/household/household_init.dart';
-import 'package:my_app/src/pages/options/vehicles/vehicles_init.dart';
+import 'package:my_app/src/pages/options/vehicles/route_category_vehicle.dart';
 
 import '../../widgets/export_widgets.dart';
 import '../options/animals/animals_init.dart';
@@ -19,6 +19,7 @@ class CommodityCategory extends StatefulWidget {
   @override
   _CommodityCategoryState createState() => _CommodityCategoryState();
 }
+//TODO: Refactor with RoutePage
 
 class _CommodityCategoryState extends State<CommodityCategory> {
   @override
@@ -52,7 +53,7 @@ class _CommodityCategoryState extends State<CommodityCategory> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => VehiclePageForm(
+                              builder: (context) => RouteVehicleCategory(
                                     seleted: widget.category,
                                     item: opt.label,
                                     token: widget.token,

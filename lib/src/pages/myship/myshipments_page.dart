@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/config/constant.dart';
+//import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/listing/dynamiclisting.dart';
 import 'package:my_app/models/listing/listing.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:my_app/src/services/data_services.dart';
 
 import '../detail_page_listing_created.dart';
 
@@ -48,6 +49,10 @@ class MyShipmentPage extends StatelessWidget {
       );
 
   Widget activedShipment() {
+    final _dataServices = DataServices();
+
+    /*
+
     Future<DynamicListingResponse?> getListingByUser() async {
       var url =
           Uri.parse('${Constants.apiUrl}listings/user/${token.user.id}/active');
@@ -62,9 +67,10 @@ class MyShipmentPage extends StatelessWidget {
       final listingByUser = DynamicListingResponse.fromRawJson(response.body);
       return listingByUser;
     }
+    */
 
     return FutureBuilder(
-      future: getListingByUser(),
+      future: _dataServices.getListingByUser(token),
       builder: (context, AsyncSnapshot<DynamicListingResponse?> snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: CircularProgressIndicator());

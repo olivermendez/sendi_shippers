@@ -1,10 +1,11 @@
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
-import 'package:my_app/config/constant.dart';
+
 import 'package:my_app/models/motorbodytypes.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/options/vehicles/motor/send_motorcycles.dart';
+import 'package:my_app/src/services/data_services.dart';
 
 class MotorcyclesBodyTypes extends StatelessWidget {
   final Token token;
@@ -12,19 +13,7 @@ class MotorcyclesBodyTypes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future<MotorBodyTypesResponse?> getBodyType() async {
-      var url = Uri.parse('${Constants.apiUrl}motor/bodytypes');
-
-      var response = await http.get(
-        url,
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        },
-      );
-      final optionsResponse = MotorBodyTypesResponse.fromRawJson(response.body);
-      return optionsResponse;
-    }
+    final _dataServices = DataServices();
 
     return Scaffold(
       appBar: AppBar(
@@ -39,7 +28,7 @@ class MotorcyclesBodyTypes extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Center(
           child: FutureBuilder(
-            future: getBodyType(),
+            future: _dataServices.getMotorBodytypes(),
             builder:
                 (context, AsyncSnapshot<MotorBodyTypesResponse?> snapshot) {
               if (!snapshot.hasData) {

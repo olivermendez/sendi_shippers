@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:my_app/config/constant.dart';
+//import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/listing/listing.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
+
+import '../services/data_services.dart';
 
 class DetailPageListing extends StatefulWidget {
   final Token token;

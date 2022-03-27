@@ -1,33 +1,21 @@
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
-import 'package:my_app/config/constant.dart';
+//import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/bodytypes.dart';
 import 'package:my_app/models/token.dart';
+import 'package:my_app/src/services/data_services.dart';
 
 import 'cars.dart';
 
 class CarsAndLightTrucksPage extends StatelessWidget {
   final Token token;
-  const CarsAndLightTrucksPage({required this.token, Key? key})
-      : super(key: key);
+  CarsAndLightTrucksPage({required this.token, Key? key}) : super(key: key);
+
+  final _dataServices = DataServices();
 
   @override
   Widget build(BuildContext context) {
-    Future<BodyTypeResponse?> getBodyType() async {
-      var url = Uri.parse('${Constants.apiUrl}vehicle/bodytypes');
-
-      var response = await http.get(
-        url,
-        headers: {
-          'content-type': 'application/json',
-          'accept': 'application/json',
-        },
-      );
-      final optionsResponse = BodyTypeResponse.fromRawJson(response.body);
-      return optionsResponse;
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -41,7 +29,7 @@ class CarsAndLightTrucksPage extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Center(
           child: FutureBuilder(
-            future: getBodyType(),
+            future: _dataServices.getVehicleBodytype(),
             builder: (context, AsyncSnapshot<BodyTypeResponse?> snapshot) {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());

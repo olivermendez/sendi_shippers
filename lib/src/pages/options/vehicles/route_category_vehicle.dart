@@ -10,11 +10,11 @@ import 'cars/bodytypes.dart';
 import 'motor/motorbodytypes.dart';
 import 'parts/parts.dart';
 
-class VehiclePageForm extends StatefulWidget {
+class RouteVehicleCategory extends StatefulWidget {
   final Token token;
   final Commodity seleted;
   final String item;
-  const VehiclePageForm(
+  const RouteVehicleCategory(
       {required this.seleted,
       required this.item,
       required this.token,
@@ -23,19 +23,19 @@ class VehiclePageForm extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<VehiclePageForm> createState() => _VehiclePageFormState();
+  State<RouteVehicleCategory> createState() => _RouteVehicleCategoryState();
 }
 
-class _VehiclePageFormState extends State<VehiclePageForm> {
+class _RouteVehicleCategoryState extends State<RouteVehicleCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: addDynamic(widget.item, widget.token, widget.seleted, widget.item),
+      body: route(widget.item, widget.token, widget.seleted, widget.item),
     );
   }
 }
 
-addDynamic(String item, Token token, Commodity comoditySeleted,
+route(String item, Token token, Commodity comoditySeleted,
     String subCommoditySeleted) {
   if (item == 'Cars & Light Trucks') {
     return CarsAndLightTrucksPage(
