@@ -1,7 +1,4 @@
-import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
-//import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/bodytypes.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/services/data_services.dart';

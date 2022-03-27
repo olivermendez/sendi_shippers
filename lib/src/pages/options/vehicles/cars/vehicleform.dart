@@ -9,6 +9,7 @@ import 'package:my_app/models/token.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../services/data_services.dart';
+import 'confirm_listing.dart';
 
 class VehicleInitialForm extends StatefulWidget {
   Bodytype bodytypeSeleted;
@@ -200,12 +201,12 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
         'Authorization': 'Bearer ${token.token}'
       },
     );
-    //var body = response.body;
-    //var decodedJson = jsonDecode(body);
-    //var listing = ListingResponse.fromJson(decodedJson);
+    var body = response.body;
+    var decodedJson = jsonDecode(body);
+    var listing = ListingResponse.fromJson(decodedJson);
     //print(listing.listing.id);
 
-    /*  Navigator.push(
+    Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => ConfirmVehicleListing(
@@ -214,6 +215,6 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
                   listingCreated: listing.listing,
                   bodytypeSeleted: bodytypeSeleted,
                   token: token,
-                ))); */
+                )));
   }
 }
