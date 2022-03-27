@@ -2,26 +2,27 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_place/google_place.dart';
-import 'package:my_app/models/listing/listing.dart';
-import 'package:my_app/models/token.dart';
+
 import 'package:my_app/src/widgets/appbar/custom_appbar_category.dart';
 
-class CarsLocations extends StatefulWidget {
-  final Listing listingCreated;
-  final Token token;
-  const CarsLocations(
-      {required this.listingCreated, required this.token, Key? key})
-      : super(key: key);
+class ExampleLocation extends StatefulWidget {
+  const ExampleLocation({Key? key}) : super(key: key);
 
   @override
-  _CarsLocationsState createState() => _CarsLocationsState();
+  _ExampleLocationState createState() => _ExampleLocationState();
 }
 
-class _CarsLocationsState extends State<CarsLocations> {
+class _ExampleLocationState extends State<ExampleLocation> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   final origin = TextEditingController();
   final destination = TextEditingController();
+
+  DetailsResult? startPosition;
+  DetailsResult? endPosition;
+
+  late FocusNode? startFocusNode;
+  late FocusNode? endFocusNode;
 
   late GooglePlace googlePlace;
   List<AutocompletePrediction> predictions = [];
@@ -32,6 +33,16 @@ class _CarsLocationsState extends State<CarsLocations> {
     super.initState();
     String apiKey = 'AIzaSyCF_VxqoAxjJ7J_nAhQIVHJsvamFOQG7xg';
     googlePlace = GooglePlace(apiKey);
+
+    startFocusNode = FocusNode();
+    endFocusNode = FocusNode();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    startFocusNode!.dispose();
+    endFocusNode!.dispose();
   }
 
   void autoCompleteSearch(String value) async {
@@ -56,11 +67,11 @@ class _CarsLocationsState extends State<CarsLocations> {
           const SizedBox(
             height: 30,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0),
+          const Padding(
+            padding: EdgeInsets.only(left: 20.0),
             child: Text(
-              "You will move: " + widget.listingCreated.title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              "You will move: ",
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
           Padding(
@@ -72,13 +83,16 @@ class _CarsLocationsState extends State<CarsLocations> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       TextFormField(
+                        focusNode: startFocusNode,
                         onChanged: (value) {
                           if (_debounce?.isActive ?? false) _debounce!.cancel();
                           _debounce =
                               Timer(const Duration(microseconds: 1000), () {
                             if (value.isNotEmpty) {
                               autoCompleteSearch(value);
-                            } else {}
+                            } else {
+                              predictions = [];
+                            }
                           });
                         },
                         controller: origin,
@@ -94,13 +108,18 @@ class _CarsLocationsState extends State<CarsLocations> {
                         height: 20,
                       ),
                       TextFormField(
+                        focusNode: endFocusNode,
                         onChanged: (value) {
                           if (_debounce?.isActive ?? false) _debounce!.cancel();
                           _debounce =
                               Timer(const Duration(microseconds: 1000), () {
                             if (value.isNotEmpty) {
                               autoCompleteSearch(value);
-                            } else {}
+                            } else {
+                              setState(() {
+                                predictions = [];
+                              });
+                            }
                           });
                         },
                         controller: destination,
@@ -119,7 +138,6 @@ class _CarsLocationsState extends State<CarsLocations> {
                           style: TextStyle(fontSize: 17)),
                       TextFormField(
                         decoration: const InputDecoration(
-                          //labelText: 'Delivery location',
                           filled: true,
                           isDense: true,
                           hintText: 'M/D/YYYY',
@@ -130,18 +148,75 @@ class _CarsLocationsState extends State<CarsLocations> {
                       Padding(
                         padding: const EdgeInsets.only(top: 30.0),
                         child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, 'home', (route) => false,
-                                  arguments: widget.token);
-                            },
-                            child: const Text("Continue")),
-                      )
+                            onPressed: () {}, child: const Text("Continue")),
+                      ),
+                      ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: predictions.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              leading: CircleAvatar(
+                                child: Icon(
+                                  Icons.pin_drop,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              title: Text(
+                                predictions[index].description.toString(),
+                              ),
+                              onTap: () async {
+                                final placeId = predictions[index].placeId!;
+                                final details =
+                                    await googlePlace.details.get(placeId);
+                                if (details != null &&
+                                    details.result != null &&
+                                    mounted) {
+                                  if (startFocusNode!.hasFocus) {
+                                    setState(() {
+                                      startPosition = details.result;
+                                      origin.text = details.result!.name!;
+                                      predictions = [];
+                                    });
+                                  } else {
+                                    setState(() {
+                                      endPosition = details.result;
+                                      destination.text = details.result!.name!;
+                                      predictions = [];
+                                    });
+                                  }
+
+                                  if (startPosition != null &&
+                                      endPosition != null) {
+                                    print('navigate');
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => MapScreen(),
+                                      ),
+                                    );
+                                  }
+                                }
+                              },
+                            );
+                          })
                     ],
                   ),
                 )),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class MapScreen extends StatelessWidget {
+  const MapScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text("mapa"),
       ),
     );
   }

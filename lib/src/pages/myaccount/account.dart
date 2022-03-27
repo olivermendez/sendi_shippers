@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/location.dart';
 
+import '../example_location.dart';
+import '../options/vehicles/cars/locations.dart';
+
 class MyAccount extends StatelessWidget {
   final Token token;
   const MyAccount({required this.token, Key? key}) : super(key: key);
@@ -71,17 +74,6 @@ class MyAccount extends StatelessWidget {
                     //letterSpacing: 2.0,
                     fontWeight: FontWeight.w300),
               ),
-              /* Card(
-                  margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-                  elevation: 2.0,
-                  child: Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 12, horizontal: 30),
-                      child: Text(
-                        "Skill Sets",
-                        style: TextStyle(
-                            letterSpacing: 2.0, fontWeight: FontWeight.w300),
-                      ))) */
               const SizedBox(
                 height: 15,
               ),
@@ -154,7 +146,9 @@ class MyAccount extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => LocationPage()));
+                              builder: (context) => ExampleLocation(
+                                  //listingCreated: ,
+                                  )));
                     },
                     child: const Text(
                       "EDIT ACCOUNT",
