@@ -6,11 +6,11 @@ import 'package:my_app/models/bodytypes.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/services/data_services.dart';
 
-import 'cars.dart';
+import 'moving_cars_form.dart';
 
-class CarsAndLightTrucksPage extends StatelessWidget {
+class CarsSelectBodyTypePage extends StatelessWidget {
   final Token token;
-  CarsAndLightTrucksPage({required this.token, Key? key}) : super(key: key);
+  CarsSelectBodyTypePage({required this.token, Key? key}) : super(key: key);
 
   final _dataServices = DataServices();
 
@@ -34,8 +34,8 @@ class CarsAndLightTrucksPage extends StatelessWidget {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
               } else {
-                return DisplayBodyTypeOptions(
-                    snapshot.data!.options.bodytypes, token);
+                return DisplayOptions(
+                    types: snapshot.data!.options.bodytypes, token: token);
               }
             },
           ),
@@ -45,18 +45,18 @@ class CarsAndLightTrucksPage extends StatelessWidget {
   }
 }
 
-class DisplayBodyTypeOptions extends StatelessWidget {
+class DisplayOptions extends StatelessWidget {
   final Token token;
-  final List<Bodytype> bodytypesOptions;
-  // ignore: use_key_in_widget_constructors
-  const DisplayBodyTypeOptions(this.bodytypesOptions, this.token);
+  final List<Bodytype> types;
+  const DisplayOptions({Key? key, required this.types, required this.token})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        itemCount: bodytypesOptions.length,
+        itemCount: types.length,
         itemBuilder: (context, index) {
-          final opt = bodytypesOptions[index];
+          final opt = types[index];
           return Card(
             elevation: 0,
             child: ListTile(
@@ -80,9 +80,9 @@ class DisplayBodyTypeOptions extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SendVehicle(
+                          builder: (context) => MovingCarsFormPage(
                                 token: token,
-                                bodySeleted: bodytypesOptions[index],
+                                bodySeleted: types[index],
                                 image: opt.image,
                               )));
                 }),

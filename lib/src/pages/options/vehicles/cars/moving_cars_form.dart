@@ -7,14 +7,15 @@ import 'package:my_app/models/listing/listing.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:my_app/src/widgets/export_widgets.dart';
 import '../../../../services/data_services.dart';
-import '../vehicleform.dart';
+import 'vehicleform.dart';
 
-class SendVehicle extends StatefulWidget {
+class MovingCarsFormPage extends StatefulWidget {
   final Bodytype bodySeleted;
   final Token token;
   final String image;
-  const SendVehicle(
+  const MovingCarsFormPage(
       {required this.token,
       required this.bodySeleted,
       required this.image,
@@ -22,24 +23,16 @@ class SendVehicle extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<SendVehicle> createState() => _SendVehicle();
+  State<MovingCarsFormPage> createState() => _MovingCarsFormPage();
 }
 
-class _SendVehicle extends State<SendVehicle> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+class _MovingCarsFormPage extends State<MovingCarsFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(" Moving: " + widget.bodySeleted.value),
-        backgroundColor: const Color.fromRGBO(3, 9, 23, 1),
-        elevation: 0,
-        centerTitle: false,
+      appBar: CustomAppBarForCategory(
+        categoryName: " Moving: " + widget.bodySeleted.value,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -48,7 +41,7 @@ class _SendVehicle extends State<SendVehicle> {
           itemBuilder: (context, index) {
             final opt = widget.bodySeleted.details[index];
 
-            return selectYourBodyTypeListView(
+            return selectedBodyType(
                 opt, widget.image, widget.token, context, widget.bodySeleted);
           },
         ),
@@ -57,7 +50,7 @@ class _SendVehicle extends State<SendVehicle> {
   }
 }
 
-Widget selectYourBodyTypeListView(Detail opt, String image, Token token,
+Widget selectedBodyType(Detail opt, String image, Token token,
     BuildContext context, Bodytype bodytypeSeleted) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -104,7 +97,7 @@ Widget selectYourBodyTypeListView(Detail opt, String image, Token token,
         ),
       ]),
       const Divider(),
-      vehicleInitialForm(
+      VehicleInitialForm(
         token: token,
         image: image,
         dimension: opt.dimensions,

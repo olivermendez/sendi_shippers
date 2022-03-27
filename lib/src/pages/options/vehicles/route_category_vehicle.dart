@@ -6,7 +6,7 @@ import 'package:my_app/src/pages/options/vehicles/sail_boast/sail_boast.dart';
 import 'package:my_app/src/pages/options/vehicles/trucks/commercial_trucks.dart';
 import 'package:my_app/src/pages/options/vehicles/watercrafts/watercrafts.dart';
 import 'atvs/atvs.dart';
-import 'cars/bodytypes.dart';
+import 'cars/select_bodytype.dart';
 import 'motor/motorbodytypes.dart';
 import 'parts/parts.dart';
 
@@ -38,7 +38,7 @@ class _RouteVehicleCategoryState extends State<RouteVehicleCategory> {
 route(String item, Token token, Commodity comoditySeleted,
     String subCommoditySeleted) {
   if (item == 'Cars & Light Trucks') {
-    return CarsAndLightTrucksPage(
+    return CarsSelectBodyTypePage(
       token: token,
     );
   } else if (item == 'Vehicle Parts') {

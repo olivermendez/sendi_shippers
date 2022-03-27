@@ -8,15 +8,15 @@ import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
 
-import '../../../services/data_services.dart';
+import '../../../../services/data_services.dart';
 
-class vehicleInitialForm extends StatefulWidget {
+class VehicleInitialForm extends StatefulWidget {
   Bodytype bodytypeSeleted;
   Token token;
   String image;
   String dimension;
   String weight;
-  vehicleInitialForm(
+  VehicleInitialForm(
       {required this.token,
       required this.image,
       required this.dimension,
@@ -26,10 +26,10 @@ class vehicleInitialForm extends StatefulWidget {
       : super(key: key);
 
   @override
-  _vehicleInitialFormState createState() => _vehicleInitialFormState();
+  _VehicleInitialFormState createState() => _VehicleInitialFormState();
 }
 
-class _vehicleInitialFormState extends State<vehicleInitialForm> {
+class _VehicleInitialFormState extends State<VehicleInitialForm> {
   final TextEditingController _title = TextEditingController();
   final TextEditingController _description = TextEditingController();
   final TextEditingController _quantity = TextEditingController();
@@ -172,12 +172,12 @@ class _vehicleInitialFormState extends State<vehicleInitialForm> {
   }
 
   Future<void> InitialListingCreated(
-    String _title,
-    String _description,
-    String _quantity,
-    String _comodity,
-    String _subcomodity,
-    Token token,
+    final String _title,
+    final String _description,
+    final String _quantity,
+    final String _comodity,
+    final String _subcomodity,
+    final Token token,
     Bodytype bodytypeSeleted,
   ) async {
     Map<String, dynamic> request = {
@@ -200,10 +200,10 @@ class _vehicleInitialFormState extends State<vehicleInitialForm> {
         'Authorization': 'Bearer ${token.token}'
       },
     );
-    var body = response.body;
-    var decodedJson = jsonDecode(body);
-    var listing = ListingResponse.fromJson(decodedJson);
-    print(listing.listing.id);
+    //var body = response.body;
+    //var decodedJson = jsonDecode(body);
+    //var listing = ListingResponse.fromJson(decodedJson);
+    //print(listing.listing.id);
 
     /*  Navigator.push(
         context,
