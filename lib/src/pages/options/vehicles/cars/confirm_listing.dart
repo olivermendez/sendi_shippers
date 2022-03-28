@@ -160,7 +160,7 @@ class ConfirmVehicleListing extends StatelessWidget {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => CarsLocations(
+            builder: (context) => LocationCars(
                   listingCreated: listingCreated,
                   token: token,
                 )));
