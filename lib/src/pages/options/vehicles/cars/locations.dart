@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -10,6 +11,7 @@ import 'package:my_app/src/widgets/appbar/custom_appbar_category.dart';
 
 import '../../../../../models/listing/listing.dart';
 import '../../../../../models/token.dart';
+import '../../../confirmation_page.dart';
 
 class LocationCars extends StatefulWidget {
   final Listing listingCreated;
@@ -201,6 +203,7 @@ class _LocationCarsState extends State<LocationCars> {
                                     print("aqui");
                                     print(startPosition!.formattedAddress);
                                     print(endPosition!.formattedAddress);
+
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -224,14 +227,6 @@ class _LocationCarsState extends State<LocationCars> {
     );
   }
 }
-
-List cars = [
-  {'id': 0, 'name': 'Select a Ride', 'price': 0.0},
-  {'id': 1, 'name': 'SendiGo', 'price': 230.0},
-  {'id': 2, 'name': 'Go Sedan', 'price': 300.0},
-  {'id': 3, 'name': 'SendiXL', 'price': 500.0},
-  {'id': 4, 'name': 'SendiAuto', 'price': 140.0},
-];
 
 class MapScreen extends StatefulWidget {
   final DetailsResult? startPosition;
@@ -265,32 +260,66 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  _addPolyLine() {
+  double totalDistance = 0;
+  double distance = 0.0;
+
+  _addPolyLine(List<LatLng> polylineCoordinates) {
     PolylineId id = const PolylineId("poly");
     Polyline polyline = Polyline(
       polylineId: id,
       color: Colors.red,
       points: polylineCoordinates,
-      width: 10,
+      width: 5,
     );
     polylines[id] = polyline;
     setState(() {});
   }
 
   _getPolyline() async {
+    List<LatLng> polylineCoordinates = [];
+
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-        'AIzaSyBTZ87zym2DZTOPcmjKBpTyWS3iggwsRPk',
-        PointLatLng(widget.startPosition!.geometry!.location!.lat!,
-            widget.startPosition!.geometry!.location!.lng!),
-        PointLatLng(widget.endPosition!.geometry!.location!.lat!,
-            widget.endPosition!.geometry!.location!.lng!),
-        travelMode: TravelMode.driving);
+      'AIzaSyBTZ87zym2DZTOPcmjKBpTyWS3iggwsRPk',
+      PointLatLng(widget.startPosition!.geometry!.location!.lat!,
+          widget.startPosition!.geometry!.location!.lng!),
+      PointLatLng(widget.endPosition!.geometry!.location!.lat!,
+          widget.endPosition!.geometry!.location!.lng!),
+      travelMode: TravelMode.driving,
+    );
+
     if (result.points.isNotEmpty) {
       for (var point in result.points) {
         polylineCoordinates.add(LatLng(point.latitude, point.longitude));
       }
+    } else {
+      print(result.errorMessage);
     }
-    _addPolyLine();
+
+    for (var i = 0; i < polylineCoordinates.length - 1; i++) {
+      totalDistance += calculateDistance(
+        polylineCoordinates[i].latitude,
+        polylineCoordinates[i].longitude,
+        polylineCoordinates[i + 1].latitude,
+        polylineCoordinates[i + 1].longitude,
+      );
+    }
+    print(totalDistance);
+
+    setState(() {
+      distance = totalDistance;
+      print("Distance: " + distance.toString());
+      print("Total Distance: " + totalDistance.toString());
+    });
+
+    _addPolyLine(polylineCoordinates);
+  }
+
+  double calculateDistance(lat1, lon1, lat2, lon2) {
+    var p = 0.017453292519943295;
+    var a = 0.5 -
+        cos((lat2 - lat1) * p) / 2 +
+        cos(lat1 * p) * cos(lat2 * p) * (1 - cos((lon2 - lon1) * p)) / 2;
+    return 12742 * asin(sqrt(a));
   }
 
   @override
@@ -298,15 +327,46 @@ class _MapScreenState extends State<MapScreen> {
     Set<Marker> _markers = {
       Marker(
           markerId: const MarkerId('start'),
-          position: LatLng(widget.startPosition!.geometry!.location!.lat!,
-              widget.startPosition!.geometry!.location!.lng!)),
+          position: LatLng(
+            widget.startPosition!.geometry!.location!.lat!,
+            widget.startPosition!.geometry!.location!.lng!,
+          )),
       Marker(
           markerId: const MarkerId('end'),
-          position: LatLng(widget.endPosition!.geometry!.location!.lat!,
-              widget.endPosition!.geometry!.location!.lng!))
+          position: LatLng(
+            widget.endPosition!.geometry!.location!.lat!,
+            widget.endPosition!.geometry!.location!.lng!,
+          ))
     };
 
     final _controller = LocationController();
+
+    List cars = [
+      {
+        'id': 0,
+        'name': 'Select a Ride',
+        'price': 0.0,
+        'deliver': 'Deliver time: 5 - 10 dias'
+      },
+      {
+        'id': 1,
+        'name': 'Regular',
+        'price': (230.0 + totalDistance) * 2,
+        'deliver': 'Deliver time: 5-3 dias'
+      },
+      {
+        'id': 2,
+        'name': 'Plus',
+        'price': (300.0 + totalDistance) * 3,
+        'deliver': 'Deliver time: 3-1 dias'
+      },
+      {
+        'id': 3,
+        'name': 'Premiun',
+        'price': (500.0 + totalDistance) * 4,
+        'deliver': 'Deliver time: 24 hrs'
+      },
+    ];
 
     return Scaffold(
       // extendBodyBehindAppBar: true,
@@ -315,8 +375,13 @@ class _MapScreenState extends State<MapScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         elevation: 0,
-        onPressed: () {},
-        label: const Text('Aceptar'),
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const ConfirmationPage()));
+        },
+        label: const Text('Create Listing'),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Stack(
@@ -387,8 +452,9 @@ class _MapScreenState extends State<MapScreen> {
                             leading: const Icon(Icons.car_rental),
                             title: Text(car['name']),
                             trailing: Text(
-                              car['price'].toString(),
+                              car['price'].toStringAsFixed(2),
                             ),
+                            subtitle: Text(car['deliver']),
                             selected: selectedCarId == car['id'],
                             selectedTileColor: Colors.grey[200],
                           ),

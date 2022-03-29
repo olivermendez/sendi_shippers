@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:my_app/src/widgets/appbar/custom_appbar_category.dart';
 import '../../../../../models/bodytypes.dart';
 import '../../../../../models/listing/listing.dart';
-import '../../../../../models/listing/response.dart';
 import '../../../../../models/token.dart';
 import '../../../../services/data_services.dart';
 
@@ -30,98 +29,87 @@ class ConfirmVehicleListing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DateTime selectedDate = DateTime.now();
+    const String date = "";
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: const CustomAppBarForCategory(
-        categoryName: 'Confirmation',
+        categoryName: 'Confirmation Page',
       ),
       body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Flexible(
-                flex: 1,
-                child: SizedBox(
-                  height: 200,
-                  width: 200,
-                  child: PageView(
-                    children: <Widget>[
-                      //Image.network(widget.listingCreated.photo),
-                      Image.network(
-                          "https://luxloungeefr.com/wp-content/uploads/2015/03/blue-custom.png"),
-                      Image.network(
-                          "https://luxloungeefr.com/wp-content/uploads/2015/03/blue-custom.png"),
-                    ],
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Text('Your Shipment'),
+            const Divider(),
+            Text(listingCreated.title,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )),
+            const Text(
+              "Description:",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(listingCreated.description),
+            const Divider(),
+            const Text(
+              "Your type of car:",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: InteractiveViewer(
+                    minScale: 1.5,
+                    maxScale: 2,
+                    child: Container(
+                        alignment: Alignment.center,
+                        height: 150,
+                        width: 150,
+                        child: FadeInImage(
+                          placeholder: const AssetImage('assets/loading.gif'),
+                          image: AssetImage(
+                              "assets/bodytypes/${bodytypeSeleted.image}"),
+                        )),
                   ),
                 ),
-              ),
-              const Divider(),
-              Text(
-                listingCreated.title,
-                style: const TextStyle(
-                    fontSize: 20, fontWeight: FontWeight.normal),
-              ),
-              Text("Description: " + listingCreated.description),
-              Text("Quantity: " + listingCreated.quantity),
-              Text("Commodity: " + listingCreated.subcomodity),
-              Row(children: [
-                Expanded(
-                  child: Container(
-                    color: Colors.amber[30],
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Text(
-                            'Average Dimensions',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            averageDimensions,
-                            style: const TextStyle(color: Colors.grey),
-                          ),
-                          const Text(
-                            'Average Weight',
-                            style: TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          Text(
-                            averageWeight,
-                            style: const TextStyle(color: Colors.grey),
-                          ),
-                        ],
+              ],
+            ),
+            const Divider(),
+            Text('Total Weight: ' + averageWeight),
+            const Divider(),
+            Text('Total Dimensions: ' + averageDimensions),
+            const Divider(),
+            const Text(
+              'Shipping Dates',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const Divider(height: 10, color: Colors.white),
+            const Text('Pick up Date Range'),
+            Text(
+                "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}"),
+            const Divider(height: 10, color: Colors.white),
+            const Text('Delivery Date Range'),
+            Text(
+                "${selectedDate.day + 3}/${selectedDate.month}/${selectedDate.year}"),
+            const Divider(height: 30, color: Colors.white),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LocationCars(
+                        listingCreated: listingCreated,
+                        token: token,
                       ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                      alignment: Alignment.center,
-                      height: 150,
-                      width: 200,
-                      child: FadeInImage(
-                        placeholder: const AssetImage('assets/loading.gif'),
-                        image: AssetImage(
-                            "assets/bodytypes/${bodytypeSeleted.image}"),
-                      )),
-                ),
-              ]),
-            ],
-          )),
-      floatingActionButton: FloatingActionButton.extended(
-        elevation: 0,
-        label: const Text(
-          "Create Shipment Now",
-          style: TextStyle(color: Colors.white),
+                  );
+                },
+                child: const Text("Continue with the listing")),
+          ],
         ),
-        onPressed: () {
-          CarDetail(bodytypeSeleted.value, averageDimensions, averageWeight,
-              true, false, false, token, context);
-        },
-        backgroundColor: Colors.blue,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 
@@ -158,12 +146,14 @@ class ConfirmVehicleListing extends StatelessWidget {
     );
 
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => LocationCars(
-                  listingCreated: listingCreated,
-                  token: token,
-                )));
+      context,
+      MaterialPageRoute(
+        builder: (context) => LocationCars(
+          listingCreated: listingCreated,
+          token: token,
+        ),
+      ),
+    );
 
     /*
 
@@ -182,6 +172,19 @@ class ConfirmVehicleListing extends StatelessWidget {
     var decodedJson = jsonDecode(body);
     var listing = ListingResponse.fromJson(decodedJson);
     print(listing.listing.id); 
+
+    floatingActionButton: FloatingActionButton.extended(
+        elevation: 0,
+        label: const Text(
+          "Create Shipment Now",
+          style: TextStyle(color: Colors.white),
+        ),
+        onPressed: () {
+          CarDetail(bodytypeSeleted.value, averageDimensions, averageWeight,
+              true, false, false, token, context);
+        },
+        backgroundColor: Colors.blue,
+      ),
 
     */
   }
