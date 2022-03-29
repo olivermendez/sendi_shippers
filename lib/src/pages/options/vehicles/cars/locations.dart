@@ -210,6 +210,7 @@ class _LocationCarsState extends State<LocationCars> {
                                         builder: (context) => MapScreen(
                                           startPosition: startPosition,
                                           endPosition: endPosition,
+                                          token: widget.token,
                                         ),
                                       ),
                                     );
@@ -229,10 +230,12 @@ class _LocationCarsState extends State<LocationCars> {
 }
 
 class MapScreen extends StatefulWidget {
+  final Token token;
   final DetailsResult? startPosition;
   final DetailsResult? endPosition;
 
-  const MapScreen({Key? key, this.startPosition, this.endPosition})
+  const MapScreen(
+      {Key? key, this.startPosition, this.endPosition, required this.token})
       : super(key: key);
   @override
   _MapScreenState createState() => _MapScreenState();
@@ -379,7 +382,9 @@ class _MapScreenState extends State<MapScreen> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const ConfirmationPage()));
+                  builder: (context) => ConfirmationPage(
+                        token: widget.token,
+                      )));
         },
         label: const Text('Create Listing'),
       ),

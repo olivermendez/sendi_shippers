@@ -16,7 +16,7 @@ class CarsSelectBodyTypePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Selecciona tu tipo de vehiculo ",
+          "Select your vehicle type",
           style: TextStyle(fontSize: 17),
         ),
         centerTitle: false,

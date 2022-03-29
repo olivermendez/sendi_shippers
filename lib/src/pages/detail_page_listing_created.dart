@@ -55,7 +55,7 @@ class _DetailPageListingState extends State<DetailPageListing> {
 class ListingTitle extends StatelessWidget {
   final Listing listing;
 
-  ListingTitle(this.listing, {Key? key}) : super(key: key);
+  const ListingTitle(this.listing, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -136,11 +136,11 @@ class ListingDetails extends StatelessWidget {
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 12, top: 10),
+        const Padding(
+          padding: EdgeInsets.only(left: 12, top: 10),
           child: Text(
             "Offer ",
-            style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
         ),
         const Divider(
