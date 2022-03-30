@@ -41,7 +41,7 @@ class DataServices {
     return data;
   }
 
-  Future<DynamicListingResponse?> getListingByUser(Token token) async {
+  Future<DynamicListingResponse?> getActiveListingByUser(Token token) async {
     var url =
         Uri.parse('${Constants.apiUrl}listings/user/${token.user.id}/active');
 
@@ -68,5 +68,36 @@ class DataServices {
     );
     final optionsResponse = MotorBodyTypesResponse.fromRawJson(response.body);
     return optionsResponse;
+  }
+
+  Future<DynamicListingResponse?> getDeliveredListingByUserId(
+      Token token) async {
+    var url = Uri.parse(
+        '${Constants.apiUrl}listings/user/${token.user.id}/delivered');
+
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+      },
+    );
+    final listingByUser = DynamicListingResponse.fromRawJson(response.body);
+    return listingByUser;
+  }
+
+  Future<DynamicListingResponse?> getBookedListingByUser(Token token) async {
+    var url =
+        Uri.parse('${Constants.apiUrl}listings/user/${token.user.id}/booked');
+
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+      },
+    );
+    final listingByUser = DynamicListingResponse.fromRawJson(response.body);
+    return listingByUser;
   }
 }
