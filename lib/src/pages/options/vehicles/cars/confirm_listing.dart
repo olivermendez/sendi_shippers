@@ -96,15 +96,8 @@ class ConfirmVehicleListing extends StatelessWidget {
             const Divider(height: 30, color: Colors.white),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => LocationCars(
-                        listingCreated: listingCreated,
-                        token: token,
-                      ),
-                    ),
-                  );
+                  CarDetail(bodytypeSeleted.value, averageDimensions,
+                      averageWeight, true, false, false, token, context);
                 },
                 child: const Text("Continue with the listing")),
           ],
@@ -156,14 +149,10 @@ class ConfirmVehicleListing extends StatelessWidget {
     );
 
     /*
-
     var body = response.body;
     var decodedJson = jsonDecode(body);
     var listing = ListingResponse.fromJson(decodedJson);
     print(listing.listing.id);
-
-
-
 
 
     Navigator.pushNamedAndRemoveUntil(context, 'home', (route) => false,

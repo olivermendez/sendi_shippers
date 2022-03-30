@@ -1,17 +1,23 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_place/google_place.dart';
+import 'package:my_app/src/pages/example_location.dart';
 import 'package:my_app/src/pages/location_controller.dart';
 
 import 'package:my_app/src/widgets/appbar/custom_appbar_category.dart';
 
 import '../../../../../models/listing/listing.dart';
+import '../../../../../models/listing/response.dart';
 import '../../../../../models/token.dart';
+import '../../../../services/data_services.dart';
 import '../../../confirmation_page.dart';
+
+import 'package:http/http.dart' as http;
 
 class LocationCars extends StatefulWidget {
   final Listing listingCreated;
@@ -208,6 +214,7 @@ class _LocationCarsState extends State<LocationCars> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => MapScreen(
+                                          listing: widget.listingCreated,
                                           startPosition: startPosition,
                                           endPosition: endPosition,
                                           token: widget.token,
@@ -230,12 +237,17 @@ class _LocationCarsState extends State<LocationCars> {
 }
 
 class MapScreen extends StatefulWidget {
+  final Listing listing;
   final Token token;
   final DetailsResult? startPosition;
   final DetailsResult? endPosition;
 
   const MapScreen(
-      {Key? key, this.startPosition, this.endPosition, required this.token})
+      {Key? key,
+      required this.listing,
+      this.startPosition,
+      this.endPosition,
+      required this.token})
       : super(key: key);
   @override
   _MapScreenState createState() => _MapScreenState();
@@ -344,6 +356,12 @@ class _MapScreenState extends State<MapScreen> {
 
     final _controller = LocationController();
 
+    var regular = 80.0 * (totalDistance);
+    var plus = 150.0 * (totalDistance);
+    var premiun = 200.0 * (totalDistance);
+
+    print(totalDistance);
+
     List cars = [
       {
         'id': 0,
@@ -354,22 +372,26 @@ class _MapScreenState extends State<MapScreen> {
       {
         'id': 1,
         'name': 'Regular',
-        'price': (230.0 + totalDistance) * 2,
+        'price': regular,
         'deliver': 'Deliver time: 5-3 dias'
       },
       {
         'id': 2,
         'name': 'Plus',
-        'price': (300.0 + totalDistance) * 3,
+        'price': plus,
         'deliver': 'Deliver time: 3-1 dias'
       },
       {
         'id': 3,
         'name': 'Premiun',
-        'price': (500.0 + totalDistance) * 4,
+        'price': premiun,
         'deliver': 'Deliver time: 24 hrs'
       },
     ];
+
+    String? _addressFrom = widget.startPosition!.formattedAddress.toString();
+    String? _addressTo = widget.endPosition!.formattedAddress.toString();
+    int _price = regular.toInt();
 
     return Scaffold(
       // extendBodyBehindAppBar: true,
@@ -379,12 +401,20 @@ class _MapScreenState extends State<MapScreen> {
       floatingActionButton: FloatingActionButton.extended(
         elevation: 0,
         onPressed: () {
+          print(widget.startPosition!.formattedAddress.toString());
+          print(widget.endPosition!.formattedAddress.toString());
+
+          CreateLocationToDB(_addressFrom, _addressTo, _price);
+
+          /*
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => ConfirmationPage(
                         token: widget.token,
                       )));
+
+                      */
         },
         label: const Text('Create Listing'),
       ),
@@ -470,6 +500,42 @@ class _MapScreenState extends State<MapScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> CreateLocationToDB(
+    final String _addressFrom,
+    final String _addressTo,
+    final int _price,
+  ) async {
+    Map<String, dynamic> request = {
+      "addressFrom": _addressFrom,
+      "addressTo": _addressTo,
+      "price": _price,
+    };
+
+    var url =
+        Uri.parse('${Constants.apiUrl}listings/${widget.listing.id}/location');
+
+    var response = await http.post(
+      url,
+      body: jsonEncode(request),
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+        'Authorization': 'Bearer ${widget.token}'
+      },
+    );
+    var body = response.body;
+    var decodedJson = jsonDecode(body);
+    //var result = ListingResponse.fromJson(decodedJson);
+    //print(result.success);
+
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ConfirmationPage(
+                  token: widget.token,
+                )));
   }
 }
 

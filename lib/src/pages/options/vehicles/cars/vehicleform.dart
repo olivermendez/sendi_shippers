@@ -36,6 +36,8 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
   final TextEditingController _quantity = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
+  String? photo = '';
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -112,6 +114,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
             ),
             TextButton(
                 onPressed: () {
+                  print(widget.bodytypeSeleted.image.toString());
                   showModalBottomSheet(
                       context: context, builder: (builder) => bottonSheet());
                 },
@@ -122,6 +125,49 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
                   child: ElevatedButton(
                       onPressed: () {
                         if (_key.currentState!.validate()) {}
+
+                        if (widget.bodytypeSeleted.image.toString() ==
+                            'coupe.png') {
+                          setState(() {
+                            photo = ImageRepository.coupeImage.toString();
+                          });
+                        } else if (widget.bodytypeSeleted.image.toString() ==
+                            'hatchback.png') {
+                          setState(() {
+                            photo = ImageRepository.hatchImage.toString();
+                          });
+                        } else if (widget.bodytypeSeleted.image.toString() ==
+                            'microcar.png') {
+                          setState(() {
+                            photo = ImageRepository.microCarImage.toString();
+                          });
+                        } else if (widget.bodytypeSeleted.image.toString() ==
+                            'minivan.png') {
+                          setState(() {
+                            photo = ImageRepository.vanImage.toString();
+                          });
+                        } else if (widget.bodytypeSeleted.image.toString() ==
+                            'pickupfullsize.png') {
+                          setState(() {
+                            photo = ImageRepository.pickupdutyImage.toString();
+                          });
+                        } else if (widget.bodytypeSeleted.image.toString() ==
+                            'pickupmidsize.png') {
+                          setState(() {
+                            photo = ImageRepository.pickupmidImage.toString();
+                          });
+                        } else if (widget.bodytypeSeleted.image.toString() ==
+                            'sedan.png') {
+                          setState(() {
+                            photo = ImageRepository.sedanImage.toString();
+                          });
+                        } else if (widget.bodytypeSeleted.image.toString() ==
+                            'stationwagon.png') {
+                          setState(() {
+                            photo = ImageRepository.wagonImage.toString();
+                          });
+                        }
+
                         InitialListingCreated(
                           _title.text,
                           _description.text,
@@ -129,6 +175,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
                           'vehicles',
                           'cars',
                           widget.token,
+                          photo.toString(),
                           widget.bodytypeSeleted,
                         );
                       },
@@ -179,6 +226,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
     final String _comodity,
     final String _subcomodity,
     final Token token,
+    final String _photo,
     Bodytype bodytypeSeleted,
   ) async {
     Map<String, dynamic> request = {
@@ -187,6 +235,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
       "quantity": _quantity,
       "comodity": _comodity,
       "subcomodity": _subcomodity,
+      "photo": _photo,
     };
 
     //var url = Uri.parse('${Constants.apiUrl}listings/${token.user.id}/vehicle');
@@ -204,7 +253,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
     var body = response.body;
     var decodedJson = jsonDecode(body);
     var listing = ListingResponse.fromJson(decodedJson);
-    //print(listing.listing.id);
+    print(listing.listing.id);
 
     Navigator.push(
         context,
@@ -217,4 +266,25 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
                   token: token,
                 )));
   }
+}
+
+class ImageRepository {
+  static const String coupeImage =
+      "https://thumbs.dreamstime.com/b/white-coupe-sporty-car-background-side-view-isolated-path-generic-automobile-glossy-carbon-fiber-surface-123480025.jpg";
+  static const String hatchImage =
+      "https://i.pinimg.com/736x/1c/1d/8a/1c1d8a73041cc07c46110c382d966672.jpg";
+  static const String microCarImage =
+      "https://media.v2.siweb.es/uploaded_thumb_medium/bcecc58aa3df5f8e6e8e3b31230f28dd/microcar_due_young_light_00.png";
+  static const String vanImage =
+      "https://media.istockphoto.com/photos/modern-compact-minivan-picture-id626962038?k=20&m=626962038&s=612x612&w=0&h=15jpoKGRTdoxn6dzR07AIc3RD1Y2BocFNN9aOgfDiiM=";
+  static const String pickupdutyImage = "";
+  static const String pickupmidImage = "";
+  static const String sedanImage = "";
+  static const String wagonImage = "";
+}
+
+String getImageFromSpecificCar(String name) {
+  String? photo = '';
+
+  return photo;
 }
