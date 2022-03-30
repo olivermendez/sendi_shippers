@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/listing/dynamiclisting.dart';
 import 'package:my_app/models/listing/listing.dart';
+import 'package:my_app/models/locations/locations_models.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:my_app/src/services/data_services.dart';
 
-import '../detail_page_listing_created.dart';
+import 'detail_page_listing_created.dart';
 
 class MyShipmentPage extends StatelessWidget {
   final Token token;
@@ -130,33 +131,5 @@ class DisplayOptions extends StatelessWidget {
                 }),
           );
         });
-  }
-}
-
-class ShipmentInformation extends StatelessWidget {
-  final Listing listing;
-  const ShipmentInformation({Key? key, required this.listing})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(listing.title)),
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("Comodity: " + listing.comodity),
-              Text("Subcomodity: " + listing.subcomodity),
-              Text("Description: " + listing.description),
-              Text("Quantity " + listing.quantity),
-              Text("Status: " + listing.status),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }

@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 
 import '../../models/bodytypes.dart';
 import '../../models/listing/dynamiclisting.dart';
+import '../../models/listing/listing.dart';
+import '../../models/locations/locations_models.dart';
 import '../../models/motorbodytypes.dart';
 import '../../models/response_options.dart';
 import '../../models/token.dart';
@@ -99,5 +101,22 @@ class DataServices {
     );
     final listingByUser = DynamicListingResponse.fromRawJson(response.body);
     return listingByUser;
+  }
+
+  Future<LocationResponse> getSingleLocation(String id) async {
+    var url = Uri.parse('${Constants.apiUrl}listings/$id/location');
+
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+      },
+    );
+
+    var body = response.body;
+    final locationResponse = LocationResponse.fromRawJson(body);
+
+    return locationResponse;
   }
 }
