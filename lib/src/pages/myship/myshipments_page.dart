@@ -43,7 +43,6 @@ class MyShipmentPage extends StatelessWidget {
               deliveredShipment(),
             ],
           ),
-          //drawer: ShipperDrawer(token: token),
         ),
       );
 
@@ -104,7 +103,6 @@ class DisplayOptions extends StatelessWidget {
         itemCount: listing.length,
         itemBuilder: (context, index) {
           final opt = listing[index];
-
           return Card(
             elevation: 1,
             child: ListTile(
@@ -123,13 +121,62 @@ class DisplayOptions extends StatelessWidget {
                       image: NetworkImage(opt.photo),
                     )),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              DetailPageListing(listing: opt, token: token)));
+                  switch (opt.comodity) {
+                    case 'vehicles':
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailPageForVehiclesListing(
+                                    listing: opt,
+                                    token: token,
+                                  )));
+                      break;
+
+                    case 'household':
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailPageForHouseholdListing(
+                                      //listing: opt,
+                                      //token: token,
+                                      )));
+                      break;
+                    default:
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Error()));
+                  }
                 }),
           );
         });
+  }
+}
+
+class DetailPageForHouseholdListing extends StatelessWidget {
+  const DetailPageForHouseholdListing({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Household'),
+      ),
+    );
+  }
+}
+
+class Error extends StatelessWidget {
+  const Error({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('error'),
+      ),
+    );
   }
 }

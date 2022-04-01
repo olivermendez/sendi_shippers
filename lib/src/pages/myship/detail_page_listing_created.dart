@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_app/models/listing/listing.dart';
 import 'package:my_app/models/token.dart';
 
@@ -9,20 +10,24 @@ import 'package:http/http.dart' as http;
 import '../../../models/locations/locations_models.dart';
 import '../../services/data_services.dart';
 
-class DetailPageListing extends StatefulWidget {
+import 'package:intl/intl.dart';
+
+class DetailPageForVehiclesListing extends StatefulWidget {
   final Token token;
   final Listing listing;
-  const DetailPageListing({
+  const DetailPageForVehiclesListing({
     Key? key,
     required this.listing,
     required this.token,
   }) : super(key: key);
 
   @override
-  _DetailPageListingState createState() => _DetailPageListingState();
+  _DetailPageForVehiclesListingState createState() =>
+      _DetailPageForVehiclesListingState();
 }
 
-class _DetailPageListingState extends State<DetailPageListing> {
+class _DetailPageForVehiclesListingState
+    extends State<DetailPageForVehiclesListing> {
   @override
   Widget build(BuildContext context) {
     //final Listing listing =
@@ -35,7 +40,7 @@ class _DetailPageListingState extends State<DetailPageListing> {
           SliverList(
             delegate: SliverChildListDelegate([
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(left: 20.0, top: 10),
                 child: Text(
                   widget.listing.title,
                   style: const TextStyle(
@@ -43,7 +48,7 @@ class _DetailPageListingState extends State<DetailPageListing> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 20.0),
+                padding: const EdgeInsets.only(left: 20.0, top: 10),
                 child: ListingDetails(
                   listing: widget.listing,
                 ),
@@ -124,9 +129,11 @@ Widget routesInformation(String id) {
                 ),
                 Expanded(
                     child: Text(
-                  snapshot.data!.data[0].price.toString(),
+                  NumberFormat.currency()
+                      .format(snapshot.data!.data[0].price)
+                      .toString(),
                   style: const TextStyle(
-                      fontSize: 30, fontWeight: FontWeight.bold),
+                      fontSize: 20, fontWeight: FontWeight.bold),
                 ))
               ],
             ),
@@ -168,13 +175,32 @@ class ListingDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _dataServices = DataServices();
+    //final _dataServices = DataServices();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          "Listing Expires in 6d 23 h",
+        Text(
+          "Date Created: " + listing.createdAt.toString(),
           //style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          "Quantity: " + listing.quantity,
+          //style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        ),
+        const Divider(),
+        Row(
+          children: [
+            Expanded(
+                child: Text(
+              "Type: " + listing.subcomodity,
+            )),
+            Expanded(
+              child: Text(
+                "Status: " + listing.status,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            )
+          ],
         ),
         const Divider(
           color: Colors.black12,
