@@ -8,7 +8,7 @@ import '../../../../services/data_services.dart';
 
 import 'package:http/http.dart' as http;
 
-import 'locations.dart';
+import '../../locations.dart';
 //TODO: Design better this page
 
 class ConfirmVehicleListing extends StatelessWidget {
@@ -141,7 +141,7 @@ class ConfirmVehicleListing extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => LocationCars(
+        builder: (context) => LocationsPage(
           listingCreated: listingCreated,
           token: token,
         ),

@@ -6,32 +6,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_place/google_place.dart';
-import 'package:my_app/src/pages/example_location.dart';
 import 'package:my_app/src/pages/location_controller.dart';
 
 import 'package:my_app/src/widgets/appbar/custom_appbar_category.dart';
 
-import '../../../../../models/listing/listing.dart';
-import '../../../../../models/listing/response.dart';
-import '../../../../../models/token.dart';
-import '../../../../services/data_services.dart';
-import '../../../confirmation_page.dart';
+import '../../../models/listing/listing.dart';
+import '../../../models/token.dart';
+import '../../services/data_services.dart';
+import '../confirmation_page.dart';
 
 import 'package:http/http.dart' as http;
 
-class LocationCars extends StatefulWidget {
+class LocationsPage extends StatefulWidget {
   final Listing listingCreated;
   final Token token;
 
-  const LocationCars(
+  const LocationsPage(
       {Key? key, required this.listingCreated, required this.token})
       : super(key: key);
 
   @override
-  _LocationCarsState createState() => _LocationCarsState();
+  _LocationsPageState createState() => _LocationsPageState();
 }
 
-class _LocationCarsState extends State<LocationCars> {
+class _LocationsPageState extends State<LocationsPage> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
   final origin = TextEditingController();
@@ -356,9 +354,9 @@ class _MapScreenState extends State<MapScreen> {
 
     final _controller = LocationController();
 
-    var regular = 80.0 * (totalDistance);
-    var plus = 150.0 * (totalDistance);
-    var premiun = 200.0 * (totalDistance);
+    var regular = 10.0 * (totalDistance);
+    var plus = 20.0 * (totalDistance);
+    var premiun = 30.0 * (totalDistance);
 
     print(totalDistance);
 

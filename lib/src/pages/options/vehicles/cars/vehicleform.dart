@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-//import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/bodytypes.dart';
 import 'package:my_app/models/listing/response.dart';
 import 'package:my_app/models/token.dart';
@@ -9,6 +8,7 @@ import 'package:my_app/models/token.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../../services/data_services.dart';
+import '../../../../services/images_repository.dart';
 import 'confirm_listing.dart';
 
 class VehicleInitialForm extends StatefulWidget {
@@ -129,42 +129,45 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
                         if (widget.bodytypeSeleted.image.toString() ==
                             'coupe.png') {
                           setState(() {
-                            photo = ImageRepository.coupeImage.toString();
+                            photo = CarsImageRepository.coupeImage.toString();
                           });
                         } else if (widget.bodytypeSeleted.image.toString() ==
                             'hatchback.png') {
                           setState(() {
-                            photo = ImageRepository.hatchImage.toString();
+                            photo = CarsImageRepository.hatchImage.toString();
                           });
                         } else if (widget.bodytypeSeleted.image.toString() ==
                             'microcar.png') {
                           setState(() {
-                            photo = ImageRepository.microCarImage.toString();
+                            photo =
+                                CarsImageRepository.microCarImage.toString();
                           });
                         } else if (widget.bodytypeSeleted.image.toString() ==
                             'minivan.png') {
                           setState(() {
-                            photo = ImageRepository.vanImage.toString();
+                            photo = CarsImageRepository.vanImage.toString();
                           });
                         } else if (widget.bodytypeSeleted.image.toString() ==
                             'pickupfullsize.png') {
                           setState(() {
-                            photo = ImageRepository.pickupfullImage.toString();
+                            photo =
+                                CarsImageRepository.pickupfullImage.toString();
                           });
                         } else if (widget.bodytypeSeleted.image.toString() ==
                             'pickupmidsize.png') {
                           setState(() {
-                            photo = ImageRepository.pickupmidImage.toString();
+                            photo =
+                                CarsImageRepository.pickupmidImage.toString();
                           });
                         } else if (widget.bodytypeSeleted.image.toString() ==
                             'sedan.png') {
                           setState(() {
-                            photo = ImageRepository.sedanImage.toString();
+                            photo = CarsImageRepository.sedanImage.toString();
                           });
                         } else if (widget.bodytypeSeleted.image.toString() ==
                             'stationwagon.png') {
                           setState(() {
-                            photo = ImageRepository.wagonImage.toString();
+                            photo = CarsImageRepository.wagonImage.toString();
                           });
                         }
 
@@ -219,6 +222,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
     );
   }
 
+  // ignore: non_constant_identifier_names
   Future<void> InitialListingCreated(
     final String _title,
     final String _description,
@@ -266,31 +270,4 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
                   token: token,
                 )));
   }
-}
-
-class ImageRepository {
-  static const String coupeImage =
-      "https://thumbs.dreamstime.com/b/white-coupe-sporty-car-background-side-view-isolated-path-generic-automobile-glossy-carbon-fiber-surface-123480025.jpg";
-  static const String hatchImage =
-      "https://i.pinimg.com/736x/1c/1d/8a/1c1d8a73041cc07c46110c382d966672.jpg";
-  static const String microCarImage =
-      "https://media.v2.siweb.es/uploaded_thumb_medium/bcecc58aa3df5f8e6e8e3b31230f28dd/microcar_due_young_light_00.png";
-  static const String vanImage =
-      "https://media.istockphoto.com/photos/modern-compact-minivan-picture-id626962038?k=20&m=626962038&s=612x612&w=0&h=15jpoKGRTdoxn6dzR07AIc3RD1Y2BocFNN9aOgfDiiM=";
-  static const String pickupdutyImage =
-      "https://pngset.com/images/ford-super-duty-pickup-truck-vehicle-transportation-wheel-transparent-png-1144179.png";
-  static const String pickupmidImage =
-      "https://www.pikpng.com/pngl/m/54-548060_pickup-truck-png-photo-pickup-png-clipart.png";
-  static const String sedanImage =
-      "https://www.pngitem.com/pimgs/m/212-2120423_sedan-png-images-sedan-car-image-in-png.png";
-  static const String wagonImage =
-      "https://www.pngkey.com/png/detail/372-3721047_new-2018-audi-a4-allroad-volkswagen-station-wagon.png";
-  static const String pickupfullImage =
-      "https://www.seekpng.com/png/full/353-3534634_side-pickup-truck-free-png-image-2008-ford.png";
-}
-
-String getImageFromSpecificCar(String name) {
-  String? photo = '';
-
-  return photo;
 }

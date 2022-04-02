@@ -3,7 +3,6 @@ import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/options/vehicles/power_boast/power_boast.dart';
 import 'package:my_app/src/pages/options/vehicles/sail_boast/sail_boast.dart';
-import 'package:my_app/src/pages/options/vehicles/watercrafts/watercrafts.dart';
 import 'atvs/atvs.dart';
 import 'cars/select_bodytype.dart';
 import 'motor/motorbodytypes.dart';
@@ -64,12 +63,6 @@ route(String item, Token token, Commodity comoditySeleted,
     );
   } else if (item == 'SailBoast') {
     return SailBoastPage(
-      seleted: comoditySeleted,
-      subCommoditySeleted: subCommoditySeleted,
-      token: token,
-    );
-  } else if (item == 'Personal Watercrafts') {
-    return WaterCraftsPage(
       seleted: comoditySeleted,
       subCommoditySeleted: subCommoditySeleted,
       token: token,

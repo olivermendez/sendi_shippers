@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
-import 'package:my_app/src/pages/options/household/household_init.dart';
+import 'package:my_app/src/pages/options/household/route_category_household.dart';
 import 'package:my_app/src/pages/options/vehicles/route_category_vehicle.dart';
 
 import '../../widgets/export_widgets.dart';
@@ -62,7 +62,7 @@ class _CommodityCategoryState extends State<CommodityCategory> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => HouseHoldGoodsPage(
+                              builder: (context) => RouteHouseholdCategory(
                                     seleted: widget.category,
                                     item: opt.label,
                                     token: widget.token,

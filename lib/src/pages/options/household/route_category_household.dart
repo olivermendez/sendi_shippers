@@ -11,11 +11,11 @@ import 'furnitures/furnitures.dart';
 import 'home_electronics/home_electronics.dart';
 import 'pianos/pianos.dart';
 
-class HouseHoldGoodsPage extends StatelessWidget {
+class RouteHouseholdCategory extends StatelessWidget {
   final Token token;
   final Commodity seleted;
   final String item;
-  const HouseHoldGoodsPage(
+  const RouteHouseholdCategory(
       {required this.seleted,
       required this.item,
       required this.token,

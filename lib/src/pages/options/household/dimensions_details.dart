@@ -1,20 +1,20 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-//import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/listing/listing.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
 
 import '../../../services/data_services.dart';
-import 'locations.dart';
+import '../locations.dart';
 
 class SecondFormDetails extends StatefulWidget {
   final Listing listing;
 
   final Token token;
-  SecondFormDetails({required this.listing, required this.token, Key? key})
+  const SecondFormDetails(
+      {required this.listing, required this.token, Key? key})
       : super(key: key);
 
   @override
@@ -171,7 +171,9 @@ class _SecondFormDetailsState extends State<SecondFormDetails> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => ThirdFormLocations(
-                listingCreated: widget.listing, token: widget.token)));
+            builder: (context) => LocationsPage(
+                  listingCreated: widget.listing,
+                  token: widget.token,
+                )));
   }
 }

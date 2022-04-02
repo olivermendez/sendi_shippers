@@ -3,7 +3,7 @@ import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/location.dart';
 
 import '../example_location.dart';
-import '../options/vehicles/cars/locations.dart';
+import '../options/locations.dart';
 
 class MyAccount extends StatelessWidget {
   final Token token;
