@@ -10,6 +10,7 @@ class ConfirmationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.green,
         appBar: const CustomAppBarForCategory(
           categoryName: 'Status',
         ),
@@ -17,8 +18,16 @@ class ConfirmationPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Center(
-              child: Text("Listing published"),
+              child: Text(
+                "Listing published",
+                style: TextStyle(
+                  fontSize: 30,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
+            const Divider(),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamedAndRemoveUntil(

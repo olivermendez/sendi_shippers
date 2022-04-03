@@ -1,20 +1,22 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-//import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/listing/response.dart';
 import 'package:my_app/models/motorbodytypes.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:my_app/src/services/images_repository.dart';
 
 import '../../../../services/data_services.dart';
+import '../../locations.dart';
 
 class MotorcyclesForm extends StatefulWidget {
   final Bodytypesmotor bodySeleted;
   final Token token;
 
-  MotorcyclesForm({Key? key, required this.bodySeleted, required this.token})
+  const MotorcyclesForm(
+      {Key? key, required this.bodySeleted, required this.token})
       : super(key: key);
 
   @override
@@ -26,6 +28,8 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
   final TextEditingController _description = TextEditingController();
   final TextEditingController _quantity = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
+
+  String? photo = '';
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +114,7 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
               ),
               TextButton(
                   onPressed: () {
-                    showModalBottomSheet(
-                        context: context, builder: (builder) => bottonSheet());
+                    print(widget.bodySeleted.value.toString());
                   },
                   child: const Text('Add image')),
               Row(
@@ -119,16 +122,63 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          if (_key.currentState!.validate()) {}
-                          InitialListingCreated(
-                            _title.text,
-                            _description.text,
-                            _quantity.text,
-                            'vehicles',
-                            'cars',
-                            widget.token,
-                            widget.bodySeleted,
-                          );
+                          if (widget.bodySeleted.toString() == 'Dual-Sport') {
+                            setState(() {
+                              photo = MotorImageRepository.dualImage;
+                            });
+                          } else if (widget.bodySeleted.toString() ==
+                              'Standard') {
+                            setState(() {
+                              photo = MotorImageRepository.standardImage;
+                            });
+                          } else if (widget.bodySeleted.toString() == 'Cabin') {
+                            setState(() {
+                              photo = MotorImageRepository.cabinImage;
+                            });
+                          } else if (widget.bodySeleted.toString() ==
+                              'Cruiser') {
+                            setState(() {
+                              photo = MotorImageRepository.cruiserImage;
+                            });
+                          } else if (widget.bodySeleted.toString() == 'Moped') {
+                            setState(() {
+                              photo = MotorImageRepository.mopedImage;
+                            });
+                          } else if (widget.bodySeleted.toString() ==
+                              'Off-Road') {
+                            setState(() {
+                              photo = MotorImageRepository.offroadImage;
+                            });
+                          } else if (widget.bodySeleted.toString() ==
+                              'Scooter') {
+                            setState(() {
+                              photo = MotorImageRepository.scooterImage;
+                            });
+                          } else if (widget.bodySeleted.toString() ==
+                              'Sport Bike') {
+                            setState(() {
+                              photo = MotorImageRepository.sportImage;
+                            });
+                          } else if (widget.bodySeleted.toString() ==
+                              'Touring') {
+                            setState(() {
+                              photo = MotorImageRepository.touringImage;
+                            });
+                          }
+
+                          if (_key.currentState!.validate()) {
+                            InitialListingCreated(
+                              _title.text,
+                              _description.text,
+                              _quantity.text,
+                              'vehicles',
+                              'motor',
+                              widget.token,
+                              widget.bodySeleted,
+                              photo.toString(),
+                            );
+                          }
+                          print(photo.toString());
                         },
                         child: const Text("Continue")),
                   ),
@@ -141,6 +191,7 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
     );
   }
 
+/*
   Widget bottonSheet() {
     return Container(
       height: 100,
@@ -171,6 +222,8 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
     );
   }
 
+  */
+
   Future<void> InitialListingCreated(
     String _title,
     String _description,
@@ -179,6 +232,7 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
     String _subcomodity,
     Token token,
     Bodytypesmotor bodytypeSeleted,
+    String photo,
   ) async {
     Map<String, dynamic> request = {
       "title": _title,
@@ -186,6 +240,7 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
       "quantity": _quantity,
       "comodity": _comodity,
       "subcomodity": _subcomodity,
+      "photo": photo
     };
 
     //var url = Uri.parse('${Constants.apiUrl}listings/${token.user.id}/vehicle');
@@ -205,15 +260,17 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
     var listing = ListingResponse.fromJson(decodedJson);
     print(listing.listing.id);
 
-    /*  Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ConfirmVehicleListing(
-                  averageDimensions: widget.dimension,
-                  averageWeight: widget.weight,
-                  listingCreated: listing.listing,
-                  bodytypeSeleted: bodytypeSeleted,
-                  token: token,
-                ))); */
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LocationsPage(
+          //averageDimensions: widget.dimension,
+          //averageWeight: widget.weight,
+          listingCreated: listing.listing,
+          //bodytypeSeleted: bodytypeSeleted,
+          token: token,
+        ),
+      ),
+    );
   }
 }

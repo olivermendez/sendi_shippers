@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/models/motorbodytypes.dart';
 import 'package:my_app/models/token.dart';
-
-import '../cars/vehicleform.dart';
 import 'motorform.dart';
 
 class SendMotorcyclesPage extends StatelessWidget {
@@ -24,46 +22,7 @@ class SendMotorcyclesPage extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Expanded(
-              child: Container(
-                color: Colors.amber[50],
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>[
-                      const Text(
-                        'Average Dimensions',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        bodySeleted.details.dimensions,
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                      const Text(
-                        'Average Weight',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        bodySeleted.details.weight,
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                  alignment: Alignment.center,
-                  child: FadeInImage(
-                    placeholder: const AssetImage('assets/loading.gif'),
-                    image: AssetImage(
-                        "assets/motorbodytypes/${bodySeleted.image}"),
-                  )),
-            ),
-          ]),
+          itemToSendBox(bodySeleted),
           const Divider(),
           MotorcyclesForm(
             bodySeleted: bodySeleted,
@@ -73,4 +32,49 @@ class SendMotorcyclesPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget itemToSendBox(Bodytypesmotor bodySeleted) {
+  return Padding(
+    padding: const EdgeInsets.all(10.0),
+    child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
+      Expanded(
+        child: Container(
+          color: Colors.blue[50],
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                const Text(
+                  'Average Dimensions',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  bodySeleted.details.dimensions,
+                  style: const TextStyle(color: Colors.grey),
+                ),
+                const Text(
+                  'Average Weight',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  bodySeleted.details.weight,
+                  style: const TextStyle(color: Colors.grey),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      Expanded(
+        child: Container(
+            alignment: Alignment.center,
+            child: FadeInImage(
+              placeholder: const AssetImage('assets/loading.gif'),
+              image: AssetImage("assets/motorbodytypes/${bodySeleted.image}"),
+            )),
+      ),
+    ]),
+  );
 }

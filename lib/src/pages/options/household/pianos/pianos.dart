@@ -20,7 +20,7 @@ class PianosPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('movieng pianos'),
+        title: const Text('Moving pianos'),
       ),
       body: Center(
         child: Padding(

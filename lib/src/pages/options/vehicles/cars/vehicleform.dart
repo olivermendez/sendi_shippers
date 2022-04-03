@@ -11,6 +11,7 @@ import '../../../../services/data_services.dart';
 import '../../../../services/images_repository.dart';
 import 'confirm_listing.dart';
 
+// ignore: must_be_immutable
 class VehicleInitialForm extends StatefulWidget {
   Bodytype bodytypeSeleted;
   Token token;
@@ -114,9 +115,20 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
             ),
             TextButton(
                 onPressed: () {
+                  if (widget.bodytypeSeleted.image == 'coupe.png') {
+                    setState(() {
+                      photo = photo = CarsImageRepository.coupeImage;
+                    });
+                  }
+
+                  print(photo.toString());
+
+                  /*
                   print(widget.bodytypeSeleted.image.toString());
                   showModalBottomSheet(
                       context: context, builder: (builder) => bottonSheet());
+
+                      */
                 },
                 child: const Text('Add image')),
             Row(
@@ -126,48 +138,44 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
                       onPressed: () {
                         if (_key.currentState!.validate()) {}
 
-                        if (widget.bodytypeSeleted.image.toString() ==
-                            'coupe.png') {
+                        if (widget.bodytypeSeleted.image == 'coupe.png') {
                           setState(() {
-                            photo = CarsImageRepository.coupeImage.toString();
+                            photo = CarsImageRepository.coupeImage;
                           });
-                        } else if (widget.bodytypeSeleted.image.toString() ==
+                        } else if (widget.bodytypeSeleted.image ==
                             'hatchback.png') {
                           setState(() {
-                            photo = CarsImageRepository.hatchImage.toString();
+                            photo = CarsImageRepository.hatchImage;
                           });
-                        } else if (widget.bodytypeSeleted.image.toString() ==
+                        } else if (widget.bodytypeSeleted.image ==
                             'microcar.png') {
                           setState(() {
-                            photo =
-                                CarsImageRepository.microCarImage.toString();
+                            photo = CarsImageRepository.microCarImage;
                           });
-                        } else if (widget.bodytypeSeleted.image.toString() ==
+                        } else if (widget.bodytypeSeleted.image ==
                             'minivan.png') {
                           setState(() {
-                            photo = CarsImageRepository.vanImage.toString();
+                            photo = CarsImageRepository.vanImage;
                           });
-                        } else if (widget.bodytypeSeleted.image.toString() ==
+                        } else if (widget.bodytypeSeleted.image ==
                             'pickupfullsize.png') {
                           setState(() {
-                            photo =
-                                CarsImageRepository.pickupfullImage.toString();
+                            photo = CarsImageRepository.pickupfullImage;
                           });
-                        } else if (widget.bodytypeSeleted.image.toString() ==
+                        } else if (widget.bodytypeSeleted.image ==
                             'pickupmidsize.png') {
                           setState(() {
-                            photo =
-                                CarsImageRepository.pickupmidImage.toString();
+                            photo = CarsImageRepository.pickupmidImage;
                           });
-                        } else if (widget.bodytypeSeleted.image.toString() ==
+                        } else if (widget.bodytypeSeleted.image ==
                             'sedan.png') {
                           setState(() {
-                            photo = CarsImageRepository.sedanImage.toString();
+                            photo = CarsImageRepository.sedanImage;
                           });
-                        } else if (widget.bodytypeSeleted.image.toString() ==
+                        } else if (widget.bodytypeSeleted.image ==
                             'stationwagon.png') {
                           setState(() {
-                            photo = CarsImageRepository.wagonImage.toString();
+                            photo = CarsImageRepository.wagonImage;
                           });
                         }
 
@@ -230,7 +238,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
     final String _comodity,
     final String _subcomodity,
     final Token token,
-    final String _photo,
+    final String photo,
     Bodytype bodytypeSeleted,
   ) async {
     Map<String, dynamic> request = {
@@ -239,7 +247,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
       "quantity": _quantity,
       "comodity": _comodity,
       "subcomodity": _subcomodity,
-      "photo": _photo,
+      "photo": photo,
     };
 
     //var url = Uri.parse('${Constants.apiUrl}listings/${token.user.id}/vehicle');

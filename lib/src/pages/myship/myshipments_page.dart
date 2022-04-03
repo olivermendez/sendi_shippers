@@ -53,7 +53,11 @@ class MyShipmentPage extends StatelessWidget {
       future: _dataServices.getActiveListingByUser(token),
       builder: (context, AsyncSnapshot<DynamicListingResponse?> snapshot) {
         if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (snapshot.data!.listing.isEmpty) {
+          return noListingFound();
         } else {
           return DisplayOptions(snapshot.data!.listing, token);
         }
@@ -69,6 +73,8 @@ class MyShipmentPage extends StatelessWidget {
       builder: (context, AsyncSnapshot<DynamicListingResponse?> snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: Text('No listing delivered'));
+        } else if (snapshot.data!.listing.isEmpty) {
+          return noListingFound();
         } else {
           return DisplayOptions(snapshot.data!.listing, token);
         }
@@ -84,12 +90,23 @@ class MyShipmentPage extends StatelessWidget {
       builder: (context, AsyncSnapshot<DynamicListingResponse?> snapshot) {
         if (!snapshot.hasData) {
           return const Center(child: Text('No listing delivered'));
+        } else if (snapshot.data!.listing.isEmpty) {
+          return noListingFound();
         } else {
           return DisplayOptions(snapshot.data!.listing, token);
         }
       },
     );
   }
+}
+
+Widget noListingFound() {
+  return const Center(
+    child: Text(
+      "No listing created yet",
+      style: TextStyle(color: Colors.black),
+    ),
+  );
 }
 
 class DisplayOptions extends StatelessWidget {

@@ -6,6 +6,7 @@ import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/listing/response.dart';
 import 'package:my_app/models/token.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/src/services/images_repository.dart';
 import '../../../services/data_services.dart';
 import 'dimensions_details.dart';
 
@@ -30,6 +31,8 @@ class _InitialFormState extends State<InitialForm> {
   final TextEditingController _title = TextEditingController();
   final TextEditingController _description = TextEditingController();
   final TextEditingController _quantity = TextEditingController();
+
+  String? photo = '';
 
   @override
   Widget build(BuildContext context) {
@@ -96,8 +99,9 @@ class _InitialFormState extends State<InitialForm> {
           ),
           TextButton(
               onPressed: () {
-                showModalBottomSheet(
-                    context: context, builder: (builder) => bottonSheet());
+                print(widget.subCommoditySeleted);
+                //showModalBottomSheet(
+                //   context: context, builder: (builder) => bottonSheet());
               },
               child: const Text('Add image')),
           const Divider(
@@ -105,9 +109,41 @@ class _InitialFormState extends State<InitialForm> {
             color: Colors.white,
           ),
           ElevatedButton(
-              onPressed: () async {
-                //TODO: Validar datos ingresados por el usuario.
-                await createListing(context);
+              onPressed: () {
+                if (widget.subCommoditySeleted.toString() == 'Furnitures') {
+                  setState(() {
+                    photo = HouseholdImageRepository.furnituremage.toString();
+                  });
+                } else if (widget.subCommoditySeleted.toString() ==
+                    'Home Electronics') {
+                  setState(() {
+                    photo = HouseholdImageRepository.electronicImage.toString();
+                  });
+                } else if (widget.subCommoditySeleted.toString() ==
+                    'Appliances') {
+                  setState(() {
+                    photo =
+                        HouseholdImageRepository.appliancesCarImage.toString();
+                  });
+                } else if (widget.subCommoditySeleted.toString() ==
+                    'Outdoor Equipment') {
+                  setState(() {
+                    photo = HouseholdImageRepository.outdoorImage.toString();
+                  });
+                } else if (widget.subCommoditySeleted.toString() ==
+                    'Sporting Equipment') {
+                  setState(() {
+                    photo = HouseholdImageRepository.sportingImage.toString();
+                  });
+                } else if (widget.subCommoditySeleted.toString() == 'Pianos') {
+                  setState(() {
+                    photo = HouseholdImageRepository.painosImage.toString();
+                  });
+                }
+
+                //if (_key.currentState!.validate()) {}
+
+                createListing(context);
               },
               child: const Text("Continue")),
         ],
@@ -152,6 +188,7 @@ class _InitialFormState extends State<InitialForm> {
       "quantity": _quantity.text,
       "commodity": widget.seleted.label,
       "subcomodity": widget.subCommoditySeleted,
+      "photo": photo
     };
 
     var url = Uri.parse('${Constants.apiUrl}listings');
