@@ -117,7 +117,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
                 onPressed: () {
                   if (widget.bodytypeSeleted.image == 'coupe.png') {
                     setState(() {
-                      photo = photo = CarsImageRepository.coupeImage;
+                      photo = CarsImageRepository.coupeImage;
                     });
                   }
 
@@ -138,46 +138,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
                       onPressed: () {
                         if (_key.currentState!.validate()) {}
 
-                        if (widget.bodytypeSeleted.image == 'coupe.png') {
-                          setState(() {
-                            photo = CarsImageRepository.coupeImage;
-                          });
-                        } else if (widget.bodytypeSeleted.image ==
-                            'hatchback.png') {
-                          setState(() {
-                            photo = CarsImageRepository.hatchImage;
-                          });
-                        } else if (widget.bodytypeSeleted.image ==
-                            'microcar.png') {
-                          setState(() {
-                            photo = CarsImageRepository.microCarImage;
-                          });
-                        } else if (widget.bodytypeSeleted.image ==
-                            'minivan.png') {
-                          setState(() {
-                            photo = CarsImageRepository.vanImage;
-                          });
-                        } else if (widget.bodytypeSeleted.image ==
-                            'pickupfullsize.png') {
-                          setState(() {
-                            photo = CarsImageRepository.pickupfullImage;
-                          });
-                        } else if (widget.bodytypeSeleted.image ==
-                            'pickupmidsize.png') {
-                          setState(() {
-                            photo = CarsImageRepository.pickupmidImage;
-                          });
-                        } else if (widget.bodytypeSeleted.image ==
-                            'sedan.png') {
-                          setState(() {
-                            photo = CarsImageRepository.sedanImage;
-                          });
-                        } else if (widget.bodytypeSeleted.image ==
-                            'stationwagon.png') {
-                          setState(() {
-                            photo = CarsImageRepository.wagonImage;
-                          });
-                        }
+                        photo = getImage(widget.bodytypeSeleted.image);
 
                         InitialListingCreated(
                           _title.text,
@@ -277,5 +238,29 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
                   bodytypeSeleted: bodytypeSeleted,
                   token: token,
                 )));
+  }
+}
+
+String? getImage(String code) {
+  String photo = "";
+
+  //TODO: Change this validation with SwithCase, for better performance
+
+  if (code == 'coupe.png') {
+    return photo = CarsImageRepository.coupeImage;
+  } else if (code == 'hatchback.png') {
+    return photo = CarsImageRepository.hatchImage;
+  } else if (code == 'microcar.png') {
+    return photo = CarsImageRepository.microCarImage;
+  } else if (code == 'minivan.png') {
+    return photo = CarsImageRepository.vanImage;
+  } else if (code == 'pickupfullsize.png') {
+    return photo = CarsImageRepository.pickupfullImage;
+  } else if (code == 'pickupmidsize.png') {
+    return photo = CarsImageRepository.pickupmidImage;
+  } else if (code == 'sedan.png') {
+    return photo = CarsImageRepository.sedanImage;
+  } else if (code == 'stationwagon.png') {
+    return photo = CarsImageRepository.wagonImage;
   }
 }

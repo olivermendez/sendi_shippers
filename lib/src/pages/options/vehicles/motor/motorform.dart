@@ -29,8 +29,6 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
   final TextEditingController _quantity = TextEditingController();
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  String? photo = '';
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -114,7 +112,8 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
               ),
               TextButton(
                   onPressed: () {
-                    print(widget.bodySeleted.value.toString());
+                    //print(widget.bodySeleted.value.toString());
+                    //print(MotorImageRepository.dualImage);
                   },
                   child: const Text('Add image')),
               Row(
@@ -122,63 +121,20 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () {
-                          if (widget.bodySeleted.toString() == 'Dual-Sport') {
-                            setState(() {
-                              photo = MotorImageRepository.dualImage;
-                            });
-                          } else if (widget.bodySeleted.toString() ==
-                              'Standard') {
-                            setState(() {
-                              photo = MotorImageRepository.standardImage;
-                            });
-                          } else if (widget.bodySeleted.toString() == 'Cabin') {
-                            setState(() {
-                              photo = MotorImageRepository.cabinImage;
-                            });
-                          } else if (widget.bodySeleted.toString() ==
-                              'Cruiser') {
-                            setState(() {
-                              photo = MotorImageRepository.cruiserImage;
-                            });
-                          } else if (widget.bodySeleted.toString() == 'Moped') {
-                            setState(() {
-                              photo = MotorImageRepository.mopedImage;
-                            });
-                          } else if (widget.bodySeleted.toString() ==
-                              'Off-Road') {
-                            setState(() {
-                              photo = MotorImageRepository.offroadImage;
-                            });
-                          } else if (widget.bodySeleted.toString() ==
-                              'Scooter') {
-                            setState(() {
-                              photo = MotorImageRepository.scooterImage;
-                            });
-                          } else if (widget.bodySeleted.toString() ==
-                              'Sport Bike') {
-                            setState(() {
-                              photo = MotorImageRepository.sportImage;
-                            });
-                          } else if (widget.bodySeleted.toString() ==
-                              'Touring') {
-                            setState(() {
-                              photo = MotorImageRepository.touringImage;
-                            });
-                          }
+                          if (_key.currentState!.validate()) {}
 
-                          if (_key.currentState!.validate()) {
-                            InitialListingCreated(
-                              _title.text,
-                              _description.text,
-                              _quantity.text,
-                              'vehicles',
-                              'motor',
-                              widget.token,
-                              widget.bodySeleted,
-                              photo.toString(),
-                            );
-                          }
-                          print(photo.toString());
+                          String? photo = getImage(widget.bodySeleted.value);
+
+                          InitialListingCreated(
+                            _title.text,
+                            _description.text,
+                            _quantity.text,
+                            'vehicles',
+                            'motor',
+                            widget.token,
+                            photo.toString(),
+                          );
+                          //print(photo);
                         },
                         child: const Text("Continue")),
                   ),
@@ -231,7 +187,6 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
     String _comodity,
     String _subcomodity,
     Token token,
-    Bodytypesmotor bodytypeSeleted,
     String photo,
   ) async {
     Map<String, dynamic> request = {
@@ -272,5 +227,31 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
         ),
       ),
     );
+  }
+}
+
+String? getImage(String code) {
+  String photo = "";
+
+  //TODO: Change this validation with SwithCase, for better performance
+
+  if (code == 'Dual-Sport') {
+    return photo = MotorImageRepository.dualImage.toString();
+  } else if (code == 'Standard') {
+    return photo = MotorImageRepository.standardImage;
+  } else if (code == 'Cabin') {
+    return photo = MotorImageRepository.cabinImage;
+  } else if (code == 'Cruiser') {
+    return photo = MotorImageRepository.cruiserImage;
+  } else if (code == 'Moped') {
+    return photo = MotorImageRepository.mopedImage;
+  } else if (code == 'Off-Road') {
+    return photo = MotorImageRepository.offroadImage;
+  } else if (code == 'Scooter') {
+    return photo = MotorImageRepository.scooterImage;
+  } else if (code == 'Sport Bike') {
+    return photo = MotorImageRepository.sportImage;
+  } else if (code == 'Touring') {
+    return photo = MotorImageRepository.touringImage;
   }
 }
