@@ -202,6 +202,7 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
       "subcomodity": _subcomodity,
       "photo": photo,
     };
+    print(photo);
 
     //var url = Uri.parse('${Constants.apiUrl}listings/${token.user.id}/vehicle');
     var url = Uri.parse('${Constants.apiUrl}listings');

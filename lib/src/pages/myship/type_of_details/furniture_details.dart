@@ -1,45 +1,44 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_app/models/household_details/household_detail_response.dart';
 import 'package:my_app/models/listing/listing.dart';
 import 'package:my_app/models/token.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:my_app/models/vehicles_details/get_vehicles_details.dart';
 
-import '../../../models/locations/locations_models.dart';
-import '../../services/data_services.dart';
-
 import 'package:intl/intl.dart';
 
-class DetailPageForVehiclesListing extends StatefulWidget {
+import '../../../../models/locations/locations_models.dart';
+import '../../../services/data_services.dart';
+
+class HouseholdPageDetails extends StatefulWidget {
   final Token token;
   final Listing listing;
-  const DetailPageForVehiclesListing({
+  const HouseholdPageDetails({
     Key? key,
     required this.listing,
     required this.token,
   }) : super(key: key);
 
   @override
-  _DetailPageForVehiclesListingState createState() =>
-      _DetailPageForVehiclesListingState();
+  _HouseholdPageDetailsState createState() => _HouseholdPageDetailsState();
 }
 
-class _DetailPageForVehiclesListingState
-    extends State<DetailPageForVehiclesListing> {
+class _HouseholdPageDetailsState extends State<HouseholdPageDetails> {
   @override
   Widget build(BuildContext context) {
+    //final Listing listing =
+    //   ModalRoute.of(context)!.settings.arguments as Listing;
+
     Widget getVehiclesDetails() {
       final _dataServices = DataServices();
 
       return FutureBuilder(
-        future: _dataServices.getVehicleDetails(widget.listing.id),
-        builder: (context, AsyncSnapshot<VehicleDetails?> snapshot) {
+        future: _dataServices.getFurnitureDetails(widget.listing.id),
+        builder: (context, AsyncSnapshot<GetFurnitureDetails?> snapshot) {
           if (!snapshot.hasData) {
             return const Center(child: Text('No listing delivered'));
-            // ignore: unnecessary_null_comparison
           } else {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,9 +47,9 @@ class _DetailPageForVehiclesListingState
                   "Listing Details",
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                Text("Bodytype: " + snapshot.data!.bodytype),
-                Text("Dimensions: " + snapshot.data!.dimensions),
-                Text("Eeight: " + snapshot.data!.weight),
+                Text("Height: " + snapshot.data!.height.toString()),
+                Text("Width: " + snapshot.data!.width.toString()),
+                Text("Weight: " + snapshot.data!.weight.toString()),
               ],
             );
           }

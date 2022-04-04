@@ -3,6 +3,7 @@ import 'package:my_app/models/listing/dynamiclisting.dart';
 import 'package:my_app/models/listing/listing.dart';
 import 'package:my_app/models/locations/locations_models.dart';
 import 'package:my_app/models/token.dart';
+import 'package:my_app/src/pages/myship/type_of_details/furniture_details.dart';
 
 import 'package:my_app/src/services/data_services.dart';
 
@@ -154,8 +155,7 @@ class DisplayOptions extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  DetailPageForVehiclesListing(
+                              builder: (context) => HouseholdPageDetails(
                                     listing: opt,
                                     token: token,
                                   )));

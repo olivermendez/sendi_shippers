@@ -10,6 +10,7 @@ import 'package:my_app/src/services/images_repository.dart';
 
 import '../../../../services/data_services.dart';
 import '../../locations.dart';
+import 'confirm_motor.dart';
 
 class MotorcyclesForm extends StatefulWidget {
   final Bodytypesmotor bodySeleted;
@@ -218,11 +219,11 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => LocationsPage(
-          //averageDimensions: widget.dimension,
-          //averageWeight: widget.weight,
+        builder: (context) => ConfirmMotorListing(
+          averageDimensions: widget.bodySeleted.details.dimensions,
+          averageWeight: widget.bodySeleted.details.weight,
           listingCreated: listing.listing,
-          //bodytypeSeleted: bodytypeSeleted,
+          bodytypeSeleted: widget.bodySeleted,
           token: token,
         ),
       ),

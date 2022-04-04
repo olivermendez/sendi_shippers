@@ -1,6 +1,8 @@
 //import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:my_app/models/household_details/household_detail_response.dart';
+import 'package:my_app/models/vehicles_details/get_vehicles_details.dart';
 
 import '../../models/bodytypes.dart';
 import '../../models/listing/dynamiclisting.dart';
@@ -118,5 +120,41 @@ class DataServices {
     final locationResponse = LocationResponse.fromRawJson(body);
 
     return locationResponse;
+  }
+
+  Future<VehicleDetails> getVehicleDetails(String id) async {
+    var url = Uri.parse('${Constants.apiUrl}listings/$id/vehicle');
+
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+      },
+    );
+
+    var body = response.body;
+    final locationResponse = GetVehicleDetailsResponse.fromRawJson(body);
+    print(locationResponse.details[0]);
+
+    return locationResponse.details[0];
+  }
+
+  Future<GetFurnitureDetails> getFurnitureDetails(String id) async {
+    var url = Uri.parse('${Constants.apiUrl}listings/$id/furniture');
+
+    var response = await http.get(
+      url,
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json',
+      },
+    );
+
+    var body = response.body;
+    final locationResponse = GetHouseholdDetailsResponse.fromRawJson(body);
+    //print(locationResponse.furniture);
+
+    return locationResponse.furniture[0];
   }
 }
