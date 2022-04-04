@@ -155,10 +155,10 @@ class DisplayOptions extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  DetailPageForHouseholdListing(
-                                      //listing: opt,
-                                      //token: token,
-                                      )));
+                                  DetailPageForVehiclesListing(
+                                    listing: opt,
+                                    token: token,
+                                  )));
                       break;
                     default:
                       Navigator.push(

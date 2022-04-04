@@ -115,14 +115,6 @@ class _VehicleInitialFormState extends State<VehicleInitialForm> {
             ),
             TextButton(
                 onPressed: () {
-                  if (widget.bodytypeSeleted.image == 'coupe.png') {
-                    setState(() {
-                      photo = CarsImageRepository.coupeImage;
-                    });
-                  }
-
-                  print(photo.toString());
-
                   /*
                   print(widget.bodytypeSeleted.image.toString());
                   showModalBottomSheet(
