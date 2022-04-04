@@ -22,7 +22,7 @@ class CatPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(subCommoditySeleted),
       ),
-      body: InitialFormAnimals(
+      body: AnimalsForm(
         token: token,
         subCommoditySeleted: subCommoditySeleted,
       ),

@@ -111,12 +111,6 @@ class _MotorcyclesFormState extends State<MotorcyclesForm> {
                 height: 20,
                 color: Colors.white,
               ),
-              TextButton(
-                  onPressed: () {
-                    //print(widget.bodySeleted.value.toString());
-                    //print(MotorImageRepository.dualImage);
-                  },
-                  child: const Text('Add image')),
               Row(
                 children: [
                   Expanded(
