@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/models/commodities.dart';
-import 'package:my_app/models/response_options.dart';
+import 'package:my_app/infraestructure/api/commodities_api.dart';
+//import 'package:my_app/models/commodities.dart';
+//import 'package:my_app/models/response_options.dart';
 import 'package:my_app/models/token.dart';
-import 'package:my_app/src/pages/create/category_seleted.dart';
+//import 'package:my_app/src/pages/create/category_seleted.dart';
 
-import '../../services/data_services.dart';
+import '../../../domain/entities/models/commodities/commodities_models.dart';
+//import '../../services/data_services.dart';
 import '../../widgets/export_widgets.dart';
+import 'category_seleted.dart';
 
 class CreateShipmentPage extends StatefulWidget {
   final Token token;
@@ -16,7 +19,9 @@ class CreateShipmentPage extends StatefulWidget {
 }
 
 class _CreateShipmentPageState extends State<CreateShipmentPage> {
-  final _dataServices = DataServices();
+  //final _dataServices = DataServices();
+
+  final _commodities = CommoditiesApi();
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +35,14 @@ class _CreateShipmentPageState extends State<CreateShipmentPage> {
             removeTop: true,
             child: SliverFillRemaining(
               child: FutureBuilder(
-                future: _dataServices.getListOfCommodities(),
-                builder: (context, AsyncSnapshot<OptionsResponse?> snapshot) {
+                future: _commodities.getCommodities(),
+                builder:
+                    (context, AsyncSnapshot<List<CommodityDetails>> snapshot) {
                   if (!snapshot.hasData) {
                     return const Center(child: CircularProgressIndicator());
                   } else {
                     return ShowListOfTypeOfCommodities(
-                        snapshot.data!.options.commodities, widget.token);
+                        snapshot.data!, widget.token);
                   }
                 },
               ),
@@ -50,7 +56,7 @@ class _CreateShipmentPageState extends State<CreateShipmentPage> {
 
 class ShowListOfTypeOfCommodities extends StatelessWidget {
   final Token token;
-  final List<Commodity> listOfCommodities;
+  final List<CommodityDetails> listOfCommodities;
   const ShowListOfTypeOfCommodities(this.listOfCommodities, this.token);
 
   @override

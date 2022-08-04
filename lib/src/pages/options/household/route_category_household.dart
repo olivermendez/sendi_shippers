@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/domain/entities/models/commodities/commodities_models.dart';
 import 'package:my_app/models/commodities.dart';
 
 import 'package:my_app/models/token.dart';
@@ -13,7 +14,7 @@ import 'pianos/pianos.dart';
 
 class RouteHouseholdCategory extends StatelessWidget {
   final Token token;
-  final Commodity seleted;
+  final CommodityDetails seleted;
   final String item;
   const RouteHouseholdCategory(
       {required this.seleted,
@@ -32,7 +33,7 @@ class RouteHouseholdCategory extends StatelessWidget {
   }
 }
 
-addDynamic(String item, Token token, Commodity comoditySeleted,
+addDynamic(String item, Token token, CommodityDetails comoditySeleted,
     String subCommoditySeleted) {
   if (item == 'Furniture') {
     return FurnituresPage(

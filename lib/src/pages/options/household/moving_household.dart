@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:my_app/domain/entities/models/commodities/commodities_models.dart';
 
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/listing/response.dart';
@@ -12,7 +13,7 @@ import 'dimensions_details.dart';
 
 class InitialForm extends StatefulWidget {
   final Token token;
-  final Commodity seleted;
+  final CommodityDetails seleted;
   final String subCommoditySeleted;
 
   const InitialForm({

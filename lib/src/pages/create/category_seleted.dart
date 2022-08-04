@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/models/commodities.dart';
+//import 'package:my_app/domain/entities/models/commodities/commodities_models.dart';
+//import 'package:my_app/models/commodities.dart';
+
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/options/household/route_category_household.dart';
 import 'package:my_app/src/pages/options/vehicles/route_category_vehicle.dart';
 
+import '../../../domain/entities/models/commodities/commodities_models.dart';
 import '../../widgets/export_widgets.dart';
 import '../options/animals/animals_init.dart';
 
 class CommodityCategory extends StatefulWidget {
   final Token token;
-  final Commodity category;
+  final CommodityDetails category;
   const CommodityCategory(
       {required this.category, required this.token, Key? key})
       : super(key: key);

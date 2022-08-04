@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/domain/entities/models/commodities/commodities_models.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
 import 'package:my_app/src/pages/options/vehicles/power_boast/power_boast.dart';
@@ -10,7 +11,7 @@ import 'parts/parts.dart';
 
 class RouteVehicleCategory extends StatefulWidget {
   final Token token;
-  final Commodity seleted;
+  final CommodityDetails seleted;
   final String item;
   const RouteVehicleCategory(
       {required this.seleted,
@@ -33,7 +34,7 @@ class _RouteVehicleCategoryState extends State<RouteVehicleCategory> {
   }
 }
 
-route(String item, Token token, Commodity comoditySeleted,
+route(String item, Token token, CommodityDetails comoditySeleted,
     String subCommoditySeleted) {
   if (item == 'Cars & Light Trucks') {
     return CarsSelectBodyTypePage(

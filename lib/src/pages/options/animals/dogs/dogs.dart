@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/domain/entities/models/commodities/commodities_models.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
 
 import '../initial_form.dart';
 
 class DogPage extends StatelessWidget {
-  final Commodity seleted;
+  final CommodityDetails seleted;
   final String subCommoditySeleted;
   final Token token;
   const DogPage(

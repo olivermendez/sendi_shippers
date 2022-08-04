@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:my_app/domain/entities/models/commodities/commodities_models.dart';
 //import 'package:my_app/config/constant.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/listing/response.dart';
@@ -11,7 +12,7 @@ import '../../../../services/data_services.dart';
 import 'dimensions.dart';
 
 class ATVSPage extends StatelessWidget {
-  final Commodity seleted;
+  final CommodityDetails seleted;
   final String subCommoditySeleted;
   final Token token;
   const ATVSPage(
@@ -37,7 +38,7 @@ class ATVSPage extends StatelessWidget {
 
 class InitialForm extends StatefulWidget {
   final Token token;
-  final Commodity seleted;
+  final CommodityDetails seleted;
   final String subCommoditySeleted;
 
   const InitialForm({

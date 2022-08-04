@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/domain/entities/models/commodities/commodities_models.dart';
 import 'package:my_app/models/commodities.dart';
 import 'package:my_app/models/token.dart';
 
@@ -8,7 +9,7 @@ import 'horses/horses.dart';
 
 class AnimalInit extends StatefulWidget {
   final Token token;
-  final Commodity seleted;
+  final CommodityDetails seleted;
   final String item;
   AnimalInit(
       {required this.seleted,
@@ -30,7 +31,7 @@ class _AnimalInitState extends State<AnimalInit> {
   }
 }
 
-addDynamic(String item, Token token, Commodity comoditySeleted,
+addDynamic(String item, Token token, CommodityDetails comoditySeleted,
     String subCommoditySeleted) {
   if (item == 'Cats') {
     return CatPage(
